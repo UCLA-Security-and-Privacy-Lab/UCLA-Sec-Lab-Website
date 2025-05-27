@@ -68,7 +68,7 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Faculty
+  - PhD Students
 ---
 
 I am currently a PhD student in the Electrical and Computer Engineering Department at UCLA. My research interests lie in the security and privacy of emerging technologies, including extended reality (XR) and machine learning.

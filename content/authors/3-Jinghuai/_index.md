@@ -68,7 +68,7 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Faculty
+  - PhD Students
 ---
 
 I received my Master and Bachelar Degree in Computer Science from Duke University and City University of Hong Kong, respectively, where I was fortunate to be advised by Prof. Zhenqiang Gong Neil and Prof. Jianping Wang.
