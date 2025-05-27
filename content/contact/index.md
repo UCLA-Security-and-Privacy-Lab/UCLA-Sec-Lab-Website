@@ -9,7 +9,31 @@ sections:
     content:
       title: Contact
       text: |-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempus augue non tempor egestas. Proin nisl nunc, dignissim in accumsan dapibus, auctor ullamcorper neque. Quisque at elit felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget elementum odio. Cras interdum eget risus sit amet aliquet. In volutpat, nisl ut fringilla dignissim, arcu nisl suscipit ante, at accumsan sapien nisl eu eros.
+        Our lab is recruiting research interns in the following directions, and relevant topic proposals have been made:
+        1. AI security: Research the security and privacy issues of AI itself, including but not limited to prompt injection, jailbreak, adversarial attacks, membership inference attacks, etc.
+        2. AI system security: Research the system security issues of AI systems, such as AI Agent, etc.
+        3. VR/AR security: Research the security and privacy issues of software, interaction and data in VR/AR
+        4. Compliance: Research the compliance issues of software and AI
+        5. Security and privacy issues of other systems and applications, including but not limited to mobility, medical, etc.
+        6. If you have a good idea, we also support it
+
+        Expected work content:
+        1. Discuss with teachers regularly to complete the design of scientific research ideas
+        2. Work with PhD students to complete the implementation and experiments of scientific research ideas, etc.
+        3. Write research results into papers and submit them to top conferences in the field of security/AI
+
+        Interns are expected to have any of the following conditions:
+        1. Have courses or project experience related to artificial intelligence and deep learning
+        2. Have courses, development, and project experience related to human-computer interaction, ARVR
+        3. Have relevant courses or project experience in program analysis and penetration testing
+        4. Have scientific research ability or solid engineering practice foundation
+        5. Undergraduate or master's degree in computer science or related majors
+
+        You are recommended to have at least three months of internship.
+
+        Contact information:
+        
+        Intern students are welcome to contact us privately. If you apply by email, please attach your resume and relevant achievements (such as project experience, papers, code links, etc.), and name the email title Research Internship Application-[Intern Name]-[Education: Undergraduate or Master's]-[School], and send the email to [yuant@ucla.edu](mailto:yuant@ucla.edu) and copy [ucla.secpriv.lab@gmail.com](mailto:ucla.secpriv.lab@gmail.com)
       email: test@example.org
       phone: 888 888 88 88
       address:
