@@ -10,7 +10,7 @@ sections:
       title: |
         UCLA Security Lab
       image:
-        filename: team-pic.png
+        filename: website-view.png
       text: |
         <br>
         
@@ -44,7 +44,7 @@ sections:
       columns: '1'
       background:
         image: 
-          filename: coders.jpg
+          filename: team-pic.png
           filters:
             brightness: 1
           parallax: false
