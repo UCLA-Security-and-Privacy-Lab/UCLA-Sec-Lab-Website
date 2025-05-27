@@ -24,4 +24,4 @@ main:
     weight: 60
   - name: Hiring
     url: hiring
-    weight: 60
+    weight: 70

@@ -10,7 +10,7 @@ last_name: Wang
 superuser: true
 
 # Role/position
-role: PhD Student
+role: PhD Student from 25'Fall
 
 # Organizations/Affiliations
 organizations:

@@ -10,7 +10,7 @@ last_name: Zhang
 superuser: true
 
 # Role/position
-role: PhD Student
+role: PhD Student from 23'Fall
 
 # Organizations/Affiliations
 organizations:
