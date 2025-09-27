@@ -1,16 +1,17 @@
 ---
 # Display name
-title: Ying Li
+title: Peiran Wang
 
 # Full Name (for SEO)
-first_name: Ying
-last_name: Li
+first_name: Peiran
+last_name: Wang
+start_year: 2025
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position
-role: PhD Student from 23'Fall
+role: PhD Student from 25'Fall
 
 # Organizations/Affiliations
 organizations:
@@ -18,20 +19,23 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: I am broadly interested in real-world computer security and privacy topics, including LLM for security, automated reasoning, etc.
+bio: My research interests lie in the security and privacy of machine learning, and application of machine learning in security and privacy.
 
 interests:
-  - LLM for Security
-  - Automated Reasoning
+  - ML Security and Privacy
+  - ML for Security
 
 education:
   courses:
-    - course: PhD student in Electrical and Computer Engineering
+    - course: PhD student in Computer Science
       institution: University of California, Los Angeles
-      year: 2028
-    - course: BA in Computer Science
+      year: 2030
+    - course: MS in Computer Science
+      institution: Tsinghua University
+      year: 2025
+    - course: BS in Computer Science
       institution: Sichuan University
-      year: 2021
+      year: 2022
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -67,10 +71,3 @@ highlight_name: false
 user_groups:
   - PhD Students
 ---
-
-
-Hi, this is Ying Li. I’m a 2nd-year Ph.D. Student in the ECE department at UCLA, working with Prof. Yuan Tian.
-
-I am broadly interested in real-world computer security and privacy topics, including LLM for security, automated reasoning, etc.
-
-I received my Bachelor’s degree from Sichuan University(SCU), and after that, I studied at University of Chinese Academy of Sciences(UCAS). I was also a research Assistant at the Chinese University of Hong Kong(CUHK).

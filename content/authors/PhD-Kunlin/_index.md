@@ -1,16 +1,17 @@
 ---
 # Display name
-title: Yuan Tian
+title: Kunlin Cai
 
 # Full Name (for SEO)
-first_name: Yuan
-last_name: Tian
+first_name: Kunlin
+last_name: Cai
+start_year: 2022
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position
-role: Associate Professor
+role: PhD Student from 21'Fall
 
 # Organizations/Affiliations
 organizations:
@@ -18,18 +19,23 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests involve security and privacy and their interactions with computer systems, machine learning, and human-computer interaction.
+bio: My research interests lie in the security and privacy of emerging technologies, including extended reality (XR) and machine learning.
 
 interests:
-  - Privacy Compliance and Enhancement
-  - System Security (IoT Security, Accountable Software)
-  - Trustworthy Machine Learning (Machine Learning Security and Privacy)
+  - XR security and privacy
+  - Trustworthy Machine Learning
 
 education:
   courses:
+    - course: PhD student in Electrical and Computer Engineering
+      institution: University of California, Los Angeles
+      year: 2025
     - course: PhD in Computer Science
-      institution: Carnegie Mellon University
-      year: 2017
+      institution: University of Virginia
+      year: 2022
+    - course: BA + MS in Computer Science
+      institution: Boston University
+      year: 2021
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -63,7 +69,7 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Faculty
+  - PhD Students
 ---
 
-I'm an Associate Professor at the University of California, Los Angeles. My research focuses on developing novel technologies for the security, privacy, and safety of modern and emerging systems. I analyze and model systems, drawing on program analysis, protocol analysis, machine learning, and human factors to understand the risks and develop systems that are secure and privacy-preserving.
+I am currently a PhD student in the Electrical and Computer Engineering Department at UCLA. My research interests lie in the security and privacy of emerging technologies, including extended reality (XR) and machine learning.

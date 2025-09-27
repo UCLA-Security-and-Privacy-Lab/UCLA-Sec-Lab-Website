@@ -1,16 +1,17 @@
 ---
 # Display name
-title: Kunlin Cai
+title: Zhiyuan Zhang
 
 # Full Name (for SEO)
-first_name: Kunlin
-last_name: Cai
+first_name: Zhiyuan
+last_name: Zhang
+start_year: 2025
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position
-role: PhD Student from 21'Fall
+role: PhD Student from 25'Fall
 
 # Organizations/Affiliations
 organizations:
@@ -18,23 +19,20 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests lie in the security and privacy of emerging technologies, including extended reality (XR) and machine learning.
+bio: My research interests lie in the security and privacy of machine learning, and application of machine learning in security and privacy.
 
 interests:
-  - XR security and privacy
-  - Trustworthy Machine Learning
+  - ML Security and Privacy
+  - ML for Security
 
 education:
   courses:
-    - course: PhD student in Electrical and Computer Engineering
+    - course: PhD student in Computer Science
       institution: University of California, Los Angeles
+      year: 2030
+    - course: BS in Computer Science
+      institution: HK PolyU
       year: 2025
-    - course: PhD in Computer Science
-      institution: University of Virginia
-      year: 2022
-    - course: BA + MS in Computer Science
-      institution: Boston University
-      year: 2021
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -46,13 +44,13 @@ social:
     link: 'mailto:test@example.org'
   - icon: twitter
     icon_pack: fab
-    link: https://twitter.com/GeorgeCushen
+    link: https://twitter.com/
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+    link: https://scholar.
   - icon: github
     icon_pack: fab
-    link: https://github.com/gcushen
+    link: https://github.com/h-zhanggg
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
@@ -70,5 +68,3 @@ highlight_name: false
 user_groups:
   - PhD Students
 ---
-
-I am currently a PhD student in the Electrical and Computer Engineering Department at UCLA. My research interests lie in the security and privacy of emerging technologies, including extended reality (XR) and machine learning.

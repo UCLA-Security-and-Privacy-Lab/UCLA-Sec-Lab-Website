@@ -1,16 +1,17 @@
 ---
 # Display name
-title: Nasir Hussain
+title: Jinghuai Zhang
 
 # Full Name (for SEO)
-first_name: Nasir
-last_name: Hussain
+first_name: Jinghuai
+last_name: Zhang
+start_year: 2023
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position
-role: Research Assistant
+role: PhD Student from 23'Fall
 
 # Organizations/Affiliations
 organizations:
@@ -18,16 +19,23 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: 
-  
+bio: I am broadly interested in the machine learning, security, and privacy with a recent focus on the intersection between them.
+
 interests:
-  - ML for Security
+  - Machine Learning
+  - ML security, and privacy
 
 education:
   courses:
-    - course: BS in Computer Science
+    - course: PhD student in Electrical and Computer Engineering
       institution: University of California, Los Angeles
-      year: 2022
+      year: 2028
+    - course: MS in Computer Science
+      institution: Duke University
+      year: 2023
+    - course: BA in Computer Science
+      institution: City University of Hong Kong
+      year: 2020
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -61,5 +69,9 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Research Assistants
+  - PhD Students
 ---
+
+I received my Master and Bachelar Degree in Computer Science from Duke University and City University of Hong Kong, respectively, where I was fortunate to be advised by Prof. Zhenqiang Gong Neil and Prof. Jianping Wang.
+
+I am broadly interested in the machine learning, security, and privacy with a recent focus on the intersection between them.

@@ -1,16 +1,17 @@
 ---
 # Display name
-title: Zhiyuan Zhang
+title: Yuan Tian
 
 # Full Name (for SEO)
-first_name: Zhiyuan
-last_name: Zhang
+first_name: Yuan
+last_name: Tian
+start_year: 2020
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position
-role: PhD Student from 25'Fall
+role: Associate Professor
 
 # Organizations/Affiliations
 organizations:
@@ -18,20 +19,18 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests lie in the security and privacy of machine learning, and application of machine learning in security and privacy.
+bio: My research interests involve security and privacy and their interactions with computer systems, machine learning, and human-computer interaction.
 
 interests:
-  - ML Security and Privacy
-  - ML for Security
+  - Privacy Compliance and Enhancement
+  - System Security (IoT Security, Accountable Software)
+  - Trustworthy Machine Learning (Machine Learning Security and Privacy)
 
 education:
   courses:
-    - course: PhD student in Computer Science
-      institution: University of California, Los Angeles
-      year: 2030
-    - course: BS in Computer Science
-      institution: HK PolyU
-      year: 2025
+    - course: PhD in Computer Science
+      institution: Carnegie Mellon University
+      year: 2017
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -43,13 +42,13 @@ social:
     link: 'mailto:test@example.org'
   - icon: twitter
     icon_pack: fab
-    link: https://twitter.com/
+    link: https://twitter.com/GeorgeCushen
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.
+    link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
   - icon: github
     icon_pack: fab
-    link: https://github.com/h-zhanggg
+    link: https://github.com/gcushen
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
@@ -65,5 +64,7 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - PhD Students
+  - Faculty
 ---
+
+I'm an Associate Professor at the University of California, Los Angeles. My research focuses on developing novel technologies for the security, privacy, and safety of modern and emerging systems. I analyze and model systems, drawing on program analysis, protocol analysis, machine learning, and human factors to understand the risks and develop systems that are secure and privacy-preserving.
