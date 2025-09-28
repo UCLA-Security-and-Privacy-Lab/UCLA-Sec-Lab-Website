@@ -18,8 +18,8 @@ sections:
               brightness: 0.7
           position: right
           color: '#666'
-      - title: World-Class Semiconductor Lab
-        content: 'Just opened last month!'
+      - title: We are recruiting new PhD/RA/Interns
+        content: 'Feel free to email us'
         align: right
         background:
           image:
