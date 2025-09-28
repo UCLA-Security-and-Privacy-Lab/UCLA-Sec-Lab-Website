@@ -11,7 +11,7 @@ start_year: 2025
 superuser: true
 
 # Role/position
-role: PhD Student from 25'Fall
+role: PhD Student from 25'Fall, co-advised with Prof. Jiaqi Ma
 
 # Organizations/Affiliations
 organizations:
