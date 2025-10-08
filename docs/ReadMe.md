@@ -11,5 +11,5 @@ Next, please create a [pull request](https://github.com/UCLA-Security-and-Privac
 
 ## What can you update
 If you want to add a new member or a new publication, please follow the instruction at
-- [Member add]()
-- [Publication add]()
+- [Member add](https://github.com/UCLA-Security-and-Privacy-Lab/UCLA-Sec-Lab-Website/blob/main/docs/add_member.md)
+- [Publication add](https://github.com/UCLA-Security-and-Privacy-Lab/UCLA-Sec-Lab-Website/blob/main/docs/add_publication.md)
