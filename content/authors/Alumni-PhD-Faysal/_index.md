@@ -11,7 +11,7 @@ start_year: 2018
 superuser: true
 
 # Role/position
-role: PhD Student grad in 2023
+role: PhD Student grad in 2023, now assistant professor at the University of Texas at Arlington
 
 # Organizations/Affiliations
 organizations:
@@ -48,6 +48,9 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/gcushen
+  - icon: user-circle
+    icon_pack: hero
+    link: https://fhshezan.github.io/
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
