@@ -11,12 +11,12 @@ start_year: 2018
 superuser: true
 
 # Role/position
-role: PhD Student grad in 2024
+role: PhD grad in 2024, now Applied Scientist at AWS
 
 # Organizations/Affiliations
 organizations:
-  - name: University of California, Los Angles
-    url: ''
+  - name: AWS Security
+    url: 'https://sites.google.com/site/tamjidrahat073/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: I am an Applied Scientist at Amazon Web Services (AWS) where I work on innovating automated technologies to proactively detect and mitigate security issues across AWS services and applications. I completed my Ph.D. from the University of California Los Angeles (UCLA) in 2024, where I was advised by Prof. Yuan Tian, and also mentored by Prof. Yu Feng from UC Santa Barbara. I finished my M.S in Computer Science from the University of Virginia and B.S in Computer Science and Engineering from the Bangladesh University of Engineering and Technology (BUET).
@@ -40,16 +40,19 @@ education:
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:test@example.org'
+    link: 'tamjid@ucla.edu'
   - icon: twitter
     icon_pack: fab
-    link: https://twitter.com/GeorgeCushen
+    link: https://x.com/tamjidrahat
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+    link: https://scholar.google.com/citations?user=LY1s3bsAAAAJ&hl=en
   - icon: github
     icon_pack: fab
     link: https://github.com/gcushen
+  - icon: user-circle
+    icon_pack: hero
+    link: https://sites.google.com/site/tamjidrahat073/
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
