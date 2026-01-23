@@ -11,11 +11,11 @@ start_year: 2018
 superuser: true
 
 # Role/position
-role: PhD Student grad in 2023
+role: PhD grad in 2023, now AP at University of Alabama
 
 # Organizations/Affiliations
 organizations:
-  - name: University of California, Los Angles
+  - name: University of Alabama
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
@@ -38,16 +38,19 @@ education:
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:test@example.org'
+    link: 'tle6@ua.edu'
   - icon: twitter
     icon_pack: fab
-    link: https://twitter.com/GeorgeCushen
+    link: https://twitter.com/tulenhat
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+    link: https://scholar.google.com/citations?hl=en&user=JS1jU8IAAAAJ&view_op=list_works&sortby=pubdate
   - icon: github
     icon_pack: fab
     link: https://github.com/gcushen
+  - icon: user-circle
+    icon_pack: hero
+    link: https://lenhattu.com/
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
@@ -55,7 +58,7 @@ social:
 #   link: files/cv.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: ''
+email: 'tle6@ua.edu'
 
 # Highlight the author in author lists? (true/false)
 highlight_name: false
