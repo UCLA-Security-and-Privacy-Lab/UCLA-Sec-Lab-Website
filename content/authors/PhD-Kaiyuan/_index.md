@@ -11,7 +11,7 @@ start_year: 2026
 superuser: true
 
 # Role/position
-role: PhD Student from 26'Spring
+role: PhD Student from 26'Spring co-advised with Prof. Abeer Alwan
 
 # Organizations/Affiliations
 organizations:
