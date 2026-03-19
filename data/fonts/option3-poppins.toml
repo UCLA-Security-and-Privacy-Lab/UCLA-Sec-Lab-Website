@@ -1,0 +1,13 @@
+# Option 3: Poppins + Open Sans
+# 风格：圆润友好，现代感强，Stripe/Notion 风格
+[heading]
+google_fonts = "Poppins:wght@400;500;600;700"
+name = "Poppins"
+
+[body]
+google_fonts = "Open Sans:ital,wght@0,400;0,600;1,400"
+name = "Open Sans"
+
+[monospace]
+google_fonts = "JetBrains Mono:wght@400;700"
+name = "JetBrains Mono"

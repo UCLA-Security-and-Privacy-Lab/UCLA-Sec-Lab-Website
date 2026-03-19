@@ -8,8 +8,8 @@
 appearance:
   theme_day: minimal
   theme_night:
-  font: modern-clean
-  font_size: L
+  font: option3-poppins
+  font_size: M
 
 # SEO
 

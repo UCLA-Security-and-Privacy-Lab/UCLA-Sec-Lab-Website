@@ -1,0 +1,13 @@
+# Option 5: Nunito Sans
+# 风格：柔和圆润，亲和力强，阅读舒适
+[heading]
+google_fonts = "Nunito Sans:wght@400;600;700;800"
+name = "Nunito Sans"
+
+[body]
+google_fonts = "Nunito Sans:ital,wght@0,400;0,600;1,400"
+name = "Nunito Sans"
+
+[monospace]
+google_fonts = "Fira Code:wght@400;700"
+name = "Fira Code"

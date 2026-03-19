@@ -1,0 +1,13 @@
+# Option 6: Source Sans Pro + Source Serif Pro
+# 风格：Adobe 出品，经典学术，正式专业，论文感
+[heading]
+google_fonts = "Source Sans Pro:wght@400;600;700"
+name = "Source Sans Pro"
+
+[body]
+google_fonts = "Source Serif Pro:ital,wght@0,400;0,600;1,400"
+name = "Source Serif Pro"
+
+[monospace]
+google_fonts = "Source Code Pro:wght@400;700"
+name = "Source Code Pro"
