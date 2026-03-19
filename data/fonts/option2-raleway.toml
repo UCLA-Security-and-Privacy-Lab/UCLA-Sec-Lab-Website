@@ -1,13 +1,7 @@
-# Option 2: Raleway + Lato
-# 风格：优雅轻盈，适合学术但不沉闷，很多大学网站在用
-[heading]
-google_fonts = "Raleway:wght@400;600;700"
-name = "Raleway"
-
-[body]
-google_fonts = "Lato:ital,wght@0,400;0,700;1,400"
-name = "Lato"
-
-[monospace]
-google_fonts = "Fira Code:wght@400;700"
-name = "Fira Code"
+# Option 2: Raleway + Lato (优雅轻盈，大学网站常用)
+name = "Raleway Lato"
+google_fonts = "family=Raleway:wght@400;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;700"
+heading_font = "Raleway"
+body_font = "Lato"
+nav_font = "Raleway"
+mono_font = "Fira Code"

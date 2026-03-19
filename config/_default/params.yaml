@@ -8,7 +8,7 @@
 appearance:
   theme_day: minimal
   theme_night:
-  font: option2-raleway
+  font: option4-dm-sans
   font_size: L
 
 # SEO

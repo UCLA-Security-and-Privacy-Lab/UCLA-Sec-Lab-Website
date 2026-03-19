@@ -1,13 +1,7 @@
-# Option 4: DM Sans + DM Serif Display
-# 风格：标题衬线+正文无衬线，高端大气，适合研究机构
-[heading]
-google_fonts = "DM Serif Display:wght@400"
-name = "DM Serif Display"
-
-[body]
-google_fonts = "DM Sans:ital,wght@0,400;0,500;0,700;1,400"
-name = "DM Sans"
-
-[monospace]
-google_fonts = "JetBrains Mono:wght@400;700"
-name = "JetBrains Mono"
+# Option 4: DM Serif Display + DM Sans (标题衬线+正文无衬线，高端大气)
+name = "DM Serif"
+google_fonts = "family=DM+Serif+Display:wght@400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;700"
+heading_font = "DM Serif Display"
+body_font = "DM Sans"
+nav_font = "DM Sans"
+mono_font = "JetBrains Mono"

@@ -1,13 +1,7 @@
-# Option 1: Inter (全站无衬线)
-# 风格：科技现代，GitHub/Vercel 同款，极简干净
-[heading]
-google_fonts = "Inter:wght@400;600;700"
+# Option 1: Inter (科技极简，GitHub/Vercel 风)
 name = "Inter"
-
-[body]
-google_fonts = "Inter:ital,wght@0,400;0,500;1,400"
-name = "Inter"
-
-[monospace]
-google_fonts = "JetBrains Mono:wght@400;700"
-name = "JetBrains Mono"
+google_fonts = "family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700"
+heading_font = "Inter"
+body_font = "Inter"
+nav_font = "Inter"
+mono_font = "JetBrains Mono"
