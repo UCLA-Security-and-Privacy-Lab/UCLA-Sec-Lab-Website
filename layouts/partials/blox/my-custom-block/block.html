@@ -1,0 +1,26 @@
+{{/* layouts/partials/blox/my-custom-block/block.html */}}
+{{ $block := . }}
+{{ $title := $block.content.title | default "" }}
+
+<section class="my-custom-block">
+  <div class="container mx-auto" style="max-width: 1200px; padding: 3rem 1rem;">
+    {{ with $title }}
+    <h2 style="text-align: center; font-size: 1.75rem; font-weight: 700; margin-bottom: 2.5rem;">{{ . }}</h2>
+    {{ end }}
+    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+      {{ range $block.content.items }}
+      <div style="flex: 1; min-width: 280px; max-width: 360px; text-align: center;">
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">{{ .title }}</h3>
+        {{ with .image }}
+        {{ $image := resources.Get (printf "media/%s" .) }}
+        {{ if $image }}
+        <img src="{{ $image.RelPermalink }}" alt="{{ $.title }}" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        {{ else }}
+        <div style="width: 100%; height: 200px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999;">Image: {{ . }}</div>
+        {{ end }}
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

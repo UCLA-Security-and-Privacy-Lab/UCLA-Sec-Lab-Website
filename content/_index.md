@@ -16,6 +16,17 @@ sections:
         
         The **UCLA Security Lab** conducts research on security and privacy and their interactions with computer systems, machine learning, and human-computer interaction.
   
+  - block: my-custom-block
+    content:
+      title: Research Directions
+      items:
+        - title: AI Security & Privacy
+          image: research-ai-security.png
+        - title: System Security
+          image: research-system-security.png
+        - title: Data Privacy
+          image: research-data-privacy.png
+
   - block: collection
     content:
       title: Latest News
