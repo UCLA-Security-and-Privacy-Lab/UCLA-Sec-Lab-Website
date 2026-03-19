@@ -3,11 +3,11 @@ title: Sean Tang # Here is your name to display on the website
 
 first_name: Sean # Your first name
 last_name: Tang # Your last name
-start_year: 2023 # The year you entered our lab, it is used to sort the display order
+start_year: 2026 # The year you entered our lab, it is used to sort the display order
 
 superuser: false # Is this the primary user of the site? Please use false for default
 
-role: Undergraduate Research Intern in 2025 # Role/position display in your personal info page
+role: PhD Student from Fall 2026 # Role/position display in your personal info page
 
 # Organizations/Affiliations
 organizations:
@@ -52,5 +52,5 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - Research Interns
+  - PhD Students
 ---
