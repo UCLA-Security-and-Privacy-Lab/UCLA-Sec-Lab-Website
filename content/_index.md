@@ -30,7 +30,6 @@ sections:
           <div style="padding: 20px;">
             <h3 style="margin-top: 0;">AI Security</h3>
             <p style="font-size: 0.95rem; color: #555;">We investigate the security and trustworthiness of machine learning models, including adversarial attacks, data poisoning, backdoor attacks on model merging, and environmental injection attacks on AI agents.</p>
-            <a href="#ai-security" style="font-weight: 500;">View publications &darr;</a>
           </div>
         </div>
 
@@ -39,7 +38,6 @@ sections:
           <div style="padding: 20px;">
             <h3 style="margin-top: 0;">Data Privacy</h3>
             <p style="font-size: 0.95rem; color: #555;">We study privacy risks and compliance , including GDPR enforcement, personal information disclosure in online communities, location privacy in recommendation systems, and user perceptions of data collection.</p>
-            <a href="#data-privacy" style="font-weight: 500;">View publications &darr;</a>
           </div>
         </div>
 
@@ -48,7 +46,6 @@ sections:
           <div style="padding: 20px;">
             <h3 style="margin-top: 0;">System Security</h3>
             <p style="font-size: 0.95rem; color: #555;">We analyze the security of software systems including voice-controlled platforms, IoT ecosystems, authentication protocols, smart home automations, and extended reality (XR).</p>
-            <a href="#system-security" style="font-weight: 500;">View publications &darr;</a>
           </div>
         </div>
 
