@@ -8,7 +8,7 @@ last_name: Zhang
 start_year: 2026
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position
 role: PhD Student from 26'Spring co-advised with Prof. Abeer Alwan

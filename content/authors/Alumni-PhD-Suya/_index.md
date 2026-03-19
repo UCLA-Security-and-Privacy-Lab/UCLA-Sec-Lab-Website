@@ -8,7 +8,7 @@ last_name: Suya
 start_year: 2017
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position
 role: PhD grad in 2022, now AP at University of Tennessee, Knoxville

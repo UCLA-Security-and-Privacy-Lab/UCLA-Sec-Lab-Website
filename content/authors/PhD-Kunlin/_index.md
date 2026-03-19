@@ -8,7 +8,7 @@ last_name: Cai
 start_year: 2022
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position
 role: PhD Student from 21'Fall

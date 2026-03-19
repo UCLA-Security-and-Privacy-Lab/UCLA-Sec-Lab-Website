@@ -8,7 +8,7 @@ last_name: Wang
 start_year: 2025
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position
 role: PhD Student from 25'Fall

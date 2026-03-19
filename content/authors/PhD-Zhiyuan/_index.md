@@ -8,7 +8,7 @@ last_name: Zhang
 start_year: 2025
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position
 role: PhD Student from 25'Fall, co-advised with Prof. Jiaqi Ma

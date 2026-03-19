@@ -8,7 +8,7 @@ last_name: Rahat
 start_year: 2018
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position
 role: PhD grad in 2024, now Applied Scientist at AWS
