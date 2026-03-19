@@ -1,93 +1,90 @@
 ---
-title: Contact
+title: Join Us
 date: 2022-10-24
 
 type: landing
 
 sections:
-  - block: contact
-    content:
-      title: Contact
-      text: |-
-        Our lab is recruiting research interns in the following directions, and relevant topic proposals have been made:
-        1. AI security: Research the security and privacy issues of AI itself, including but not limited to prompt injection, jailbreak, adversarial attacks, membership inference attacks, etc.
-        2. AI system security: Research the system security issues of AI systems, such as AI Agent, etc.
-        3. VR/AR security: Research the security and privacy issues of software, interaction and data in VR/AR
-        4. Compliance: Research the compliance issues of software and AI
-        5. Security and privacy issues of other systems and applications, including but not limited to mobility, medical, etc.
-        6. If you have a good idea, we also support it
-
-        Expected work content:
-        1. Discuss with teachers regularly to complete the design of scientific research ideas
-        2. Work with PhD students to complete the implementation and experiments of scientific research ideas, etc.
-        3. Write research results into papers and submit them to top conferences in the field of security/AI
-
-        Interns are expected to have any of the following conditions:
-        1. Have courses or project experience related to artificial intelligence and deep learning
-        2. Have courses, development, and project experience related to human-computer interaction, ARVR
-        3. Have relevant courses or project experience in program analysis and penetration testing
-        4. Have scientific research ability or solid engineering practice foundation
-        5. Undergraduate or master's degree in computer science or related majors
-
-        You are recommended to have at least three months of internship.
-
-        Contact information:
-        
-        Intern students are welcome to contact us privately. If you apply by email, please attach your resume and relevant achievements (such as project experience, papers, code links, etc.), and name the email title Research Internship Application-[Intern Name]-[Education: Undergraduate or Master's]-[School], and send the email to [yuant@ucla.edu](mailto:yuant@ucla.edu) and copy [ucla.secpriv.lab@gmail.com](mailto:ucla.secpriv.lab@gmail.com)
-      email: ucla.secpriv.lab@gmail.com
-      #phone: 888 888 88 88
-      #address:
-      #  street: 450 Serra Mall
-      #  city: Stanford
-      #  region: CA
-      #  postcode: '94305'
-      #  country: United States
-      #  country_code: US
-      #coordinates:
-      #  latitude: '37.4275'
-      #  longitude: '-122.1697'
-      #directions: Enter Building 1 and take the stairs to Office 200 on Floor 2
-      #office_hours:
-      #  - 'Monday 10:00 to 13:00'
-      #  - 'Wednesday 09:00 to 10:00'
-      #appointment_url: 'https://calendly.com'
-      #contact_links:
-      #  - icon: comments
-      #    icon_pack: fas
-      #    name: Discuss on Forum
-      #    link: 'https://discourse.gohugo.io'
-    
-      # Automatically link email and phone or display as text?
-      autolink: true
-    
-      # Email form provider
-      form:
-        provider: netlify
-        formspree:
-          id:
-        netlify:
-          # Enable CAPTCHA challenge to reduce spam?
-          captcha: false
-    design:
-      columns: '1'
-
   - block: markdown
     content:
-      title:
+      title: Join Us
       subtitle: ''
-      text:
+      text: |
+        <div class="join-us-page">
+
+        We are always looking for motivated students and researchers to join our lab. If you're interested, please read the information below and submit your application.
+
+        ---
+
+        ## Research Directions
+
+        Our lab conducts research at the intersection of security, privacy, machine learning, and human-computer interaction. Current research directions include:
+
+        1. **AI Security:** Security and privacy of AI systems, including prompt injection, jailbreak, adversarial attacks, membership inference attacks, backdoor attacks, and AI agent security.
+        2. **Data Privacy:** Privacy compliance and enforcement (e.g., GDPR), personal information disclosure, location privacy, and user perceptions of data collection in IoT and public WiFi environments.
+        3. **System Security:** Security of software systems including voice-controlled platforms, IoT ecosystems, authentication protocols, smart home automations, extended reality (XR), and WebAssembly runtime security.
+
+        We also welcome students who bring their own strong research ideas in related areas.
+
+        ---
+
+        ## Who We Are Looking For
+
+        ### Prospective PhD Students
+
+        - We are looking for PhD students with strong research potential and interest in security, privacy, or trustworthy AI.
+        - If you have submitted an official application to UCLA CS, you do not need to contact us separately — we will review all applications. However, you are welcome to mention our lab in your application.
+        - If you would like to express interest before the application cycle, feel free to fill out the form below.
+
+        ### Postdoctoral Researchers
+
+        - We occasionally have openings for postdocs. If interested, please send your CV and a brief research statement to [yuant@ucla.edu](mailto:yuant@ucla.edu).
+
+        ### Research Interns (Visiting Students / Remote Interns)
+
+        We actively recruit research interns. Interns are expected to:
+
+        - Discuss research ideas regularly with the advisor and PhD students
+        - Collaborate on implementation, experiments, and paper writing
+        - Target submissions to top venues in security and AI (e.g., IEEE S&P, USENIX Security, CCS, NDSS, ICLR, NeurIPS)
+
+        **Preferred qualifications** (any of the following):
+
+        - Coursework or project experience in AI / deep learning
+        - Experience in HCI, AR/VR development
+        - Background in program analysis or penetration testing
+        - Solid engineering skills or prior research experience
+        - Undergraduate or Master's student in CS or related fields
+
+        A minimum commitment of **three months** is recommended.
+
+        ### UCLA Undergraduate / Master's Students
+
+        - The best way to get started is to take relevant courses in security or machine learning, and then reach out to us.
+        - If you are interested in a capstone or independent study project, please contact us well in advance.
+
+        ---
+
+        ## How to Apply
+
+        **Option 1: Fill out the form below.**
+
+        **Option 2: Email us directly.**
+        Please attach your CV and relevant materials (project experience, papers, code links, etc.). Use the following email subject format:
+
+        > **Research Internship Application – [Your Name] – [Degree: Undergrad/Master's/PhD] – [University]**
+
+        Send to: [yuant@ucla.edu](mailto:yuant@ucla.edu), CC: [ucla.secpriv.lab@gmail.com](mailto:ucla.secpriv.lab@gmail.com)
+
+        *Due to the volume of applications, we may not be able to respond to every inquiry individually. We appreciate your understanding.*
+
+        ---
+
+        ## Application Form
+
+        <iframe src="https://docs.google.com/forms/d/1Ym5WEcGsOLn-HTra-Sh13LiuO8-aRrCTQmTwdJR2GFo/viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0" style="border: 1px solid #e0e0e0; border-radius: 8px;">Loading…</iframe>
+
+        </div>
     design:
       columns: '1'
-      background:
-        image: 
-          filename: contact.jpg
-          filters:
-            brightness: 1
-          parallax: false
-          position: center
-          size: cover
-          text_color_light: true
-      spacing:
-        padding: ['20px', '0', '20px', '0']
-      css_class: fullscreen
 ---

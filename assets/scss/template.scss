@@ -38,6 +38,21 @@
   }
 }
 
+// Join Us page: smaller font
+.join-us-page {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  h2 {
+    font-size: 1.4rem;
+  }
+  h3 {
+    font-size: 1.15rem;
+  }
+  p, li {
+    font-size: 0.9rem;
+  }
+}
+
 // Unified link color
 a {
   color: rgb(68, 86, 167) !important;

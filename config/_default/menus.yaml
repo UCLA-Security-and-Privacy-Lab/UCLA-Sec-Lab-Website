@@ -22,9 +22,6 @@ main:
   - name: Publications
     url: publication
     weight: 50
-  - name: Contact
+  - name: Join Us
     url: contact
     weight: 60
-  - name: Apply
-    url: https://docs.google.com/forms/d/1Ym5WEcGsOLn-HTra-Sh13LiuO8-aRrCTQmTwdJR2GFo/viewform
-    weight: 70
