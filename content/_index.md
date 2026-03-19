@@ -4,13 +4,6 @@ title:
 date: 2022-10-24
 type: landing
 
-design:
-  background:
-    gradient:
-      start: '#4bb4e3'
-      end: '#2b94c3'
-      direction: 135
-
 sections:
   - block: hero
     content:
