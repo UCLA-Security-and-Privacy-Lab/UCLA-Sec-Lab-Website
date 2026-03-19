@@ -21,6 +21,23 @@
   color: #dbeafe !important;
 }
 
+// People page: card style with rounded rectangle and left alignment
+.people-widget .row {
+  justify-content: flex-start !important;
+}
+.people-person {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px 16px;
+  margin: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+}
+
 // Unified link color
 a {
   color: rgb(68, 86, 167) !important;
