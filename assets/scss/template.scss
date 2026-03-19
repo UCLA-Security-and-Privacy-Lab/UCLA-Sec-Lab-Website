@@ -20,3 +20,12 @@
 .navbar .nav-link:focus {
   color: #dbeafe !important;
 }
+
+// Unified link color
+a {
+  color: rgb(68, 86, 167) !important;
+}
+a:hover,
+a:focus {
+  color: rgb(48, 62, 130) !important;
+}
