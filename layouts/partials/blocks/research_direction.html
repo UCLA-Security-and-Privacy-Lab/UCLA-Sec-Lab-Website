@@ -2,18 +2,32 @@
 {{ $block := .wcBlock }}
 {{ $title := $block.content.title | default "" }}
 
-<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-  {{ range $block.content.items }}
-  <div style="flex: 1; min-width: 280px; max-width: 360px; text-align: center;">
-    <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">{{ .title }}</h3>
-    {{ with .image }}
-    {{ $image := resources.Get (printf "media/%s" .) }}
-    {{ if $image }}
-    <img src="{{ $image.RelPermalink }}" alt="{{ .title }}" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-    {{ else }}
-    <img src="{{ (printf "media/%s" .) | relURL }}" alt="{{ .title }}" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+<section class="my-custom-block p-8">
+  <h2 class="text-2xl font-bold text-center mb-8">{{ $title }}</h2>
+  <div style="display: flex; flex-direction: row; justify-content: center; gap: 2rem;">
+    {{ with $block.content.rd_1_title }}
+    <div style="flex: 1; text-align: center;">
+      <h3 class="text-xl font-semibold mb-4">{{ . }}</h3>
+      {{ with $block.content.rd_1_image }}
+      <img src="{{ (printf "media/%s" .) | absURL }}" alt="{{ $block.content.rd_1_title }}" style="border-radius: 8px; max-width: 100%;" />
+      {{ end }}
+    </div>
     {{ end }}
+    {{ with $block.content.rd_2_title }}
+    <div style="flex: 1; text-align: center;">
+      <h3 class="text-xl font-semibold mb-4">{{ . }}</h3>
+      {{ with $block.content.rd_2_image }}
+      <img src="{{ (printf "media/%s" .) | absURL }}" alt="{{ $block.content.rd_2_title }}" style="border-radius: 8px; max-width: 100%;" />
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ with $block.content.rd_3_title }}
+    <div style="flex: 1; text-align: center;">
+      <h3 class="text-xl font-semibold mb-4">{{ . }}</h3>
+      {{ with $block.content.rd_3_image }}
+      <img src="{{ (printf "media/%s" .) | absURL }}" alt="{{ $block.content.rd_3_title }}" style="border-radius: 8px; max-width: 100%;" />
+      {{ end }}
+    </div>
     {{ end }}
   </div>
-  {{ end }}
-</div>
+</section>

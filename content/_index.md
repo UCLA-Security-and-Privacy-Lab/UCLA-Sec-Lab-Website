@@ -19,13 +19,12 @@ sections:
   - block: research_direction
     content:
       title: Research Directions
-      items:
-        - title: AI Security & Privacy
-          image: research-ai-security.png
-        - title: System Security
-          image: research-system-security.png
-        - title: Data Privacy
-          image: research-data-privacy.png
+      rd_1_title: AI Security & Privacy
+      rd_1_image: research-ai-security.png
+      rd_2_title: System Security
+      rd_2_image: research-system-security.png
+      rd_3_title: Data Privacy
+      rd_3_image: research-data-privacy.png
 
   - block: collection
     content:
