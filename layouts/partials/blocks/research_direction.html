@@ -1,21 +1,19 @@
-{{ $block := .block }}
-{{ $page := .page }}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
 {{ $title := $block.content.title | default "" }}
 
-<section class="research_direction" style="padding: 3rem 0;">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
-    {{ with $title }}
-    <h2 style="text-align: center; font-size: 1.75rem; font-weight: 700; margin-bottom: 2.5rem;">{{ . }}</h2>
+<div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+  {{ range $block.content.items }}
+  <div style="flex: 1; min-width: 280px; max-width: 360px; text-align: center;">
+    <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">{{ .title }}</h3>
+    {{ with .image }}
+    {{ $image := resources.Get (printf "media/%s" .) }}
+    {{ if $image }}
+    <img src="{{ $image.RelPermalink }}" alt="{{ .title }}" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    {{ else }}
+    <img src="{{ (printf "media/%s" .) | relURL }}" alt="{{ .title }}" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
     {{ end }}
-    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-      {{ range $block.content.items }}
-      <div style="flex: 1; min-width: 280px; max-width: 360px; text-align: center;">
-        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">{{ .title }}</h3>
-        {{ with .image }}
-        <img src="{{ (printf "media/%s" .) | relURL }}" alt="{{ $.title }}" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        {{ end }}
-      </div>
-      {{ end }}
-    </div>
+    {{ end }}
   </div>
-</section>
+  {{ end }}
+</div>
