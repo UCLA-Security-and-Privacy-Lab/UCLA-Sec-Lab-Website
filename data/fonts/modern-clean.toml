@@ -1,0 +1,16 @@
+# Modern Clean Font Theme
+# Heading: Inter (clean, modern sans-serif)
+# Body: Source Serif Pro (elegant, readable serif)
+# Monospace: JetBrains Mono
+
+[heading]
+google_fonts = "Inter:wght@400;500;600;700"
+name = "Inter"
+
+[body]
+google_fonts = "Source Serif Pro:ital,wght@0,400;0,600;1,400"
+name = "Source Serif Pro"
+
+[monospace]
+google_fonts = "JetBrains Mono:wght@400;700"
+name = "JetBrains Mono"
