@@ -5,8 +5,15 @@ title: 'Location-Enhanced Information Flow Analysis for Smart Home Automations'
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - McKenna McCall
+  - Ben Weinshel
+  - PhD-Kunlin
+  - PhD-YingLi
+  - Eric Zeng
+  - Devika Manohar
+  - Lujo Bauer
+  - Limin Jia
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

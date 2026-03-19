@@ -5,8 +5,14 @@ title: 'CHKPLUG: Checking GDPR Compliance of WordPress Plugins via Cross-languag
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - Alumni-PhD-Faysal
+  - Zihao Su
+  - Mingqing Kang
+  - Nicholas Phair
+  - Patrick Thomas
+  - Matti Dam
+  - Yinzhi Cao
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

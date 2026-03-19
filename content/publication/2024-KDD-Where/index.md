@@ -5,8 +5,14 @@ title: 'Where have you been? A Study of Privacy Risk for Point-of-Interest Recom
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - PhD-Kunlin
+  - PhD-Jinghuai
+  - William Shand
+  - Zhi Hong
+  - Gang Wang
+  - Daniel Zhang
+  - Alumni-PhD-Jianfeng
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

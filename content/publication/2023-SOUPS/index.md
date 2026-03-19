@@ -5,8 +5,15 @@ title: 'Towards Usable Security Analysis Tools for Trigger-Action Programming'
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - McKenna McCall
+  - Eric Zeng
+  - Alumni-PhD-Faysal
+  - Minyue Yang
+  - Lujo Bauer
+  - Abhishek Bichhawat
+  - Camille Cobb
+  - Limin Jia
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

@@ -5,8 +5,14 @@ title: 'Breaking the Illusion: Automated Reasoning of GDPR Consent Violations'
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - PhD-YingLi
+  - Wenjie Qiu
+  - Alumni-PhD-Faysal
+  - PhD-Kunlin
+  - Matti Dam
+  - Lorrie Austin
+  - David Lie
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

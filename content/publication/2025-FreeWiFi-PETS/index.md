@@ -5,8 +5,11 @@ title: 'Free WiFi is not ultimately free: Privacy Perceptions of Users in the US
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - Paromita Mandal
+  - Alumni-PhD-Tu
+  - Amit Ami
+  - Prof-YuanTian
+  - Adwait Nadkarni
 
 # Author notes (optional)
 #author_notes:

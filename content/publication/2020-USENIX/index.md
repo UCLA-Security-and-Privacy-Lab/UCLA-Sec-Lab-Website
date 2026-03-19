@@ -5,8 +5,10 @@ title: 'Hybrid Batch Attacks: Finding Black-box Adversarial Examples with Limite
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - Alumni-PhD-Suya
+  - Alumni-PhD-Jianfeng
+  - David Evans
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

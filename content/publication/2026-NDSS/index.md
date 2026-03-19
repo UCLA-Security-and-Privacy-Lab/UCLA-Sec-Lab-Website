@@ -5,8 +5,13 @@ title: 'From Perception to Protection: A Developer-Centered Study of Security an
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - PhD-Kunlin
+  - PhD-Jinghuai
+  - PhD-YingLi
+  - Zihang Wang
+  - Xianren Chen
+  - Tianshi Li
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

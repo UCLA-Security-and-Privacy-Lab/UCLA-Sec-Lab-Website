@@ -5,8 +5,11 @@ title: 'Side Channel Attacks in GPU-Virtualization-Based Computation-Offload Sys
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - Sihang Liu
+  - Yizhou Wei
+  - Alumni-PhD-Jianfeng
+  - Alumni-PhD-Faysal
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

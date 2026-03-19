@@ -5,8 +5,14 @@ title: 'Your Microphone Array Retains Your Identity: A Robust Voice Liveness Det
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - Yan Meng
+  - Jiachun Li
+  - Matthew Pillari
+  - Arjun Deopujari
+  - Liam Brennan
+  - Hafsah Shamsie
+  - Haojin Zhu
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:

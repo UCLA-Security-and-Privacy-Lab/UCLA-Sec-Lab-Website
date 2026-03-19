@@ -5,8 +5,10 @@ title: 'SkillBot: Identifying Risky Content for Children in Alexa Skills'
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-#  - admin
-#  - Robert Ford
+  - Alumni-PhD-Tu
+  - Danny Huang
+  - Noah Apthorpe
+  - Prof-YuanTian
 
 # Author notes (optional)
 #author_notes:
