@@ -17,6 +17,20 @@
   color: #fff !important;
   font-weight: 700 !important;
 }
+// Navbar icon before site title
+.navbar-brand {
+  display: inline-flex !important;
+  align-items: center;
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    background: url('/media/icon.png') no-repeat center / contain;
+    flex-shrink: 0;
+  }
+}
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
   color: #dbeafe !important;

@@ -8,11 +8,11 @@ sections:
   - block: hero
     content:
       title: |
-        UCLA Security Lab
+        <span style="display: inline-flex; align-items: center;"><img src="/media/icon.png" alt="Lab Icon" style="height: 72px; margin-right: 12px;">UCLA Security Lab</span>
       image:
         filename: website-view.png
       text: |
-        <img src="/media/icon.png" alt="Lab Icon" style="height: 72px; vertical-align: middle; margin-right: 8px; margin-bottom: 16px;">
+        <br>
 
         The **UCLA Security Lab** conducts research on security and privacy and their interactions with computer systems, machine learning, and human-computer interaction.
 
