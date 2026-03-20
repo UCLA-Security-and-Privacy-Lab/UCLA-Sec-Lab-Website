@@ -67,9 +67,9 @@ sections:
 
         ## How to Apply
 
-        **Option 1: Fill out the form below.**
+        **First: Fill out the form below.**
 
-        **Option 2: Email us directly.**
+        **Second: Email us.**
         Please attach your CV and relevant materials (project experience, papers, code links, etc.). Use the following email subject format:
 
         > **Research Internship Application – [Your Name] – [Degree: Undergrad/Master's/PhD] – [University]**
