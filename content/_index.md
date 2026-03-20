@@ -16,10 +16,6 @@ sections:
 
         Our research spans **AI security**, **data privacy**, and **system security**, with publications at top venues including IEEE S&P, USENIX Security, CCS, NDSS, ICLR, and ICML.
 
-        We are part of the [Department of Electrical and Computer Engineering](https://www.ee.ucla.edu/) and the [Department of Computer Science](https://cs.ucla.edu/) at [UCLA](https://www.ucla.edu/).
-
-        {{% cta cta_link="./research/" cta_text="Explore Our Research →" %}}
-
   - block: markdown
     content:
       title: Research
