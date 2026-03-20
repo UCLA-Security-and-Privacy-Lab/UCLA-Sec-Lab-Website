@@ -7,7 +7,7 @@ title: 'Conditional Supervised Contrastive Learning for Fair Text Classification
 authors:
   - Alumni-PhD-Jianfeng
   - William Shand
-  - Yu Yu
+  - Yaodong Yu
   - Kai-Wei Chang
   - Han Zhao
   - Prof-YuanTian

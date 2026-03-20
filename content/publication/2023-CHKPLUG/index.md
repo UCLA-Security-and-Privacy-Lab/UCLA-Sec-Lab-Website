@@ -10,7 +10,7 @@ authors:
   - Mingqing Kang
   - Nicholas Phair
   - Patrick Thomas
-  - Matti Dam
+  - Michelangelo van Dam
   - Yinzhi Cao
   - Prof-YuanTian
 

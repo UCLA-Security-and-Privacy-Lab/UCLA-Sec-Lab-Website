@@ -9,7 +9,7 @@ authors:
   - Lingbo Mo
   - Chejian Xu
   - Mintong Kang
-  - PhD-Jinghuai
+  - Jiawei Zhang
   - Chaowei Xiao
   - Prof-YuanTian
   - Bo Li

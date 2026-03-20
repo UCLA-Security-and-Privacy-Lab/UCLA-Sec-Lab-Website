@@ -8,8 +8,8 @@ authors:
   - PhD-Kunlin
   - PhD-Jinghuai
   - PhD-YingLi
-  - Zihang Wang
-  - Xianren Chen
+  - Zhiyuan Wang
+  - Xun Chen
   - Tianshi Li
   - Prof-YuanTian
 

@@ -5,10 +5,10 @@ title: 'Chimera: Creating Digitally Signed Fake Photos by Fooling Image Recaptur
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Siyuan Park
+  - Seongbin Park
   - Alexander Vilesov
   - PhD-Jinghuai
-  - Hadi Khalili
+  - Hossein Khalili
   - Prof-YuanTian
   - Achuta Kadambi
   - Nader Sehatbakhsh

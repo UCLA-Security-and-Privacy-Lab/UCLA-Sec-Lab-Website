@@ -8,9 +8,9 @@ authors:
   - PhD-Kunlin
   - PhD-Jinghuai
   - William Shand
-  - Zhi Hong
-  - Gang Wang
-  - Daniel Zhang
+  - Zhiqing Hong
+  - Guang Wang
+  - Desheng Zhang
   - Alumni-PhD-Jianfeng
   - Prof-YuanTian
 

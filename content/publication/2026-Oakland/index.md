@@ -6,11 +6,11 @@ title: 'Breaking the Illusion: Automated Reasoning of GDPR Consent Violations'
 # and it will be replaced with their full name and linked to their profile.
 authors:
   - PhD-YingLi
-  - Wenjie Qiu
+  - Wenjun Qiu
   - Alumni-PhD-Faysal
   - PhD-Kunlin
-  - Matti Dam
-  - Lorrie Austin
+  - Michelangelo van Dam
+  - Lisa Austin
   - David Lie
   - Prof-YuanTian
 

@@ -6,9 +6,9 @@ title: 'Alexa, is the skill always safe? Uncover Lenient Skill Vetting Process a
 # and it will be replaced with their full name and linked to their profile.
 authors:
   - Alumni-PhD-Tu
-  - Dexin Zhao
-  - Zhiyuan Wang
-  - Xiangrui Wang
+  - Dongfang Zhao
+  - Zihao Wang
+  - XiaoFeng Wang
   - Prof-YuanTian
 
 # Author notes (optional)

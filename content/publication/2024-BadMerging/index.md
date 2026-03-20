@@ -7,9 +7,9 @@ title: 'BadMerging: Backdoor Attacks Against Model Merging'
 authors:
   - PhD-Jinghuai
   - Alumni-PhD-Jianfeng
-  - Zhehao Li
+  - Zheng Li
   - PhD-Kunlin
-  - Yi Zhang
+  - Yang Zhang
   - Prof-YuanTian
 
 # Author notes (optional)
