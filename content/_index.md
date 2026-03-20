@@ -12,9 +12,13 @@ sections:
       image:
         filename: website-view.png
       text: |
-        <br>
+        The **UCLA Security Lab**, led by [Prof. Yuan Tian](https://www.ytian.info/), conducts research on security and privacy and their interactions with computer systems, machine learning, and human-computer interaction.
 
-        The **UCLA Security Lab** conducts research on security and privacy and their interactions with computer systems, machine learning, and human-computer interaction.
+        Our research spans **AI security**, **data privacy**, and **system security**, with publications at top venues including IEEE S&P, USENIX Security, CCS, NDSS, ICLR, and ICML.
+
+        We are part of the [Department of Electrical and Computer Engineering](https://www.ee.ucla.edu/) and the [Department of Computer Science](https://cs.ucla.edu/) at [UCLA](https://www.ucla.edu/).
+
+        {{% cta cta_link="./research/" cta_text="Explore Our Research →" %}}
 
   - block: markdown
     content:

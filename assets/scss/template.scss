@@ -68,6 +68,19 @@
   }
 }
 
+// Hero block: title matches navbar font, smaller body text
+.wg-hero h1 {
+  font-family: var(--wc-font-nav, var(--wc-font-body)) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.wg-hero p,
+.wg-hero .hero-lead {
+  font-size: 0.95rem !important;
+  line-height: 1.7;
+}
+
 // Unified link color
 a {
   color: rgb(68, 86, 167) !important;
