@@ -16,6 +16,9 @@ main:
   - name: PUBLICATIONS
     url: publication
     weight: 50
+  - name: AWARDS
+    url: awards
+    weight: 55
   - name: JOIN US
     url: contact
     weight: 60
