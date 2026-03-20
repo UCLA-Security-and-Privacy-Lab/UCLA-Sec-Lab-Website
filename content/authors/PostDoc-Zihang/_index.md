@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Zihang Xiang
+external_link: "https://zihangxiang.github.io/"
 
 # Full Name (for SEO)
 first_name: Zihang

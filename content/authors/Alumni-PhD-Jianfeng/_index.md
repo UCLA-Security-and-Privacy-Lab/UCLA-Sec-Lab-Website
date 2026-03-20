@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Jianfeng Chi
+external_link: "https://jfchi.github.io/"
 
 # Full Name (for SEO)
 first_name: Jianfeng

@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Jinghuai Zhang
+external_link: "https://jzhang538.github.io/jinghuaizhang/"
 
 # Full Name (for SEO)
 first_name: Jinghuai

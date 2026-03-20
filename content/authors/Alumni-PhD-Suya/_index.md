@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Fnu Suya
+external_link: "https://fsuya.org/"
 
 # Full Name (for SEO)
 first_name: Fnu

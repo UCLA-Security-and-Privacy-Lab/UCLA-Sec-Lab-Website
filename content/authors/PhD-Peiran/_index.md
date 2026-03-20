@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Peiran Wang
+external_link: "https://whilebug.github.io/"
 
 # Full Name (for SEO)
 first_name: Peiran

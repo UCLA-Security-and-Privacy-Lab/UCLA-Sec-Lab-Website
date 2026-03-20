@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Ying Li
+external_link: "https://y1ngli.github.io/"
 
 # Full Name (for SEO)
 first_name: Ying

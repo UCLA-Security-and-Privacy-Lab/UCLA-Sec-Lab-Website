@@ -1,5 +1,6 @@
 ---
 title: Sean Tang # Here is your name to display on the website
+external_link: "https://seantang001.github.io/"
 
 first_name: Sean # Your first name
 last_name: Tang # Your last name

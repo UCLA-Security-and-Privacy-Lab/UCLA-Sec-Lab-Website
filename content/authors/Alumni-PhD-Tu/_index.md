@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Tu Le
+external_link: "https://lenhattu.com/"
 
 # Full Name (for SEO)
 first_name: Tu

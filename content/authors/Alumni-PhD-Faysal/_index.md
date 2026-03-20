@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Faysal Hossain Shezan
+external_link: "https://fhshezan.github.io/"
 
 # Full Name (for SEO)
 first_name: Faysal

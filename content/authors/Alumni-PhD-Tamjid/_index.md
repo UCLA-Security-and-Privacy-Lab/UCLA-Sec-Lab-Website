@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Tamjid Al Rahat
+external_link: "https://sites.google.com/site/tamjidrahat073/"
 
 # Full Name (for SEO)
 first_name: Tamjid

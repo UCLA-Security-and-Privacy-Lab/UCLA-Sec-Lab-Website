@@ -1,6 +1,7 @@
 ---
 # Display name
 title: Yuan Tian
+external_link: "https://www.ytian.info/"
 
 # Full Name (for SEO)
 first_name: Yuan
