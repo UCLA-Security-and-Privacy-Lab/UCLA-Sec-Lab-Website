@@ -8,7 +8,7 @@ sections:
   - block: hero
     content:
       title: |
-        UCLA Security Lab
+        <img src="/media/icon.png" alt="Lab Icon" style="height: 80px; vertical-align: middle; margin-right: 12px;">UCLA Security Lab
       image:
         filename: website-view.png
       text: |
