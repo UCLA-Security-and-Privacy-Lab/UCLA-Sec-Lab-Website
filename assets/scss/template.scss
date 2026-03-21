@@ -53,6 +53,33 @@
   }
 }
 
+// Alumni list style (compact, no avatar)
+.alumni-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  columns: 2;
+  column-gap: 2rem;
+  li.alumni-list-item {
+    padding: 6px 0;
+    break-inside: avoid;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    a {
+      font-weight: 600;
+    }
+    .alumni-first-employment {
+      color: #666;
+      font-size: 0.88rem;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .alumni-list {
+    columns: 1;
+  }
+}
+
 // Join Us page: smaller font
 .join-us-page {
   font-size: 0.9rem;

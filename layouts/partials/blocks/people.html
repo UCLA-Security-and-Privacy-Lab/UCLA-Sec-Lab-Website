@@ -1,7 +1,7 @@
 {{/* Hugo Blox: People */}}
 {{/* Documentation: https://hugoblox.com/blocks/ */}}
 {{/* License: https://github.com/HugoBlox/hugo-blox-builder/blob/main/LICENSE.md */}}
-{{/* Modified: Added external_link support for authors */}}
+{{/* Modified: Added external_link support, alumni list view, undergraduate alumni */}}
 
 {{/* Initialise */}}
 {{ $page := .wcPage }}
@@ -26,55 +26,114 @@
   {{ end }}
 
   {{ range $block.content.user_groups }}
-    {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
+    {{/* Special handling for Undergraduate Alumni - rendered from custom data */}}
+    {{ if eq . "Undergraduate Alumni" }}
+      {{ with $block.content.undergraduate_alumni }}
+        <div class="col-md-12">
+          <h2 class="mb-4">Undergraduate Alumni</h2>
+        </div>
+        <div class="col-md-12">
+          <ul class="alumni-list">
+            {{ range . }}
+              <li class="alumni-list-item">
+                {{ if ne .link "" }}
+                  <a href="{{ .link }}" target="_blank" rel="noopener">{{ .name }}</a>
+                {{ else }}
+                  <span>{{ .name }}</span>
+                {{ end }}
+                {{ if ne (.first_employment | default "") "" }}
+                  <span class="alumni-first-employment">&mdash; {{ .first_employment }}</span>
+                {{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    {{ else }}
+      {{/* Standard handling for all other groups */}}
+      {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
 
-    {{/* Sort */}}
-    {{ $sort_by := $block.content.sort_by | default "Params.last_name" }}
-    {{ $sort_by = partial "blox-core/functions/get_sort_by_parameter" $sort_by }}
-    {{ $sort_ascending := $block.content.sort_ascending | default true }}
-    {{ $sort_order := cond $sort_ascending "asc" "desc" }}
-    {{ $query = sort $query $sort_by $sort_order }}
+      {{/* Sort */}}
+      {{ $sort_by := $block.content.sort_by | default "Params.last_name" }}
+      {{ $sort_by = partial "blox-core/functions/get_sort_by_parameter" $sort_by }}
+      {{ $sort_ascending := $block.content.sort_ascending | default true }}
+      {{ $sort_order := cond $sort_ascending "asc" "desc" }}
+      {{ $query = sort $query $sort_by $sort_order }}
 
-    {{if $query | and (gt (len $block.content.user_groups) 1) }}
-      <div class="col-md-12">
-        <h2 class="mb-4">{{ . | markdownify }}</h2>
-      </div>
-    {{end}}
+      {{ $is_alumni_group := eq . "PhD Alumni" }}
 
-    {{ range $query }}
-      {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
-      {{/* Get link to user's profile page or external link. */}}
-      {{ $link := "" }}
-      {{ $is_external := false }}
-      {{ if .Params.external_link }}
-        {{ $link = .Params.external_link }}
-        {{ $is_external = true }}
+      {{if $query | and (gt (len $block.content.user_groups) 1) }}
+        <div class="col-md-12">
+          <h2 class="mb-4">{{ . | markdownify }}</h2>
+        </div>
+      {{end}}
+
+      {{ if $is_alumni_group }}
+        {{/* PhD Alumni: render as compact list */}}
+        <div class="col-md-12">
+          <ul class="alumni-list">
+            {{ range $query }}
+              {{ $link := "" }}
+              {{ $is_external := false }}
+              {{ if .Params.external_link }}
+                {{ $link = .Params.external_link }}
+                {{ $is_external = true }}
+              {{ else }}
+                {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
+                  {{ $link = .RelPermalink }}
+                {{ end }}
+              {{ end }}
+              <li class="alumni-list-item">
+                {{ if $link }}
+                  <a href="{{ $link }}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}</a>
+                {{ else }}
+                  <span>{{ .Title }}</span>
+                {{ end }}
+                {{ if and $show_role .Params.role }}
+                  <span class="alumni-first-employment">&mdash; {{ .Params.role | markdownify | emojify }}</span>
+                {{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        </div>
       {{ else }}
-        {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
-          {{ $link = .RelPermalink }}
+        {{/* Regular groups: render as cards */}}
+        {{ range $query }}
+          {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
+          {{/* Get link to user's profile page or external link. */}}
+          {{ $link := "" }}
+          {{ $is_external := false }}
+          {{ if .Params.external_link }}
+            {{ $link = .Params.external_link }}
+            {{ $is_external = true }}
+          {{ else }}
+            {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
+              {{ $link = .RelPermalink }}
+            {{ end }}
+          {{ end }}
+          <div class="col-12 col-sm-auto people-person">
+            {{ $src := "" }}
+            {{ if site.Params.features.avatar.gravatar }}
+              {{ $src = printf "https://s.gravatar.com/avatar/%s?s=150" (md5 .Params.email) }}
+            {{ else if $avatar }}
+              {{ $avatar_image := $avatar.Fill "270x270 Center" }}
+              {{ $src = $avatar_image.RelPermalink }}
+            {{ end }}
+            {{ if $src }}
+              {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
+              {{with $link}}<a href="{{.}}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{end}}<img width="270" height="270" loading="lazy" class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="{{ $src }}" alt="Avatar">{{if $link}}</a>{{end}}
+            {{ end }}
+
+            <div class="portrait-title">
+              <h2>{{with $link}}<a href="{{.}}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{end}}{{ .Title }}{{if $link}}</a>{{end}}</h2>
+              {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
+              {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
+              {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
+              {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
+            </div>
+          </div>
         {{ end }}
       {{ end }}
-      <div class="col-12 col-sm-auto people-person">
-        {{ $src := "" }}
-        {{ if site.Params.features.avatar.gravatar }}
-          {{ $src = printf "https://s.gravatar.com/avatar/%s?s=150" (md5 .Params.email) }}
-        {{ else if $avatar }}
-          {{ $avatar_image := $avatar.Fill "270x270 Center" }}
-          {{ $src = $avatar_image.RelPermalink }}
-        {{ end }}
-        {{ if $src }}
-          {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
-          {{with $link}}<a href="{{.}}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{end}}<img width="270" height="270" loading="lazy" class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="{{ $src }}" alt="Avatar">{{if $link}}</a>{{end}}
-        {{ end }}
-
-        <div class="portrait-title">
-          <h2>{{with $link}}<a href="{{.}}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{end}}{{ .Title }}{{if $link}}</a>{{end}}</h2>
-          {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
-          {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
-          {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
-          {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
-        </div>
-      </div>
     {{ end }}
   {{ end }}
 </div>
