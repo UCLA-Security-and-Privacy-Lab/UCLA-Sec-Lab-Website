@@ -58,8 +58,7 @@
   list-style: none;
   padding: 0;
   margin: 0 0 1.5rem 0;
-  columns: 2;
-  column-gap: 2rem;
+  columns: 1;
   li.alumni-list-item {
     padding: 6px 0;
     break-inside: avoid;
@@ -74,12 +73,6 @@
     }
   }
 }
-@media (max-width: 768px) {
-  .alumni-list {
-    columns: 1;
-  }
-}
-
 // Join Us page: smaller font
 .join-us-page {
   font-size: 0.9rem;
