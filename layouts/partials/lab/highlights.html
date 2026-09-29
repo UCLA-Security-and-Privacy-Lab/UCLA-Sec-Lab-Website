@@ -1,0 +1,9 @@
+{{/* Highlighted papers. Input: list of {title, venue, url}. */}}
+<section class="lab-section">
+  <p class="section-label">Highlighted papers</p>
+  <ul class="highlight-list">
+    {{ range . }}
+      <li><a href="{{ partial "functions/lab_url" .url }}"><strong>{{ .title }}</strong><span>{{ .venue }}</span></a></li>
+    {{ end }}
+  </ul>
+</section>

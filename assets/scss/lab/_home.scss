@@ -151,3 +151,98 @@ p.lab-hero-summary {
     gap: 4px;
   }
 }
+
+// Two-column content grid (main | 250px side), vertical divider between them
+.lab-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  border-top: 1px solid $lab-border;
+}
+.lab-main {
+  min-width: 0;
+  padding: 28px 32px 30px;
+  border-right: 1px solid $lab-border;
+}
+.lab-side {
+  padding: 28px 24px 30px;
+}
+.lab-section + .lab-section {
+  margin-top: 28px;
+}
+
+// Research at a glance (also used on the Research page)
+.project-list {
+  margin-top: 10px;
+}
+.project-item {
+  padding: 16px 0 15px;
+  border-bottom: 1px solid $lab-border;
+}
+.project-item:first-child {
+  padding-top: 8px;
+}
+.project-item p {
+  margin: 0;
+  color: $lab-body-soft;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.project-item .lab-more {
+  display: inline-block;
+  margin-top: 9px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+// What we are building (PASTA project cards in kwchang colours)
+.lab-projects {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+.lab-project {
+  padding: 20px;
+  border: 1px solid $lab-border;
+  border-radius: 10px;
+}
+.lab-project .chip-row {
+  margin: 0 0 10px;
+}
+.lab-project h3 {
+  margin: 0 0 6px;
+}
+.lab-project p {
+  margin: 0 0 12px;
+  color: $lab-body-soft;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.chip-status {
+  color: $lab-pill-text;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.chip-topic {
+  color: $lab-tile-text;
+  background: $lab-surface-soft;
+}
+
+@media (max-width: $lab-bp-stack) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+  .lab-main {
+    padding-bottom: 18px;
+    border-right: 0;
+  }
+  .lab-side {
+    border-top: 1px solid $lab-border;
+  }
+}
+@media (max-width: $lab-bp-mobile) {
+  .lab-main,
+  .lab-side {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}

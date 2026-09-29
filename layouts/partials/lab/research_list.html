@@ -1,0 +1,19 @@
+{{/* "Research at a glance" list (homepage and Research page).
+     Input: dict "label" (optional) "areas" (list of {title, description, chips[{label, url}] optional, link{label, url} optional}). */}}
+<section class="lab-section">
+  {{ with .label }}<p class="section-label">{{ . }}</p>{{ end }}
+  <div class="project-list">
+    {{ range .areas }}
+      <div class="project-item">
+        <h3>{{ .title }}</h3>
+        <p>{{ .description | markdownify }}</p>
+        {{ with .chips }}
+          <div class="chip-row">
+            {{ range . }}<a class="chip" href="{{ partial "functions/lab_url" .url }}">{{ .label }}</a>{{ end }}
+          </div>
+        {{ end }}
+        {{ with .link }}<a class="lab-more" href="{{ partial "functions/lab_url" .url }}">{{ .label }}</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>

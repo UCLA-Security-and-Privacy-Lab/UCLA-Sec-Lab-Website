@@ -1,0 +1,21 @@
+{{/* PASTA-style project cards. Input: list of {title, status, topics[], description, links[{label, url}]}. */}}
+<section class="lab-section">
+  <p class="section-label">What we are building</p>
+  <div class="lab-projects">
+    {{ range . }}
+      <article class="lab-project">
+        <div class="chip-row">
+          {{ with .status }}<span class="chip chip-status">{{ . }}</span>{{ end }}
+          {{ range .topics }}<span class="chip chip-topic">{{ . }}</span>{{ end }}
+        </div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .description | markdownify }}</p>
+        {{ with .links }}
+          <div class="action-row">
+            {{ range . }}<a class="action-pill" href="{{ partial "functions/lab_url" .url }}">{{ .label }}</a>{{ end }}
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+</section>

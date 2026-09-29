@@ -227,5 +227,57 @@ class LabUrlTest(unittest.TestCase):
         self.assertIn('"peeple/" does not match any page', log)
 
 
+EXPECTED_CHIPS = {
+    "AI Security": ["EIA (ICLR '25)", "BadMerging (CCS '24)", "Chimera (USENIX Sec '25)",
+                    "SoK: Vulnerability Repair (USENIX Sec '25)", "Poisoning Attacks (ICML '21)"],
+    "Data Privacy": ["GDPR Consent (S&P '26)", "Smart Home IFA (PETS '26)", "City-wide WiFi (PETS '25)",
+                     "CHKPLUG (NDSS '23)", "SenRev (PETS '23)"],
+    "System Security": ["XR Threats (NDSS '26)", "Waltzz (USENIX Sec '25)", "AuthSaber (CCS '24)",
+                        "Alexa Skill Vetting (ICSE '24)", "TKPERM (NDSS '20)"],
+}
+
+
+class HomeMainTest(unittest.TestCase):
+    def setUp(self):
+        self.main = st.page("").find(cls="lab-main")
+
+    def section(self, label):
+        return [s for s in self.main.find_all("section", cls="lab-section")
+                if s.find("p", cls="section-label").text() == label][0]
+
+    def test_sections_in_order(self):
+        labels = [s.find("p", cls="section-label").text() for s in self.main.find_all("section", cls="lab-section")]
+        self.assertEqual(labels, ["Research at a glance", "What we are building", "Highlighted papers"])
+
+    def test_research_areas_and_chips(self):
+        items = self.section("Research at a glance").find_all(cls="project-item")
+        got = {i.find("h3").text(): [a.text() for a in i.find_all("a", cls="chip")] for i in items}
+        self.assertEqual(got, EXPECTED_CHIPS)
+        for i in items:
+            for a in i.find_all("a", cls="chip"):
+                self.assertTrue(a.attrs["href"].startswith(st.BASE_PATH + "publication/"), a.attrs["href"])
+                self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_project_cards(self):
+        cards = self.section("What we are building").find_all("article", cls="lab-project")
+        self.assertEqual([c.find("h3").text() for c in cards], ["Bruinweb", "Trustworthy AI Agents", "Trustworthy Medical AI"])
+        for c in cards:
+            self.assertEqual(c.find(cls="chip-status").text(), "Active")
+            self.assertEqual(len(c.find_all(cls="chip-topic")), 2)
+            for a in c.find_all("a"):
+                self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_highlighted_papers(self):
+        links = self.section("Highlighted papers").find_all("a")
+        self.assertEqual([a.find("span").text() for a in links],
+                         ["IEEE S&P 2026", "NDSS 2026", "ACM CCS 2024", "ACM CCS 2024", "USENIX Security 2025", "ICLR 2025"])
+        for a in links:
+            self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_two_column_grid_stacks_on_tablets(self):
+        self.assertIn("grid-template-columns:minmax(0,1fr)250px", st.css_rules(".lab-grid"))
+        self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-grid", media="(max-width: 991.98px)"))
+
+
 if __name__ == "__main__":
     unittest.main()

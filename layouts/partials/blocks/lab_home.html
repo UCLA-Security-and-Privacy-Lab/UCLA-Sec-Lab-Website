@@ -3,4 +3,12 @@
 <div class="lab-home">
   {{ partial "lab/hero" (dict "hero" $c.hero "pi" $c.pi) }}
   {{ partial "lab/news" $c.news }}
+  <div class="lab-grid">
+    <div class="lab-main">
+      {{ partial "lab/research_list" $c.research }}
+      {{ partial "lab/projects" $c.projects }}
+      {{ partial "lab/highlights" $c.highlights }}
+    </div>
+    <aside class="lab-side"></aside>
+  </div>
 </div>
