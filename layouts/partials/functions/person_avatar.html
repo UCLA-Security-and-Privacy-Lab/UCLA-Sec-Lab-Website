@@ -1,0 +1,12 @@
+{{/* The picture shown for a person (an author page): stylized-<style>.* when a style is on for them and that file
+     exists, otherwise their photo (avatar.*). The style is the person's own `avatar_style`, else the site-wide
+     params.people.avatar_style; "photo" means the photo. Returns nil when the person has no picture. */}}
+{{- $images := .Resources.ByType "image" -}}
+{{- $style := "photo" -}}
+{{- with site.Params.people }}{{ with .avatar_style }}{{ $style = . }}{{ end }}{{ end -}}
+{{- with .Params.avatar_style }}{{ $style = . }}{{ end -}}
+{{- $picture := $images.GetMatch "*avatar*" -}}
+{{- if ne $style "photo" -}}
+  {{- with $images.GetMatch (printf "stylized-%s.*" $style) }}{{ $picture = . }}{{ end -}}
+{{- end -}}
+{{- return $picture -}}

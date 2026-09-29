@@ -128,3 +128,10 @@ extensions:
 publications:
   date_format: January 2006
   citation_style: apa
+
+# Member pictures on the People page, profile pages and publication author cards.
+# photo shows everyone's photo (avatar.jpg). A style name, such as bear or human, shows
+# content/authors/<folder>/stylized-<style>.jpg for the members who have one and keeps the photo for the rest.
+# A member can set avatar_style in their own _index.md to use a different style or their photo.
+people:
+  avatar_style: photo

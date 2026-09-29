@@ -97,7 +97,7 @@
               {{ $link := partial "functions/person_link" . }}
               <li class="people-compact-item{{ if $with_photo }} people-compact-item--photo{{ end }}">
                 {{ if $with_photo }}
-                  {{ with (.Resources.ByType "image").GetMatch "*avatar*" }}
+                  {{ with partial "functions/person_avatar" . }}
                     {{ $photo := .Fill "400x400 Center" }}
                     {{ if $link.url }}<a class="people-compact-photo-link" href="{{ $link.url }}"{{ if $link.external }} target="_blank" rel="noopener"{{ end }} tabindex="-1" aria-hidden="true">{{ end }}<img class="people-compact-photo" src="{{ $photo.RelPermalink }}" width="400" height="400" loading="lazy" alt="">{{ if $link.url }}</a>{{ end }}
                   {{ end }}
@@ -115,7 +115,7 @@
       {{ else }}
         {{/* Photo cards */}}
         {{ range $query }}
-          {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
+          {{ $avatar := partial "functions/person_avatar" . }}
           {{ $link := partial "functions/person_link" . }}
           <div class="col-12 col-sm-auto people-person">
             {{ $src := "" }}

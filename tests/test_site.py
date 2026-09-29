@@ -798,6 +798,82 @@ class AwardsPageTest(unittest.TestCase):
         self.assertIn("column-count:1", st.css_rules(".award-timeline", media="(max-width: 767.98px)"))
 
 
+def member_pictures(pages):
+    """{(where, name): kind of picture} on the People page, Zhiyuan Zhang's profile page and a publication page,
+    where kind is "avatar" (the photo), "stylized-bear" or "stylized-human". `pages` maps site paths to parsed pages."""
+    def kind(src):
+        name = src.rsplit("/", 1)[-1]
+        for k in ("avatar", "stylized-bear", "stylized-human"):
+            if name.startswith(k + "_"):
+                return k
+        raise AssertionError(src)
+    out = {}
+    people = pages["people/"]
+    for card in people.find_all(cls="people-person"):
+        img = card.find("img")
+        if img is not None:
+            out[("people", card.find("h2").text())] = kind(img.attrs["src"])
+    for li in people.find_all("li", cls="people-compact-item--photo"):
+        out[("people", li.find(cls="people-compact-name").text())] = kind(li.find("img").attrs["src"])
+    out[("profile", "Zhiyuan Zhang")] = kind(pages["author/zhiyuan-zhang/"].find("img", cls="avatar").attrs["src"])
+    for img in pages["publication/2026-ndss/"].find_all("img", cls="avatar"):
+        out[("paper", img.attrs["alt"])] = kind(img.attrs["src"])
+    return out
+
+
+class AvatarStyleTest(unittest.TestCase):
+    """params.people.avatar_style shows each member's stylized-<style>.jpg instead of their photo; a member's own
+    avatar_style overrides it, and members without that picture keep their photo."""
+    PAGES = ["people/", "author/zhiyuan-zhang/", "publication/2026-ndss/"]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.default = member_pictures({p: st.page(p) for p in cls.PAGES})
+        code, log, pages = st.build_variant("config/_default/params.yaml", "avatar_style: photo", "avatar_style: bear",
+                                            pages=cls.PAGES)
+        assert code == 0, log
+        cls.bear = member_pictures(pages)
+        code, log, pages = st.build_variant("content/authors/PhD-Zhiyuan/_index.md", "\nfirst_name:",
+                                            "\navatar_style: human\nfirst_name:", pages=cls.PAGES)
+        assert code == 0, log
+        cls.override = member_pictures(pages)
+
+    def test_photos_by_default(self):
+        self.assertIn(("people", "Yuan Tian"), self.default)
+        self.assertIn(("people", "Ying Li"), self.default)
+        self.assertEqual(set(self.default.values()), {"avatar"}, self.default)
+
+    def test_site_wide_style_on_every_page(self):
+        for key in [("people", "Yuan Tian"), ("people", "Zihang Xiang"), ("people", "Ying Li"),
+                    ("people", "Sean Tang"), ("profile", "Zhiyuan Zhang"), ("paper", "Ying Li"), ("paper", "Yuan Tian")]:
+            self.assertEqual(self.bear[key], "stylized-bear", key)
+
+    def test_members_without_that_picture_keep_their_photo(self):
+        self.assertEqual(self.bear[("people", "Jinghuai Zhang")], "avatar")   # has no bear picture
+        self.assertEqual(self.bear[("paper", "Jinghuai Zhang")], "avatar")
+        self.assertEqual(self.bear[("paper", "Kunlin Cai")], "avatar")        # alumnus, photo only
+
+    def test_a_member_can_choose_their_own_style(self):
+        self.assertEqual(self.override[("people", "Zhiyuan Zhang")], "stylized-human")
+        self.assertEqual(self.override[("profile", "Zhiyuan Zhang")], "stylized-human")
+        self.assertEqual(self.override[("people", "Ying Li")], "avatar")
+
+    def test_stylized_pictures_are_jpgs_next_to_a_photo(self):
+        root = os.path.join(st.ROOT, "content", "authors")
+        found = 0
+        for folder in sorted(os.listdir(root)):
+            names = os.listdir(os.path.join(root, folder)) if os.path.isdir(os.path.join(root, folder)) else []
+            for name in names:
+                if name.startswith("stylized-"):
+                    found += 1
+                    self.assertRegex(name, r"^stylized-[a-z]+\.jpg$", folder)
+                    self.assertTrue(any(n.startswith("avatar.") for n in names), folder)
+                    with open(os.path.join(root, folder, name), "rb") as fh:
+                        head = fh.read(4096)
+                    self.assertTrue(head.startswith(b"\xff\xd8"), (folder, name))
+        self.assertEqual(found, 17)
+
+
 NEWS_TYPES = ["Paper", "Funding", "Award", "Service", "Talk", "People"]
 
 
