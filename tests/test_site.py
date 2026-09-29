@@ -395,12 +395,12 @@ class PeopleTest(unittest.TestCase):
 
     def test_students_and_interns_use_the_compact_grid(self):
         items = self.grid_items()
-        for name in ("Ying Li", "Kunlin Cai", "Peiran Wang", "Sean Tang", "Bomin Wei", "Nasir Hussain"):
+        for name in ("Ying Li", "Jinghuai Zhang", "Peiran Wang", "Sean Tang", "Bomin Wei", "Nasir Hussain"):
             self.assertIn(name, items)
 
     def test_phd_students_have_photos_in_the_grid(self):
         items = self.grid_items()
-        for name in ("Kunlin Cai", "Ying Li", "Jinghuai Zhang", "Peiran Wang", "Zhiyuan Zhang",
+        for name in ("Ying Li", "Jinghuai Zhang", "Peiran Wang", "Zhiyuan Zhang",
                      "Kaiyuan Zhang", "Sean Tang", "Jingmiao Zhang"):
             img = items[name].find("img")
             self.assertIsNotNone(img, name)
@@ -410,6 +410,13 @@ class PeopleTest(unittest.TestCase):
         items = self.grid_items()
         for name in ("Bomin Wei", "Nasir Hussain", "Esha Shivakumar", "Isaac Khabra", "Kevin Hong", "Tiancheng Zheng"):
             self.assertIsNone(items[name].find("img"), name)
+
+    def test_kunlin_cai_is_a_phd_alumnus_at_meta(self):
+        self.assertNotIn("Kunlin Cai", self.grid_items())
+        alumni = {li.find("a").text(): li for li in self.page.find_all("li", cls="alumni-list-item") if li.find("a")}
+        self.assertIn("Kunlin Cai", alumni)
+        self.assertEqual(alumni["Kunlin Cai"].find(cls="alumni-first-employment").text(), "— PhD grad in 2026, now at Meta")
+        self.assertEqual(alumni["Kunlin Cai"].find("a").attrs["href"], "https://kunlin-cai.com/")
 
     def test_jingmiao_zhang_joins_as_a_fall_2026_phd_student(self):
         phd_grid = self.page.find_all("ul", cls="people-compact-grid")[0]
@@ -425,8 +432,8 @@ class PeopleTest(unittest.TestCase):
             self.assertIsNotNone(card.find("img"))
 
     def test_external_homepages_open_in_a_new_tab(self):
-        a = self.grid_items()["Kunlin Cai"].find("a")
-        self.assertEqual(a.attrs["href"], "https://kunlin-cai.com/")
+        a = self.grid_items()["Ying Li"].find("a", cls="people-compact-name")
+        self.assertEqual(a.attrs["href"], "https://y1ngli.github.io/")
         self.assertEqual((a.attrs.get("target"), a.attrs.get("rel")), ("_blank", "noopener"))
 
     def test_profile_links_stay_on_site(self):

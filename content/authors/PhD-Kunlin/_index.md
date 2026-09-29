@@ -12,7 +12,7 @@ start_year: 2022
 superuser: false
 
 # Role/position
-role: PhD Student from 21'Fall
+role: PhD grad in 2026, now at Meta
 
 # Organizations/Affiliations
 organizations:
@@ -70,7 +70,7 @@ highlight_name: false
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-  - PhD Students
+  - PhD Alumni
 ---
 
 I am currently a PhD student in the Electrical and Computer Engineering Department at UCLA. My research interests lie in the security and privacy of emerging technologies, including extended reality (XR) and machine learning.
