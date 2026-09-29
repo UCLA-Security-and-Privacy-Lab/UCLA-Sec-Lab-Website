@@ -32,6 +32,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 33rd Network and Distributed System Security Symposium (NDSS)
 publication_short: In *NDSS*
+research_area: system-security
 
 abstract: ''
 

@@ -33,6 +33,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In Network \& Distributed System Security Symposium (NDSS)
 publication_short: In *NDSS 2023*
+research_area: data-privacy
 
 abstract: ...
 

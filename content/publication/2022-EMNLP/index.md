@@ -31,6 +31,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In EMNLP Findings
 publication_short: In *EMNLP Findings*
+research_area: ai-security
 
 abstract: ...
 

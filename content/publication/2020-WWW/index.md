@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In The Web Conference (WWW)
 publication_short: In *WWW 2020*
+research_area: system-security
 
 abstract: ...
 

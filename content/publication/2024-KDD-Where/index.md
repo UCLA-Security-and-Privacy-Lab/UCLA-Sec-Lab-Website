@@ -33,6 +33,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 2024 ACM SIGKDD International Conference on Knowledge Discovery and Data Mining
 publication_short: In *SIGKDD 2024*
+research_area: data-privacy
 
 abstract: ...
 

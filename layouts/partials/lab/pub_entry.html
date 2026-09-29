@@ -1,0 +1,54 @@
+{{/* One paper on the Publications page: title, "Authors, in Venue, Year.", action pills, research-area dot.
+     Input: dict "page" (publication page) "areas" (research_area key -> label). Placeholder links from the
+     Hugo Blox template (hugoblox.com repo, example.org) are not shown. */}}
+{{ $p := .page }}
+{{ $area := $p.Params.research_area | default "" }}
+{{ $label := index .areas $area }}
+{{ if not $label }}
+  {{ errorf "%s: research_area must be one of ai-security, data-privacy, system-security (got %q)" $p.File.Path $area }}
+{{ end }}
+
+{{/* Authors as "A", "A and B" or "A, B, and C" */}}
+{{ $names := slice }}
+{{ range $p.GetTerms "authors" }}{{ $names = $names | append .LinkTitle }}{{ end }}
+{{ $authors := "" }}
+{{ if eq (len $names) 1 }}
+  {{ $authors = index $names 0 }}
+{{ else if eq (len $names) 2 }}
+  {{ $authors = delimit $names " and " }}
+{{ else if gt (len $names) 2 }}
+  {{ $authors = delimit $names ", " ", and " }}
+{{ end }}
+
+{{ $year := $p.Date.Format "2006" }}
+{{ $venue := strings.TrimPrefix "In " ($p.Params.publication_short | default $p.Params.publication | default "") }}
+{{ $venue_html := $venue | markdownify }}
+{{ $venue_text := $venue_html | plainify }}
+
+{{ $pdf := $p.Params.url_pdf | default "" }}
+{{ if not $pdf }}{{ with $p.Resources.GetMatch "*.pdf" }}{{ $pdf = .RelPermalink }}{{ end }}{{ end }}
+{{ $code := $p.Params.url_code | default "" }}
+{{ if findRE `hugoblox|hugo-blox|example\.(org|com)` $code }}{{ $code = "" }}{{ end }}
+{{ $bib := $p.Resources.GetMatch "cite.bib" }}
+{{ $abstract := $p.Params.abstract | default "" }}
+{{ $id := printf "abstract-%s" ($p.File.ContentBaseName | lower | anchorize) }}
+
+<li>
+  <article class="pub-entry" data-topic="{{ $area }}"
+           data-search="{{ printf "%s %s %s %s" $p.Title $authors $venue_text $year | lower }}"
+           data-abstract="{{ $abstract | plainify | lower }}">
+    <h3 class="pub-title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+    <p class="pub-authors">{{ $authors }}{{ with $venue_html }}, in {{ . }}{{ end }}{{ if not (in $venue_text $year) }}, {{ $year }}{{ end }}.</p>
+    <div class="pub-meta-row">
+      <div class="pub-actions">
+        {{ with $pdf }}<a class="pub-action" href="{{ . }}">Full Text</a>{{ end }}
+        {{ with $code }}<a class="pub-action pub-action--code" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+        {{ with $abstract }}<button type="button" class="pub-action pub-abstract-toggle" aria-expanded="false" aria-controls="{{ $id }}">Abstract</button>{{ end }}
+        {{ with $bib }}<a href="#" class="pub-action js-cite-modal" data-filename="{{ .RelPermalink }}">BibTeX</a>{{ end }}
+        <a class="pub-action" href="{{ $p.RelPermalink }}">Details</a>
+      </div>
+      <span class="pub-topic-dot pub-topic-dot--{{ $area }}" title="{{ $label }}" aria-label="{{ $label }}"></span>
+    </div>
+    {{ with $abstract }}<div class="pub-abstract" id="{{ $id }}" hidden>{{ . | markdownify }}</div>{{ end }}
+  </article>
+</li>

@@ -4,8 +4,11 @@ Run from the repository root:
     python3 -m unittest -v tests.test_site              # everything
     python3 -m unittest -v tests.test_site.ThemeTest    # one group
 """
+import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import unittest
 
@@ -454,35 +457,20 @@ class PeopleTest(unittest.TestCase):
 
 
 class ListPagesTest(unittest.TestCase):
-    def test_publication_rows_hide_thumbnails_and_keep_authors_under_the_title(self):
-        self.assertIn("display:none", st.css_rules("#container-publications .view-compact .ml-3"))
-        self.assertIn("order:0", st.css_rules("#container-publications .view-compact .stream-meta"))
-
     def test_news_rows_put_the_date_first_without_reading_time(self):
         self.assertIn("order:-1", st.css_rules(".view-compact .stream-meta"))
         self.assertIn("display:none", st.css_rules(".view-compact .article-reading-time"))
-
-    def test_publication_list_still_lists_every_paper(self):
-        folder = os.path.join(st.ROOT, "content", "publication")
-        papers = [d for d in os.listdir(folder) if os.path.isdir(os.path.join(folder, d))]
-        self.assertEqual(len(st.page("publication/").find_all(cls="view-compact")), len(papers))
 
     def test_list_pages_fill_the_card(self):
         # Hugo Blox fixes .universal-wrapper at width:1000px, centred; inside our 1180px card it must fill the card.
         widths = [d for d in st.css_rules(".page-body .universal-wrapper").split(";") if d.startswith("width")]
         self.assertEqual(widths, ["width:auto"])
 
-    def test_publication_rows_line_up_with_the_title(self):
-        # Each publication row is a Bootstrap column inside the isotope grid; drop its gutter.
-        self.assertIn("padding-left:0", st.css_rules("#container-publications .isotope-item"))
-
-    def test_publication_rows_show_the_venue(self):
-        rows = st.page("publication/").find_all(cls="view-compact")
-        venues = [row.find(cls="pub-venue") for row in rows]
-        self.assertTrue(all(v is not None and v.text() for v in venues), [r.find("a").text() for r, v in zip(rows, venues) if v is None])
-
-    def test_publication_rows_hide_the_abstract(self):
-        self.assertIn("display:none", st.css_rules("#container-publications .summary-link"))
+    def test_compact_publication_rows_elsewhere_show_the_venue(self):
+        # Taxonomy pages (e.g. publication type) still use Hugo Blox's compact view, extended with the venue.
+        rows = st.page("publication-type/paper-conference/").find_all(cls="view-compact")
+        self.assertTrue(rows)
+        self.assertTrue(all(r.find(cls="pub-venue") is not None for r in rows))
 
     def test_list_page_links_work_under_the_subpath(self):
         for path in ("publication/", "post/"):
@@ -490,6 +478,165 @@ class ListPagesTest(unittest.TestCase):
                 href = a.attrs.get("href", "")
                 if href.startswith("/"):
                     self.assertTrue(st.resolves(href), (path, href))
+
+AREAS = {"ai-security": "AI Security", "data-privacy": "Data Privacy", "system-security": "System Security"}
+
+
+def publication_front_matter():
+    """{slug: front-matter text} for every publication bundle."""
+    out = {}
+    root = os.path.join(st.ROOT, "content", "publication")
+    for name in sorted(os.listdir(root)):
+        path = os.path.join(root, name, "index.md")
+        if os.path.isfile(path):
+            with open(path, encoding="utf-8") as fh:
+                out[name.lower()] = fh.read().split("---")[1]
+    return out
+
+
+class PublicationsPageTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.page = st.page("publication/")
+        cls.entries = cls.page.find_all("article", cls="pub-entry")
+        cls.front = publication_front_matter()
+
+    def entry(self, slug):
+        return [e for e in self.entries
+                if e.find("h3", cls="pub-title").find("a").attrs["href"].rstrip("/").endswith("/" + slug)][0]
+
+    def actions(self, entry):
+        return [a.text() for a in entry.find(cls="pub-actions").find_all() if a.tag in ("a", "button")]
+
+    def test_every_publication_declares_a_research_area(self):
+        for slug, front in self.front.items():
+            m = re.search(r"(?m)^research_area:\s*['\"]?([a-z-]+)", front)
+            self.assertTrue(m and m.group(1) in AREAS, slug)
+
+    def test_header_links(self):
+        links = self.page.find(cls="pub-header-links").find_all("a")
+        self.assertEqual([a.text() for a in links], ["Google Scholar", "Research areas"])
+        self.assertEqual(links[0].attrs["href"], "https://scholar.google.com/citations?user=ja0GtqgAAAAJ")
+        self.assertTrue(st.resolves(links[1].attrs["href"]), links[1].attrs["href"])
+
+    def test_explorer_has_search_abstract_toggle_and_topic_chips(self):
+        explorer = self.page.find(cls="pub-explorer")
+        self.assertEqual({i.attrs.get("id") for i in explorer.find_all("input")}, {"pub-search", "pub-search-abstract"})
+        chips = explorer.find_all("button", cls="pub-filter-chip")
+        self.assertEqual([c.text() for c in chips], ["All", "AI Security", "Data Privacy", "System Security"])
+        self.assertEqual([c.attrs.get("data-filter") for c in chips], ["all", "ai-security", "data-privacy", "system-security"])
+        self.assertEqual(explorer.find(cls="pub-filter-status").text(),
+                         "Showing %d publications for all topics." % len(self.front))
+
+    def test_entries_are_grouped_by_year_newest_first(self):
+        years = [h.text() for h in self.page.find_all("h2", cls="pub-year")]
+        expected = sorted({re.search(r"(?m)^date:\s*['\"]?(\d{4})", f).group(1) for f in self.front.values()}, reverse=True)
+        self.assertEqual(years, expected)
+        self.assertEqual(len(self.entries), len(self.front))
+
+    def test_entry_reads_title_then_authors_venue_and_year(self):
+        e = self.entry("2026-oakland")
+        self.assertEqual(e.find("h3", cls="pub-title").text(), "Breaking the Illusion: Automated Reasoning of GDPR Consent Violations")
+        line = e.find("p", cls="pub-authors").text()
+        self.assertTrue(line.startswith("Ying Li, Wenjun Qiu, "), line)
+        self.assertTrue(line.endswith(", and Yuan Tian, in IEEE S&P, 2026."), line)
+        # A venue that already names the year does not repeat it.
+        self.assertTrue(self.entry("2019-birthday").find("p", cls="pub-authors").text().endswith("in USENIX Security 2019."))
+
+    def test_actions_point_only_at_real_things(self):
+        self.assertTrue(self.entries, "no publication entries rendered")
+        for e in self.entries:
+            for node in e.find(cls="pub-actions").find_all():
+                href = node.attrs.get("href", "")
+                self.assertNotRegex(href, r"hugoblox|hugo-blox|youtube\.com")
+                if node.tag == "a" and href not in ("", "#") and not href.startswith("http"):
+                    self.assertTrue(st.resolves(href), href)
+                if "js-cite-modal" in node.classes:
+                    self.assertTrue(st.resolves(node.attrs["data-filename"]), node.attrs["data-filename"])
+            self.assertEqual(self.actions(e)[-1], "Details")
+
+    def test_full_text_abstract_and_bibtex_appear_only_when_available(self):
+        root = os.path.join(st.ROOT, "content", "publication")
+        for name in os.listdir(root):
+            folder = os.path.join(root, name)
+            if not os.path.isdir(folder):
+                continue
+            slug, files, front = name.lower(), os.listdir(folder), self.front[name.lower()]
+            got = self.actions(self.entry(slug))
+            self.assertEqual("Full Text" in got, any(f.endswith(".pdf") for f in files), slug)
+            self.assertEqual("BibTeX" in got, "cite.bib" in files, slug)
+            m = re.search(r"(?m)^abstract:[ \t]*(.*)$", front)
+            has_abstract = bool(m and m.group(1).strip().strip("'\"").strip())
+            self.assertEqual("Abstract" in got, has_abstract, slug)
+
+    def test_abstract_buttons_control_a_hidden_abstract(self):
+        self.assertTrue(self.entries, "no publication entries rendered")
+        for e in self.entries:
+            for button in e.find_all("button", cls="pub-abstract-toggle"):
+                box = [d for d in e.find_all(cls="pub-abstract") if d.attrs.get("id") == button.attrs["aria-controls"]]
+                self.assertEqual(len(box), 1)
+                self.assertIn("hidden", box[0].attrs)
+                self.assertEqual(button.attrs.get("aria-expanded"), "false")
+
+    def test_entries_carry_their_topic_for_filtering(self):
+        self.assertTrue(self.entries, "no publication entries rendered")
+        for e in self.entries:
+            topic = e.attrs.get("data-topic")
+            self.assertIn(topic, AREAS)
+            self.assertIn("pub-topic-dot--" + topic, e.find(cls="pub-topic-dot").classes)
+            self.assertTrue(e.attrs.get("data-search"))
+
+    def test_filter_script_loads_under_the_subpath(self):
+        scripts = [x.attrs["src"] for x in self.page.find_all("script") if "publications" in x.attrs.get("src", "")]
+        self.assertEqual(len(scripts), 1)
+        self.assertTrue(st.resolves(scripts[0]), scripts[0])
+
+    def test_year_panels_use_kwchang_panel_colours(self):
+        rules = st.css_rules(".pub-year-group")
+        self.assertIn("background:#fbfbf8", rules)
+        self.assertIn("border:1pxsolid#e1e1dc", rules)
+
+    def test_missing_research_area_fails_the_build(self):
+        code, log = st.build_variant("content/publication/2026-Oakland/index.md", "research_area: data-privacy\n", "")
+        self.assertNotEqual(code, 0, log)
+        self.assertIn("research_area", log)
+
+
+class PublicationFilterScriptTest(unittest.TestCase):
+    """The filter logic in assets/js/lab-publications.js, run with Node."""
+    SCRIPT = os.path.join(st.ROOT, "assets", "js", "lab-publications.js")
+
+    def node(self, expression):
+        node = shutil.which("node") or "/opt/homebrew/opt/node@22/bin/node"
+        if not os.path.exists(node):
+            self.skipTest("node not installed")
+        code = "const P = require(%s); console.log(JSON.stringify(%s));" % (json.dumps(self.SCRIPT), expression)
+        result = subprocess.run([node, "-e", code], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return json.loads(result.stdout)
+
+    ENTRY = "{topic: 'ai-security', search: 'badmerging: backdoor attacks against model merging jinghuai zhang ccs 2024', abstract: 'fine-tuned task-specific models'}"
+
+    def test_topic_must_match_unless_all(self):
+        self.assertTrue(self.node("P.matches(%s, 'all', [], false)" % self.ENTRY))
+        self.assertTrue(self.node("P.matches(%s, 'ai-security', [], false)" % self.ENTRY))
+        self.assertFalse(self.node("P.matches(%s, 'data-privacy', [], false)" % self.ENTRY))
+
+    def test_every_term_must_appear(self):
+        self.assertTrue(self.node("P.matches(%s, 'all', ['backdoor', 'ccs'], false)" % self.ENTRY))
+        self.assertFalse(self.node("P.matches(%s, 'all', ['backdoor', 'gdpr'], false)" % self.ENTRY))
+
+    def test_abstract_is_searched_only_when_asked(self):
+        self.assertFalse(self.node("P.matches(%s, 'all', ['fine-tuned'], false)" % self.ENTRY))
+        self.assertTrue(self.node("P.matches(%s, 'all', ['fine-tuned'], true)" % self.ENTRY))
+
+    def test_query_is_split_into_lower_case_terms(self):
+        self.assertEqual(self.node("P.terms('  BackDoor   CCS ')"), ["backdoor", "ccs"])
+
+    def test_status_text(self):
+        self.assertEqual(self.node("P.statusText(29, 'all topics', '')"), "Showing 29 publications for all topics.")
+        self.assertEqual(self.node("P.statusText(1, 'Data Privacy', 'gdpr')"),
+                         "Showing 1 publication for Data Privacy matching \u201cgdpr\u201d.")
 
 
 if __name__ == "__main__":

@@ -28,6 +28,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 34th IEEE/ACM International Conference on Automated Software Engineering (ASE)
 publication_short: In *ASE 2019*
+research_area: system-security
 
 abstract: ...
 

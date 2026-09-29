@@ -33,6 +33,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 47th IEEE Symposium on Security and Privacy (Oakland)
 publication_short: In *IEEE S&P*
+research_area: data-privacy
 
 abstract: ''
 

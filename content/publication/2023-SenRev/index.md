@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In Privacy Enhancing Technologies Symposium (PoPETs/PETS)
 publication_short: In *PoPETs/PETS 2023*
+research_area: data-privacy
 
 abstract: ...
 

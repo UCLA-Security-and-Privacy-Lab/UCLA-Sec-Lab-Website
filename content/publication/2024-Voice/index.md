@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In Symposium on Usable Security and Privacy (USEC)
 publication_short: In *USEC 2024*
+research_area: system-security
 
 abstract: ...
 

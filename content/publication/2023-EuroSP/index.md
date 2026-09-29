@@ -32,6 +32,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In IEEE European Symposium on Security and Privacy (EuroS\&P)
 publication_short: In *EuroSP 2023*
+research_area: data-privacy
 
 abstract: ...
 

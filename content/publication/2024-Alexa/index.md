@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 46th International Conference on Software Engineering (ICSE)
 publication_short: In *ICSE 2024*
+research_area: system-security
 
 abstract: ...
 

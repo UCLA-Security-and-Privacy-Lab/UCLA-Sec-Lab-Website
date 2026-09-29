@@ -33,6 +33,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 40th IEEE Symposium on Security and Privacy (Oakland)
 publication_short: In *Oakland 2019*
+research_area: system-security
 
 abstract: ...
 

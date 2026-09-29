@@ -28,6 +28,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 31st ACM Conference on Computer and Communications Security (CCS)
 publication_short: In *CCS*
+research_area: system-security
 
 abstract: ...
 

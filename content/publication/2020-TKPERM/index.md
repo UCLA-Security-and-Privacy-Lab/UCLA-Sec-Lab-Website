@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In NDSS Symposium
 publication_short: In *NDSS 2020*
+research_area: system-security
 
 abstract: ...
 

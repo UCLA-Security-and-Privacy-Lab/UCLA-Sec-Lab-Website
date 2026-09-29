@@ -34,6 +34,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In nineteenth Symposium on Usable Privacy and Security (SOUPS)
 publication_short: In *SOUPS 2023*
+research_area: system-security
 
 abstract: ...
 

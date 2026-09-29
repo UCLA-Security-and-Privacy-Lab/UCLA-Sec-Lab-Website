@@ -29,6 +29,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 29th USENIX Security Symposium (USENIX Security)
 publication_short: In *USENIX Security 2020*
+research_area: ai-security
 
 abstract: ...
 

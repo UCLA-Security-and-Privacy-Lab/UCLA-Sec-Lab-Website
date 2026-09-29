@@ -1,0 +1,52 @@
+{{/* Publications page in the style of Kai-Wei Chang's publication list: title and pill links, a search and
+     research-area filter panel, then one panel per year. Every paper needs `research_area` in its front matter. */}}
+{{- define "main" -}}
+{{ $areas := dict "ai-security" "AI Security" "data-privacy" "Data Privacy" "system-security" "System Security" }}
+{{ $pubs := .RegularPages.ByDate.Reverse }}
+<div class="universal-wrapper pt-3 lab-publications">
+  <header class="pub-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.header_links }}
+      <div class="pub-header-links">
+        {{ range . }}
+          {{ $href := partial "functions/lab_url" .url }}
+          <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </header>
+
+  <div class="pub-explorer">
+    <div class="publication-search">
+      <label for="pub-search">Search publications</label>
+      <input id="pub-search" type="search" placeholder="Title, author, venue, year..." autocomplete="off">
+      <label class="pub-search-abstract" for="pub-search-abstract">
+        <input id="pub-search-abstract" type="checkbox"> Include abstract
+      </label>
+    </div>
+    <div class="pub-topic-filter" role="group" aria-label="Filter by research area">
+      <button type="button" class="pub-filter-chip is-active" data-filter="all" aria-pressed="true">All</button>
+      {{ range $key, $label := $areas }}
+        <button type="button" class="pub-filter-chip" data-filter="{{ $key }}" aria-pressed="false"><span class="pub-chip-swatch pub-chip-swatch--{{ $key }}" aria-hidden="true"></span>{{ $label }}</button>
+      {{ end }}
+    </div>
+    <p id="pub-filter-status" class="pub-filter-status" aria-live="polite">Showing {{ len $pubs }} publications for all topics.</p>
+  </div>
+
+  <div class="pub-year-list">
+    {{ range $pubs.GroupByDate "2006" }}
+      <section class="pub-year-group" data-year="{{ .Key }}">
+        <h2 class="pub-year">{{ .Key }}</h2>
+        <ol class="pub-list">
+          {{ range .Pages }}
+            {{ partial "lab/pub_entry" (dict "page" . "areas" $areas) }}
+          {{ end }}
+        </ol>
+      </section>
+    {{ end }}
+  </div>
+  <p class="pub-empty" hidden>No publications match this search.</p>
+</div>
+{{ $js := resources.Get "js/lab-publications.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{- end -}}

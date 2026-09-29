@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In IEEE Workshop on the Internet of Safe Things (SafeThings)
 publication_short: In *SafeThings 2019*
+research_area: system-security
 
 abstract: ...
 

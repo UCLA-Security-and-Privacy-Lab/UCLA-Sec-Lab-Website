@@ -30,6 +30,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In Proceedings of The ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies (IMWUT/UbiComp)
 publication_short: In *Ubicomp 2021*
+research_area: system-security
 
 abstract: ...
 

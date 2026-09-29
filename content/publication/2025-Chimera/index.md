@@ -32,6 +32,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 34th USENIX Security Symposium (USENIX Security)
 publication_short: In *USENIX Security*
+research_area: ai-security
 
 abstract: ''
 

@@ -29,6 +29,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In ACM Transactions on Internet Technology (ACM TOIT)
 publication_short: In *ACM TOIT*
+research_area: system-security
 
 abstract: ...
 

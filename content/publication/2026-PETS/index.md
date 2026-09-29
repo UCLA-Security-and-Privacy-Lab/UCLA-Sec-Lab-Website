@@ -34,6 +34,7 @@ publication_types: ['paper-conference']
 # Publication name and optional abbreviated publication name.
 publication: In 26th Privacy Enhancing Technologies Symposium (PETS)
 publication_short: In *PETS*
+research_area: data-privacy
 
 abstract: ''
 
