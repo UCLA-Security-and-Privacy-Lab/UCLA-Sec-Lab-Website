@@ -1,0 +1,6 @@
+{{/* BruinSec Lab homepage: one kwchang-style card. All copy lives in this block's `content:` in content/_index.md. */}}
+{{ $c := .wcBlock.content }}
+<div class="lab-home">
+  {{ partial "lab/hero" (dict "hero" $c.hero "pi" $c.pi) }}
+  {{ partial "lab/news" $c.news }}
+</div>

@@ -1,0 +1,37 @@
+{{/* Homepage hero: lab name, role lines, summary and buttons; PI card on the right.
+     Input: dict "hero" (title, roles, summary, buttons[{label, url, primary}]) "pi" (author, name, lines, links[{label, url}]). */}}
+{{ $hero := .hero }}
+{{ $pi := .pi }}
+{{ $avatar := "" }}
+{{ with site.GetPage (printf "/authors/%s" $pi.author) }}
+  {{ $avatar = (.Resources.ByType "image").GetMatch "*avatar*" }}
+{{ end }}
+{{ if not $avatar }}
+  {{ errorf "lab/hero: no avatar image in content/authors/%s/" $pi.author }}
+{{ end }}
+{{ $portrait := $avatar.Fill "280x322 Center" }}
+<div class="lab-hero">
+  <div class="lab-hero-copy">
+    <h1>{{ $hero.title }}</h1>
+    {{ range $hero.roles }}<p class="lab-hero-role">{{ . }}</p>{{ end }}
+    <p class="lab-hero-summary">{{ $hero.summary | markdownify }}</p>
+    <div class="action-row">
+      {{ range $hero.buttons }}
+        <a class="action-pill{{ if .primary }} primary{{ end }}" href="{{ partial "functions/lab_url" .url }}">{{ .label }}</a>
+      {{ end }}
+    </div>
+  </div>
+  <div class="lab-pi-card">
+    <img class="lab-pi-portrait" src="{{ $portrait.RelPermalink }}" width="140" height="161" alt="{{ $pi.name }}">
+    <div class="lab-pi-body">
+      <p class="lab-pi-name">{{ $pi.name }}</p>
+      {{ range $pi.lines }}<p>{{ . }}</p>{{ end }}
+      <div class="lab-pi-links">
+        {{ range $pi.links }}
+          {{ $href := partial "functions/lab_url" .url }}
+          <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

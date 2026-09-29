@@ -1,0 +1,15 @@
+{{/* Homepage news strip: the newest posts as date + title. Input: dict with optional "count" (default 5). */}}
+{{ $count := .count | default 5 }}
+{{ $posts := first $count (where site.RegularPages "Type" "post").ByDate.Reverse }}
+<div class="lab-news">
+  <p class="section-label">News</p>
+  <ul class="lab-news-list">
+    {{ range $posts }}
+      <li class="lab-news-item">
+        <span class="lab-news-date">{{ .Date.Format "Jan 2006" | upper }}</span>
+        <p><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+      </li>
+    {{ end }}
+  </ul>
+  <a class="lab-news-all" href="{{ "post/" | relLangURL }}">All news &rarr;</a>
+</div>

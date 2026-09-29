@@ -166,5 +166,66 @@ class MarkdownLinkTest(unittest.TestCase):
         self.assertEqual((a.attrs.get("target"), a.attrs.get("rel")), ("_blank", "noopener"))
 
 
+class HomeHeroTest(unittest.TestCase):
+    def setUp(self):
+        self.hero = st.page("").find(cls="lab-hero")
+
+    def test_lab_name_roles_and_summary(self):
+        self.assertEqual(self.hero.find("h1").text(), "BruinSec Lab")
+        self.assertEqual([p.text() for p in self.hero.find_all("p", cls="lab-hero-role")],
+                         ["Electrical and Computer Engineering · Computer Science", "University of California, Los Angeles"])
+        self.assertIn("led by Prof. Yuan Tian at UCLA", self.hero.find("p", cls="lab-hero-summary").text())
+
+    def test_buttons(self):
+        pills = self.hero.find_all("a", cls="action-pill")
+        self.assertEqual([a.text() for a in pills], ["Research", "Publications", "People", "News", "Join Us"])
+        self.assertEqual([a.text() for a in pills if "primary" in a.classes], ["Research"])
+        for a in pills:
+            self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_pi_card(self):
+        card = self.hero.find(cls="lab-pi-card")
+        img = card.find("img")
+        self.assertTrue(st.resolves(img.attrs["src"]), img.attrs["src"])
+        self.assertEqual(card.find("p", cls="lab-pi-name").text(), "Yuan Tian")
+        links = {a.text(): a.attrs for a in card.find_all("a")}
+        self.assertEqual(links["Email"]["href"], "mailto:yuant@ucla.edu")
+        self.assertEqual(links["Homepage"]["href"], "https://www.ytian.info/")
+        self.assertEqual(links["Scholar"]["href"], "https://scholar.google.com/citations?user=ja0GtqgAAAAJ")
+        self.assertEqual(links["Homepage"].get("target"), "_blank")
+
+    def test_hero_grid_stacks_on_tablets(self):
+        self.assertIn("grid-template-columns:minmax(0,1fr)190px", st.css_rules(".lab-hero"))
+        self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-hero", media="(max-width: 991.98px)"))
+
+
+class HomeNewsTest(unittest.TestCase):
+    def setUp(self):
+        self.news = st.page("").find(cls="lab-news")
+
+    def test_shows_the_five_newest_posts(self):
+        items = self.news.find_all("li", cls="lab-news-item")
+        self.assertEqual([li.find("a").text() for li in items], st.newest_post_titles(5))
+
+    def test_dates_are_capitalised_month_and_year(self):
+        for li in self.news.find_all("li", cls="lab-news-item"):
+            self.assertRegex(li.find(cls="lab-news-date").text(), r"^[A-Z]{3} \d{4}$")
+
+    def test_links_resolve(self):
+        for a in self.news.find_all("a"):
+            self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_long_titles_wrap_and_phones_stack_the_date(self):
+        self.assertIn("overflow-wrap:anywhere", st.css_rules(".lab-news-item p"))
+        self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-news-item", media="(max-width: 767.98px)"))
+
+
+class LabUrlTest(unittest.TestCase):
+    def test_unknown_site_path_fails_the_build(self):
+        code, log = st.build_variant("content/_index.md", "url: people/", "url: peeple/")
+        self.assertNotEqual(code, 0, log)
+        self.assertIn('"peeple/" does not match any page', log)
+
+
 if __name__ == "__main__":
     unittest.main()

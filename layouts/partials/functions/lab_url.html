@@ -1,0 +1,14 @@
+{{- /* Resolve a URL written in page front matter.
+       External URLs (http…, mailto:) pass through. Site paths are written without a leading slash
+       ("research/", "publication/2026-oakland/", "research/#ai-security"); they must match a page in
+       content/ (otherwise the build fails) and get the baseURL prefix, so they work under a subpath. */ -}}
+{{- $url := . -}}
+{{- $out := $url -}}
+{{- if not (or (strings.HasPrefix $url "http") (strings.HasPrefix $url "mailto:")) -}}
+  {{- $path := index (split $url "#") 0 | strings.TrimSuffix "/" -}}
+  {{- if not (site.GetPage (printf "/%s" $path)) -}}
+    {{- errorf "lab_url: %q does not match any page in content/; fix this url in the page front matter" $url -}}
+  {{- end -}}
+  {{- $out = $url | relLangURL -}}
+{{- end -}}
+{{- return $out -}}
