@@ -82,7 +82,15 @@
   border: 1px solid $lab-border;
   border-radius: 10px;
 }
+// Photo cards (e.g. PhD Students) match the faculty/postdoc cards: 200px wide, wrapping row.
+.people-compact-grid--photo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 .people-compact-item--photo {
+  width: 200px;
+  padding: 16px;
   align-items: center;
   text-align: center;
 }
@@ -134,7 +142,8 @@ a.people-compact-name:focus {
   .people-compact-grid {
     grid-template-columns: 1fr;
   }
-  .people-person {
+  .people-person,
+  .people-compact-item--photo {
     width: 100%;
     margin-right: 0;
   }

@@ -418,6 +418,18 @@ class PeopleTest(unittest.TestCase):
                 self.assertIn("people-compact-item--photo", li.classes, name)
         self.assertIn("text-align:center", st.css_rules(".people-compact-item--photo"))
 
+    def test_phd_cards_match_the_faculty_card_size(self):
+        faculty = st.css_rules(".people-person")
+        self.assertIn("width:200px", faculty)
+        card = st.css_rules(".people-compact-item--photo")
+        self.assertIn("width:200px", card)
+        self.assertIn("padding:16px", card)
+        # Photo cards sit in a wrapping row like the faculty cards, not in the stretched 4-column grid.
+        self.assertIn("display:flex", st.css_rules(".people-compact-grid--photo"))
+        grids = self.page.find_all("ul", cls="people-compact-grid")
+        self.assertIn("people-compact-grid--photo", grids[0].classes)      # PhD Students
+        self.assertNotIn("people-compact-grid--photo", grids[1].classes)   # Research Interns
+
     def test_research_interns_stay_text_only(self):
         items = self.grid_items()
         for name in ("Bomin Wei", "Nasir Hussain", "Esha Shivakumar", "Isaac Khabra", "Kevin Hong", "Tiancheng Zheng"):

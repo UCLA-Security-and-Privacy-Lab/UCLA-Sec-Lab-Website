@@ -92,7 +92,7 @@
         {{/* PASTA-style compact grid: name and role; groups in photo_groups also get a photo on top */}}
         {{ $with_photo := in $photo_groups $group }}
         <div class="col-md-12">
-          <ul class="people-compact-grid">
+          <ul class="people-compact-grid{{ if $with_photo }} people-compact-grid--photo{{ end }}">
             {{ range $query }}
               {{ $link := partial "functions/person_link" . }}
               <li class="people-compact-item{{ if $with_photo }} people-compact-item--photo{{ end }}">
