@@ -1,0 +1,7 @@
+# Font pack: Plus Jakarta Sans everywhere, as on Kai-Wei Chang's homepage.
+name = "kwchang"
+google_fonts = "family=Plus+Jakarta+Sans:wght@400;500;700;800"
+heading_font = "Plus Jakarta Sans"
+body_font = "Plus Jakarta Sans"
+nav_font = "Plus Jakarta Sans"
+mono_font = ""

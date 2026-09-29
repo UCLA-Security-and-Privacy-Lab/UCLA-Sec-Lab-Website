@@ -1,0 +1,18 @@
+# Theme pack copied from Kai-Wei Chang's homepage colors (https://web.cs.ucla.edu/~kwchang/).
+name = "Lab"
+
+[light]
+  primary = "#1f65ab"
+
+  link = "#1f65ab"
+  link_hover = "#174f88"
+
+  # Navbar: kwchang blue bar with white text. The current-page underline comes from SCSS.
+  menu_primary = "#3c58ad"
+  menu_text = "#FFFFFF"
+  menu_text_active = "#FFFFFF"
+  menu_title = "#FFFFFF"
+
+  # Sections sit inside one white card; dividers come from SCSS.
+  home_section_odd = "#FFFFFF"
+  home_section_even = "#FFFFFF"

@@ -6,10 +6,10 @@
 # Appearance
 
 appearance:
-  theme_day: minimal
+  theme_day: lab
   theme_night:
-  font: option4-dm-sans
-  font_size: L
+  font: kwchang
+  font_size: S
 
 # SEO
 
@@ -17,9 +17,9 @@ marketing:
   seo:
     site_type: Organization
     local_business_type: ''
-    org_name: ''
-    description: 'A highly-customizable Hugo research group theme powered by Wowchemy website builder.'
-    twitter: 'GetResearchDev'
+    org_name: 'BruinSec Lab'
+    description: 'BruinSec Lab, led by Prof. Yuan Tian at UCLA, conducts research on AI security, data privacy, and system security.'
+    twitter: ''
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -39,13 +39,13 @@ header:
     show_language: false
     show_day_night: true
     show_search: true
-    highlight_active_link: false
+    highlight_active_link: true
 
 # Site footer
 
 footer:
   copyright:
-    notice: '© {year} Me. This work is licensed under {license}'
+    notice: '© {year} BruinSec Lab. This work is licensed under {license}'
     license:
       enable: true
       allow_derivatives: false
