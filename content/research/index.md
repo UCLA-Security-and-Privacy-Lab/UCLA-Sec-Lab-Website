@@ -4,52 +4,45 @@ date: 2024-01-01
 type: landing
 
 sections:
-  - block: markdown
+  - block: research_glance
     content:
       title: Research
-      subtitle: ''
-      text: |
-        Our lab conducts research at the intersection of security, privacy, machine learning, and human-computer interaction. Our work spans three major research directions.
-
-        <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 32px;">
-
-        <div style="flex: 1; min-width: 280px; max-width: 360px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <img src="/media/research-ai-security.png" alt="AI Security" style="width: 100%; height: 200px; object-fit: cover;">
-          <div style="padding: 20px;">
-            <h3 style="margin-top: 0;">AI Security</h3>
-            <p style="font-size: 0.95rem; color: #555;">We investigate the security and trustworthiness of machine learning models, including adversarial attacks, data poisoning, backdoor attacks on model merging, and environmental injection attacks on AI agents. Our work addresses threats across the ML pipeline — from training-time poisoning to deployment-time adversarial manipulation — and explores defenses such as automated vulnerability repair.</p>
-            <a href="#ai-security" style="font-weight: 500;">View publications &darr;</a>
-          </div>
-        </div>
-
-        <div style="flex: 1; min-width: 280px; max-width: 360px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <img src="/media/research-data-privacy.png" alt="Data Privacy" style="width: 100%; height: 200px; object-fit: cover;">
-          <div style="padding: 20px;">
-            <h3 style="margin-top: 0;">Data Privacy</h3>
-            <p style="font-size: 0.95rem; color: #555;">We study privacy risks and compliance in software systems, including GDPR enforcement, personal information disclosure in online communities, location privacy in recommendation systems, and user perceptions of data collection in IoT and public WiFi environments. Our research combines automated program analysis with empirical user studies to advance privacy protection.</p>
-            <a href="#data-privacy" style="font-weight: 500;">View publications &darr;</a>
-          </div>
-        </div>
-
-        <div style="flex: 1; min-width: 280px; max-width: 360px; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-          <img src="/media/research-system-security.png" alt="System Security" style="width: 100%; height: 200px; object-fit: cover;">
-          <div style="padding: 20px;">
-            <h3 style="margin-top: 0;">System Security</h3>
-            <p style="font-size: 0.95rem; color: #555;">We analyze the security of software systems including voice-controlled platforms, IoT ecosystems, authentication protocols, smart home automations, and extended reality (XR). Our work spans vulnerability discovery in voice assistants, permission analysis, OAuth security verification, WebAssembly runtime fuzzing, and usable security tools for end users.</p>
-            <a href="#system-security" style="font-weight: 500;">View publications &darr;</a>
-          </div>
-        </div>
-
-        </div>
-    design:
-      columns: '1'
+      text: Our lab conducts research at the intersection of security, privacy, machine learning, and human-computer interaction. Our work spans three major research directions.
+      areas:
+        - title: AI Security
+          description: >-
+            We investigate the security and trustworthiness of machine learning models, including adversarial
+            attacks, data poisoning, backdoor attacks on model merging, and environmental injection attacks on AI
+            agents. Our work addresses threats across the ML pipeline — from training-time poisoning to
+            deployment-time adversarial manipulation — and explores defenses such as automated vulnerability repair.
+          link:
+            label: View publications ↓
+            url: research/#ai-security
+        - title: Data Privacy
+          description: >-
+            We study privacy risks and compliance in software systems, including GDPR enforcement, personal
+            information disclosure in online communities, location privacy in recommendation systems, and user
+            perceptions of data collection in IoT and public WiFi environments. Our research combines automated
+            program analysis with empirical user studies to advance privacy protection.
+          link:
+            label: View publications ↓
+            url: research/#data-privacy
+        - title: System Security
+          description: >-
+            We analyze the security of software systems including voice-controlled platforms, IoT ecosystems,
+            authentication protocols, smart home automations, and extended reality (XR). Our work spans
+            vulnerability discovery in voice assistants, permission analysis, OAuth security verification,
+            WebAssembly runtime fuzzing, and usable security tools for end users.
+          link:
+            label: View publications ↓
+            url: research/#system-security
 
   - block: markdown
     content:
       title: ''
       subtitle: ''
       text: |
-        <h2 id="ai-security" style="margin-top: 48px; padding-top: 16px; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">AI Security</h2>
+        <h2 id="ai-security" class="research-area-heading">AI Security</h2>
 
         - **EIA: Environmental Injection Attack on Generalist Web Agents for Privacy Leakage**
           *ICLR 2025*
@@ -79,7 +72,7 @@ sections:
           *USENIX Security 2020*
           [Details &rarr;](/publication/2020-usenix/)
 
-        <h2 id="data-privacy" style="margin-top: 48px; padding-top: 16px; border-bottom: 2px solid #4CAF50; padding-bottom: 8px;">Data Privacy</h2>
+        <h2 id="data-privacy" class="research-area-heading">Data Privacy</h2>
 
         - **Breaking the Illusion: Automated Reasoning of GDPR Consent Violations**
           *IEEE S&P (Oakland) 2026*
@@ -113,7 +106,7 @@ sections:
           *USENIX Security 2019*
           [Details &rarr;](/publication/2019-birthday/)
 
-        <h2 id="system-security" style="margin-top: 48px; padding-top: 16px; border-bottom: 2px solid #FF9800; padding-bottom: 8px;">System Security</h2>
+        <h2 id="system-security" class="research-area-heading">System Security</h2>
 
         - **From Perception to Protection: A Developer-Centered Study of Security and Privacy Threats in Extended Reality (XR)**
           *NDSS 2026*

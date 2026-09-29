@@ -328,5 +328,27 @@ class HomeLinksTest(unittest.TestCase):
         self.assertEqual(broken, [])
 
 
+class ResearchPageTest(unittest.TestCase):
+    def setUp(self):
+        self.page = st.page("research/")
+        self.glance = self.page.find("section", cls="wg-research-glance")
+
+    def test_overview_lists_three_areas_without_images(self):
+        self.assertEqual(self.glance.find("h1").text(), "Research")
+        self.assertEqual([h.text() for h in self.glance.find_all("h3")], ["AI Security", "Data Privacy", "System Security"])
+        self.assertEqual(self.glance.find_all("img"), [])
+        self.assertEqual(self.glance.find_all("a", cls="chip"), [])
+
+    def test_area_links_jump_to_the_publication_lists(self):
+        hrefs = [a.attrs["href"] for a in self.glance.find_all("a", cls="lab-more")]
+        anchors = ["ai-security", "data-privacy", "system-security"]
+        self.assertEqual(hrefs, [st.BASE_PATH + "research/#" + a for a in anchors])
+        ids = [h.attrs.get("id") for h in self.page.find_all("h2", cls="research-area-heading")]
+        self.assertEqual(ids, anchors)
+
+    def test_old_icon_cards_are_gone(self):
+        self.assertIsNone(self.page.find(cls="research-cards"))
+
+
 if __name__ == "__main__":
     unittest.main()
