@@ -148,6 +148,10 @@ class FooterTest(unittest.TestCase):
         self.assertRegex(text, r"© \d{4} BruinSec Lab\. This work is licensed under CC BY NC ND 4\.0")
         self.assertNotIn("Hugo Blox", text)
 
+    def test_footer_text_is_left_aligned(self):
+        # Hugo Blox centres every `footer p`; the blurb and column labels must line up with the links.
+        self.assertIn("text-align:left", st.css_rules(".lab-footer p"))
+
     def test_footer_is_kwchang_blue_and_stacks_on_phones(self):
         self.assertIn("background:#1f65ab", st.css_rules(".page-footer"))
         self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-footer-grid", media="(max-width: 767.98px)"))

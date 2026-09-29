@@ -16,6 +16,10 @@
 .lab-footer a:focus {
   color: #fff;
 }
+// Hugo Blox centres every `footer p`
+.lab-footer p {
+  text-align: left;
+}
 .lab-footer-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
