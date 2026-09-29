@@ -1,0 +1,30 @@
+{{/* Site footer (overrides Hugo Blox): PASTA-style columns in kwchang colours.
+     Lab links come from the main menu; blurb and Elsewhere links from params.footer. */}}
+<footer class="site-footer lab-footer">
+  <div class="lab-footer-grid">
+    <div class="lab-footer-about">
+      <a class="lab-footer-brand" href="{{ "" | relLangURL }}">
+        <img src="{{ "media/logo-bruinsec.svg" | relURL }}" alt="" width="40" height="40">
+        <span>{{ site.Title }}</span>
+      </a>
+      {{ with site.Params.footer.blurb }}<p>{{ . }}</p>{{ end }}
+    </div>
+    <nav class="lab-footer-col" aria-label="Lab pages">
+      <p class="lab-footer-label">Lab</p>
+      <ul>
+        {{ range site.Menus.main }}
+          <li><a href="{{ .URL | relLangURL }}">{{ .Name | lower | title }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    <nav class="lab-footer-col" aria-label="Elsewhere">
+      <p class="lab-footer-label">Elsewhere</p>
+      <ul>
+        {{ range site.Params.footer.elsewhere }}
+          <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+  {{ partial "site_footer_license" . }}
+</footer>

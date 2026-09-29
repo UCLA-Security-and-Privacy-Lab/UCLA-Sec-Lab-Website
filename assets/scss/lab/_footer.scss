@@ -1,0 +1,78 @@
+// Footer: PASTA-style columns on kwchang's #1f65ab.
+.page-footer {
+  margin-top: 30px;
+  background: $lab-accent;
+}
+.page-footer > .container {
+  max-width: 1180px;
+}
+.lab-footer {
+  padding: 40px 0 28px;
+  color: #fff;
+  border-top: 0;
+}
+.lab-footer a,
+.lab-footer a:hover,
+.lab-footer a:focus {
+  color: #fff;
+}
+.lab-footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+}
+.lab-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.lab-footer-about p {
+  max-width: 340px;
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.lab-footer-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lab-footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lab-footer li {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+.lab-footer ul a {
+  text-decoration: none;
+}
+.lab-footer ul a:hover,
+.lab-footer ul a:focus,
+.lab-footer-brand:hover span {
+  text-decoration: underline;
+}
+.lab-footer .powered-by {
+  margin: 28px 0 0;
+  padding-top: 16px;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  text-align: left;
+}
+.lab-footer .footer-license-icons {
+  display: none;
+}
+@media (max-width: $lab-bp-mobile) {
+  .lab-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

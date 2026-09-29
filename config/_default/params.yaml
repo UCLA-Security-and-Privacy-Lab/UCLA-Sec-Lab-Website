@@ -44,6 +44,18 @@ header:
 # Site footer
 
 footer:
+  blurb: 'Security and privacy research at UCLA: AI security, data privacy, and system security.'
+  elsewhere:
+    - name: Prof. Yuan Tian
+      url: https://www.ytian.info/
+    - name: Google Scholar
+      url: https://scholar.google.com/citations?user=ja0GtqgAAAAJ
+    - name: UCLA ECE
+      url: https://www.ee.ucla.edu/
+    - name: UCLA CS
+      url: https://www.cs.ucla.edu/
+    - name: GitHub
+      url: https://github.com/UCLA-Security-and-Privacy-Lab
   copyright:
     notice: '© {year} BruinSec Lab. This work is licensed under {license}'
     license:

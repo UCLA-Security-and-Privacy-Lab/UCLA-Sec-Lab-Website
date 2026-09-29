@@ -108,5 +108,50 @@ class LogoTest(unittest.TestCase):
             self.assertTrue(st.resolves(href), href)
 
 
+ELSEWHERE = [
+    "https://www.ytian.info/",
+    "https://scholar.google.com/citations?user=ja0GtqgAAAAJ",
+    "https://www.ee.ucla.edu/",
+    "https://www.cs.ucla.edu/",
+    "https://github.com/UCLA-Security-and-Privacy-Lab",
+]
+
+
+class FooterTest(unittest.TestCase):
+    def setUp(self):
+        self.footer = st.page("").find("footer")
+
+    def test_has_lab_and_elsewhere_columns(self):
+        self.assertIsNotNone(self.footer.find(cls="lab-footer-grid"))
+        self.assertEqual([p.text() for p in self.footer.find_all("p", cls="lab-footer-label")], ["Lab", "Elsewhere"])
+
+    def test_brand_shows_logo_and_name(self):
+        brand = self.footer.find("a", cls="lab-footer-brand")
+        self.assertEqual(brand.text(), "BruinSec Lab")
+        self.assertTrue(st.resolves(brand.attrs["href"]), brand.attrs["href"])
+        self.assertTrue(st.resolves(brand.find("img").attrs["src"]), brand.find("img").attrs["src"])
+
+    def test_lab_column_lists_the_main_menu(self):
+        links = self.footer.find_all("nav", cls="lab-footer-col")[0].find_all("a")
+        self.assertEqual([a.text() for a in links], ["Research", "News", "People", "Publications", "Awards", "Join Us"])
+        for a in links:
+            self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_elsewhere_links_open_in_a_new_tab(self):
+        links = self.footer.find_all("nav", cls="lab-footer-col")[1].find_all("a")
+        self.assertEqual([a.attrs["href"] for a in links], ELSEWHERE)
+        for a in links:
+            self.assertEqual((a.attrs.get("target"), a.attrs.get("rel")), ("_blank", "noopener"))
+
+    def test_copyright_without_hugo_blox_credit(self):
+        text = self.footer.text()
+        self.assertRegex(text, r"© \d{4} BruinSec Lab\. This work is licensed under CC BY NC ND 4\.0")
+        self.assertNotIn("Hugo Blox", text)
+
+    def test_footer_is_kwchang_blue_and_stacks_on_phones(self):
+        self.assertIn("background:#1f65ab", st.css_rules(".page-footer"))
+        self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-footer-grid", media="(max-width: 767.98px)"))
+
+
 if __name__ == "__main__":
     unittest.main()
