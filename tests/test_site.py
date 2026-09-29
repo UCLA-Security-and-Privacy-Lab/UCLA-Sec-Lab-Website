@@ -785,6 +785,137 @@ class AwardsPageTest(unittest.TestCase):
         self.assertIn("column-count:1", st.css_rules(".award-timeline", media="(max-width: 767.98px)"))
 
 
+NEWS_TYPES = ["Paper", "Funding", "Award", "Service", "Talk", "People"]
+
+
+def post_front_matter():
+    """{bundle folder (lower-case): front-matter text} for every news post."""
+    out = {}
+    root = os.path.join(st.ROOT, "content", "post")
+    for name in sorted(os.listdir(root)):
+        path = os.path.join(root, name, "index.md")
+        if os.path.isfile(path):
+            with open(path, encoding="utf-8") as fh:
+                out[name.lower()] = fh.read().split("---")[1]
+    return out
+
+
+class NewsListTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.page = st.page("post/")
+        cls.entries = cls.page.find_all("article", cls="news-entry")
+
+    def entry(self, slug):
+        return [e for e in self.entries
+                if e.find("h3", cls="news-title").find("a").attrs["href"].rstrip("/").endswith("/" + slug)][0]
+
+    def test_header_is_centred(self):
+        self.assertEqual(self.page.find(cls="news-header").find("h1").text(), "Latest News")
+        self.assertIn("text-align:center", st.css_rules(".news-header"))
+
+    def test_posts_are_grouped_by_year_newest_first(self):
+        groups = self.page.find_all("section", cls="news-year-group")
+        self.assertEqual([g.attrs["data-year"] for g in groups], ["2026", "2025"])
+        self.assertEqual([g.find("h2", cls="news-year").text() for g in groups], ["2026", "2025"])
+        titles = [e.find("h3", cls="news-title").text() for e in self.entries]
+        self.assertEqual(titles, st.newest_post_titles(len(post_front_matter())))
+
+    def test_each_post_shows_its_month_and_day(self):
+        self.assertEqual(self.entry("26-sean-kaiyuan-phd").find(cls="news-date").text(), "MAR 18")
+        self.assertEqual(self.entry("25-05-sp-keynote").find(cls="news-date").text(), "MAY 15")
+
+    def test_every_post_declares_a_news_type(self):
+        front = post_front_matter()
+        self.assertTrue(front)
+        for slug, text in front.items():
+            m = re.search(r"(?m)^news_type:\s*(\S+)", text)
+            self.assertTrue(m, slug)
+            self.assertIn(m.group(1), NEWS_TYPES, slug)
+
+    def test_type_chip_on_every_entry(self):
+        self.assertTrue(self.entries)
+        for e in self.entries:
+            chip = e.find(cls="news-type")
+            self.assertIsNotNone(chip)
+            self.assertIn("news-type--" + chip.text().lower(), chip.classes)
+        self.assertEqual(self.entry("26-ndss-paper").find(cls="news-type").text(), "Paper")
+        self.assertEqual(self.entry("26-nsf-medical-ai").find(cls="news-type").text(), "Funding")
+
+    def test_summary_does_not_repeat_the_title(self):
+        # Hidden when it only repeats the title; the repeated opening sentence is dropped otherwise.
+        self.assertIsNone(self.entry("26-welcome-new-members").find(cls="news-summary"))
+        self.assertIsNone(self.entry("25-05-sp-keynote").find(cls="news-summary"))
+        self.assertEqual(self.entry("26-sp2027-associate-chair").find(cls="news-summary").text(),
+                         "Please submit your interesting papers!")
+        self.assertTrue(self.entry("26-sean-kaiyuan-phd").find(cls="news-summary").text().startswith("Sean Tang,"))
+        self.assertTrue(self.entry("26-amazon-nova-challenge").find(cls="news-summary").text().startswith("We are excited"))
+
+    def test_featured_image_becomes_a_thumbnail(self):
+        thumb = self.entry("25-05-sp-keynote").find("img", cls="news-thumb")
+        self.assertIsNotNone(thumb)
+        # The featured image is a banner with text on it: scale it, never crop it.
+        self.assertIn("height:auto", st.css_rules(".news-thumb"))
+        self.assertNotIn("object-fit:cover", st.css_rules(".news-thumb"))
+        self.assertTrue(st.resolves(thumb.attrs["src"]), thumb.attrs["src"])
+        self.assertIsNone(self.entry("26-ndss-paper").find("img", cls="news-thumb"))
+
+
+class NewsPostTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.page = st.page("post/26-ndss-paper/")
+        cls.post = cls.page.find("article", cls="news-post")
+
+    def test_back_link_to_all_news(self):
+        back = self.post.find("a", cls="news-back")
+        self.assertEqual(back.text(), "\u2190 All news")
+        self.assertTrue(back.attrs["href"].endswith("/post/"), back.attrs["href"])
+        self.assertTrue(st.resolves(back.attrs["href"]))
+
+    def test_date_and_type_above_a_smaller_title(self):
+        meta = self.post.find(cls="news-post-meta")
+        self.assertEqual(meta.find("time").text(), "Mar 12, 2026")
+        self.assertEqual(meta.find(cls="news-type").text(), "Paper")
+        self.assertEqual(self.post.find("h1").text(), "Our paper on XR Security and Privacy accepted at NDSS 2026!")
+        self.assertIn("font-size:30px", st.css_rules(".page-body .news-post h1"))
+
+    def test_no_share_buttons_or_author_box(self):
+        self.assertIsNone(self.page.find(cls="share-box"))
+        self.assertIsNone(self.page.find(cls="author-card"))
+
+    def test_pager_links_the_older_and_newer_posts(self):
+        pager = self.post.find("nav", cls="news-pager")
+        older, newer = pager.find("a", cls="news-older"), pager.find("a", cls="news-newer")
+        self.assertIn("Thanks, NSF, for supporting our research on trustworthy medical AI!", older.text())
+        self.assertIn("Our paper on GDPR Consent Violations will appear at IEEE S&P (Oakland) 2026!", newer.text())
+        self.assertTrue(st.resolves(older.attrs["href"]) and st.resolves(newer.attrs["href"]))
+
+    def test_pager_ends(self):
+        oldest = st.page("post/25-05-sp-keynote/").find("nav", cls="news-pager")
+        self.assertIsNone(oldest.find("a", cls="news-older"))
+        self.assertIsNotNone(oldest.find("a", cls="news-newer"))
+        newest = st.page("post/26-sean-kaiyuan-phd/").find("nav", cls="news-pager")
+        self.assertIsNone(newest.find("a", cls="news-newer"))
+        self.assertIsNotNone(newest.find("a", cls="news-older"))
+
+    def test_featured_image_is_shown_in_the_post(self):
+        img = st.page("post/25-05-sp-keynote/").find("img", cls="news-featured")
+        self.assertIsNotNone(img)
+        self.assertTrue(st.resolves(img.attrs["src"]), img.attrs["src"])
+
+    def test_card_is_as_tall_as_its_content(self):
+        # Hugo Blox stretches .page-body to fill the viewport, leaving a blank card under short posts.
+        self.assertIn("align-self:start", st.css_rules(".page-body"))
+        # ...and the pager at the end keeps a gap above the card's bottom edge.
+        self.assertIn("padding-bottom:32px", st.css_rules(".news-post"))
+
+    def test_unknown_news_type_fails_the_build(self):
+        code, log = st.build_variant("content/post/26-ndss-paper/index.md", "news_type: Paper", "news_type: Papers")
+        self.assertNotEqual(code, 0)
+        self.assertIn("news_type", log)
+
+
 class ResearchFilterScriptTest(PublicationFilterScriptTest):
     """Small pure helpers of assets/js/lab-research.js and the hash preselect in lab-publications.js."""
     SCRIPT = os.path.join(st.ROOT, "assets", "js", "lab-research.js")

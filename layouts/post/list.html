@@ -1,0 +1,18 @@
+{{/* News list in the style of the Publications page: one panel per year, newest first. */}}
+{{- define "main" -}}
+<div class="universal-wrapper pt-3 lab-news-page">
+  <header class="news-header">
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{ range .RegularPages.ByDate.Reverse.GroupByDate "2006" }}
+    <section class="news-year-group" data-year="{{ .Key }}">
+      <h2 class="news-year">{{ .Key }}</h2>
+      <ol class="news-list">
+        {{ range .Pages }}
+          <li>{{ partial "lab/news_entry" . }}</li>
+        {{ end }}
+      </ol>
+    </section>
+  {{ end }}
+</div>
+{{- end -}}

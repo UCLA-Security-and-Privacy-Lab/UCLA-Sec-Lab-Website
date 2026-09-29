@@ -1,0 +1,37 @@
+{{/* One news post: back link, date and type, title, featured image and text, then the older and newer post.
+     Replaces Hugo Blox's article layout, so there is no share bar or author box. */}}
+{{- define "main" -}}
+{{ $posts := (where site.RegularPages "Type" "post").ByDate }}
+{{ $older := false }}
+{{ $newer := false }}
+{{ range $i, $p := $posts }}
+  {{ if eq $p.RelPermalink $.RelPermalink }}
+    {{ if gt $i 0 }}{{ $older = index $posts (sub $i 1) }}{{ end }}
+    {{ if lt (add $i 1) (len $posts) }}{{ $newer = index $posts (add $i 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ $featured := (.Resources.ByType "image").GetMatch "*featured*" }}
+<div class="universal-wrapper pt-3">
+  <article class="news-post">
+    <a class="news-back" href="{{ "post/" | relLangURL }}">&larr; All news</a>
+    <div class="news-post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{ partial "lab/news_type" . }}
+    </div>
+    <h1>{{ .Title }}</h1>
+    {{ with $featured }}
+      {{ $img := .Resize "1520x" }}
+      <img class="news-featured" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="">
+    {{ end }}
+    <div class="article-style news-post-body">
+      {{ .Content }}
+    </div>
+    {{ if or $older $newer }}
+      <nav class="news-pager" aria-label="More news">
+        {{ with $older }}<a class="news-older" href="{{ .RelPermalink }}"><span class="news-pager-label">&larr; Older</span>{{ .Title }}</a>{{ end }}
+        {{ with $newer }}<a class="news-newer" href="{{ .RelPermalink }}"><span class="news-pager-label">Newer &rarr;</span>{{ .Title }}</a>{{ end }}
+      </nav>
+    {{ end }}
+  </article>
+</div>
+{{- end -}}

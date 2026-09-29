@@ -1,0 +1,21 @@
+{{/* One row of the News list: date, type chip, title, a summary that does not repeat the title, and a thumbnail
+     when the post has a featured image. Input: the post page. */}}
+{{ $title := .Title | markdownify | plainify | htmlUnescape }}
+{{ $summary := trim (.Summary | plainify | htmlUnescape) " \n\t" }}
+{{ if strings.HasPrefix $summary $title }}
+  {{ $summary = trim (strings.TrimPrefix $title $summary) " \n\t" }}
+{{ end }}
+{{ $featured := (.Resources.ByType "image").GetMatch "*featured*" }}
+<article class="news-entry">
+  <time class="news-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" | upper }}</time>
+  <div class="news-main">
+    {{ partial "lab/news_type" . }}
+    <h3 class="news-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{ with $summary }}<p class="news-summary">{{ . }}</p>{{ end }}
+  </div>
+  {{ with $featured }}
+    {{/* Featured images are often banners with text on them, so scale rather than crop. */}}
+    {{ $thumb := .Resize "320x" }}
+    <a class="news-thumb-link" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true"><img class="news-thumb" src="{{ $thumb.RelPermalink }}" width="{{ div $thumb.Width 2 }}" height="{{ div $thumb.Height 2 }}" alt="" loading="lazy"></a>
+  {{ end }}
+</article>

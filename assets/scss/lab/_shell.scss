@@ -21,6 +21,7 @@ button {
   width: calc(100% - 32px);
   max-width: 1180px;
   min-height: 0;
+  align-self: start; // Hugo Blox stretches the body row to the viewport; keep the card as tall as its content
   margin: 16px auto 24px;
   overflow: hidden;
   color: $lab-text;

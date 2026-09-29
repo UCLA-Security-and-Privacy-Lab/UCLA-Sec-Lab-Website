@@ -1,6 +1,8 @@
 ---
 title: Prof. Tian will give a talk at 8th Deep Learning Security and Privacy Workshop.
 date: 2025-05-15
+# One of: Paper, Funding, Award, Service, Talk, People
+news_type: Talk
 ---
 
 Prof. Tian will give a talk at 8th Deep Learning Security and Privacy Workshop.

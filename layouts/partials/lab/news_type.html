@@ -1,0 +1,9 @@
+{{/* Type chip of a news post (front matter `news_type`). Input: the post page. Renders nothing when the post has no
+     news_type; an unknown value stops the build so a typo cannot slip through. */}}
+{{- $types := slice "Paper" "Funding" "Award" "Service" "Talk" "People" -}}
+{{- with .Params.news_type -}}
+  {{- if not (in $types .) -}}
+    {{- errorf "news_type %q in %s must be one of: %s" . $.File.Path (delimit $types ", ") -}}
+  {{- end -}}
+  <span class="news-type news-type--{{ lower . }}">{{ . }}</span>
+{{- end -}}
