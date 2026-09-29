@@ -1,5 +1,6 @@
 ---
 title: 'Poster: Attack the Dedicated Short-Range Communication for Connected Vehicles'
+short_title: 'DSRC Attacks (Poster)' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

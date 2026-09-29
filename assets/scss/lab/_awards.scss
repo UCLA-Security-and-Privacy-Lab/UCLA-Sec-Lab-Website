@@ -1,0 +1,104 @@
+// Awards & Service page (blocks/awards.html): kwchang-style name/year rows, person cards, service lists.
+.awards-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.awards-section + .awards-section {
+  margin-top: 30px;
+}
+.page-body .awards-section h2 {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  font-size: 22px;
+  font-weight: 800;
+  border-bottom: 1px solid $lab-border;
+}
+.award-list-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.award-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid $lab-border;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.award-name {
+  min-width: 0;
+  color: $lab-text;
+}
+.award-year {
+  flex: none;
+  color: $lab-muted;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+// Two balanced columns, like the service lists; columns (not a grid) keep each row whole.
+.award-timeline {
+  column-count: 2;
+  column-gap: 32px;
+}
+.award-timeline .award-row {
+  break-inside: avoid;
+}
+.award-timeline .award-name {
+  font-weight: 700;
+}
+
+// Columns instead of a grid, so a short card is not stretched to the height of its tall neighbour.
+.award-people {
+  column-count: 2;
+  column-gap: 12px;
+}
+.award-person {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 12px;
+  break-inside: avoid;
+  padding: 16px 18px 10px;
+  background: #fbfbf8;
+  border: 1px solid #e1e1dc;
+  border-radius: 10px;
+}
+.award-person .award-person-name {
+  margin: 0;
+  color: $lab-text;
+  font-size: 16px;
+  font-weight: 800;
+}
+.award-person .award-person-role {
+  margin: 2px 0 6px;
+  color: $lab-muted;
+  font-size: 13px;
+}
+.award-person .award-row {
+  font-size: 13px;
+}
+.award-person .award-row:last-child {
+  border-bottom: 0;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 32px;
+}
+.service-grid > div {
+  min-width: 0;
+}
+
+@media (max-width: $lab-bp-mobile) {
+  .award-timeline,
+  .award-people {
+    column-count: 1;
+  }
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}

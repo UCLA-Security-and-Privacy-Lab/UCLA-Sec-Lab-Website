@@ -1,5 +1,6 @@
 ---
 title: 'Conditional Supervised Contrastive Learning for Fair Text Classification'
+short_title: 'Fair Text Classification' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

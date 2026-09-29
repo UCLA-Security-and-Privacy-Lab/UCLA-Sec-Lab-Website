@@ -1,5 +1,6 @@
 ---
 title: 'Where have you been? A Study of Privacy Risk for Point-of-Interest Recommendation'
+short_title: 'POI Recommendation Privacy' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

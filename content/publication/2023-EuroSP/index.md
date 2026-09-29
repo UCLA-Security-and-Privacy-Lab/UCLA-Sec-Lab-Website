@@ -1,5 +1,6 @@
 ---
 title: 'Exploring Smart Commercial Building Occupants Perceptions and Notification Preferences of IoT Data Collection'
+short_title: 'Smart Building IoT Privacy' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

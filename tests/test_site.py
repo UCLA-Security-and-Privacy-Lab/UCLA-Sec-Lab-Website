@@ -170,11 +170,15 @@ class FooterTest(unittest.TestCase):
 
 
 class MarkdownLinkTest(unittest.TestCase):
-    def test_research_page_detail_links_work_under_the_subpath(self):
-        links = [a for a in st.page("research/").find_all("a") if "Details" in a.text()]
-        self.assertGreaterEqual(len(links), 29)
-        for a in links:
-            self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+    def test_site_root_markdown_links_get_the_subpath(self):
+        code, log, pages = st.build_variant(
+            "content/contact/index.md",
+            "We are always looking for motivated students",
+            "See [all publications](/publication/). We are always looking for motivated students",
+            pages=["contact/"])
+        self.assertEqual(code, 0, log)
+        link = [a for a in pages["contact/"].find_all("a") if a.text() == "all publications"][0]
+        self.assertEqual(link.attrs["href"], st.BASE_PATH + "publication/")
 
     def test_external_markdown_links_still_open_in_a_new_tab(self):
         a = [a for a in st.page("publication/2019-oauthlint/").find_all("a")
@@ -365,25 +369,77 @@ class HomeLinksTest(unittest.TestCase):
 
 
 class ResearchPageTest(unittest.TestCase):
-    def setUp(self):
-        self.page = st.page("research/")
-        self.glance = self.page.find("section", cls="wg-research-glance")
+    AREAS = ["ai-security", "data-privacy", "system-security"]
 
-    def test_overview_lists_three_areas_without_images(self):
-        self.assertEqual(self.glance.find("h1").text(), "Research")
-        self.assertEqual([h.text() for h in self.glance.find_all("h3")], ["AI Security", "Data Privacy", "System Security"])
-        self.assertEqual(self.glance.find_all("img"), [])
-        self.assertEqual(self.glance.find_all("a", cls="chip"), [])
+    @classmethod
+    def setUpClass(cls):
+        cls.page = st.page("research/")
+        cls.cards = cls.page.find_all("article", cls="research-card")
+        cls.front = publication_front_matter()
 
-    def test_area_links_jump_to_the_publication_lists(self):
-        hrefs = [a.attrs["href"] for a in self.glance.find_all("a", cls="lab-more")]
-        anchors = ["ai-security", "data-privacy", "system-security"]
-        self.assertEqual(hrefs, [st.BASE_PATH + "research/#" + a for a in anchors])
-        ids = [h.attrs.get("id") for h in self.page.find_all("h2", cls="research-area-heading")]
-        self.assertEqual(ids, anchors)
+    def test_header_links_to_all_publications(self):
+        header = self.page.find(cls="research-header")
+        self.assertEqual(header.find("h1").text(), "Research")
+        link = header.find("a")
+        self.assertEqual(link.text(), "See all publications")
+        self.assertTrue(st.resolves(link.attrs["href"]), link.attrs["href"])
+        self.assertIn("text-align:center", st.css_rules(".research-header"))
 
-    def test_old_icon_cards_are_gone(self):
-        self.assertIsNone(self.page.find(cls="research-cards"))
+    def test_filter_chips(self):
+        chips = self.page.find(cls="research-filter").find_all("button")
+        self.assertEqual([c.text() for c in chips], ["All", "AI Security", "Data Privacy", "System Security"])
+        self.assertEqual([c.attrs.get("data-filter") for c in chips], ["all"] + self.AREAS)
+
+    def test_one_card_per_area_with_an_active_status(self):
+        self.assertEqual([c.attrs.get("id") for c in self.cards], self.AREAS)
+        self.assertEqual([c.attrs.get("data-topic") for c in self.cards], self.AREAS)
+        self.assertEqual([c.find("h2").text() for c in self.cards], ["AI Security", "Data Privacy", "System Security"])
+        for card in self.cards:
+            self.assertEqual(card.find(cls="research-status").text(), "Active")
+            self.assertTrue(card.find("p", cls="research-card-desc").text())
+
+    def test_projects_and_sponsors_are_listed(self):
+        self.assertEqual(len(self.cards), 3, "research cards not rendered")
+        for card in self.cards:
+            self.assertTrue(card.find("ul", cls="research-projects").find_all("li"), card.attrs["id"])
+            self.assertTrue(card.find_all(cls="sponsor-chip"), card.attrs["id"])
+
+    def test_related_papers_come_from_each_papers_research_area(self):
+        self.assertEqual(len(self.cards), 3, "research cards not rendered")
+        for card in self.cards:
+            area = card.attrs["id"]
+            expected = sum(1 for f in self.front.values() if re.search(r"(?m)^research_area:\s*%s\s*$" % area, f))
+            chips = card.find(cls="research-papers").find_all("a", cls="paper-chip")
+            self.assertEqual(len(chips), expected, area)
+            for chip in chips:
+                self.assertTrue(chip.attrs["href"].startswith(st.BASE_PATH + "publication/"), chip.attrs["href"])
+                self.assertTrue(st.resolves(chip.attrs["href"]), chip.attrs["href"])
+                self.assertLessEqual(len(chip.text()), 45, chip.text())
+
+    def test_every_paper_has_a_short_label(self):
+        for slug, front in self.front.items():
+            title = re.search(r"(?m)^title:\s*(.+)$", front).group(1)
+            self.assertTrue(":" in title or re.search(r"(?m)^short_title:\s*\S", front), slug)
+
+    def test_all_papers_link_preselects_the_area_on_the_publications_page(self):
+        self.assertEqual(len(self.cards), 3, "research cards not rendered")
+        for card in self.cards:
+            more = card.find("a", cls="research-more")
+            self.assertEqual(more.attrs["href"], st.BASE_PATH + "publication/#" + card.attrs["id"])
+
+    def test_long_publication_lists_are_gone(self):
+        self.assertEqual(self.page.find_all("h2", cls="research-area-heading"), [])
+        self.assertFalse([a for a in self.page.find_all("a") if "Details" in a.text()])
+
+    def test_cards_use_kwchang_panels_and_two_columns(self):
+        self.assertIn("background:#fbfbf8", st.css_rules(".research-card"))
+        self.assertIn("grid-template-columns:minmax(0,1fr)minmax(0,1fr)", st.css_rules(".research-card-body"))
+        self.assertIn("grid-template-columns:1fr", st.css_rules(".research-card-body", media="(max-width: 767.98px)"))
+
+    def test_filter_script_loads_under_the_subpath(self):
+        scripts = [x.attrs["src"] for x in self.page.find_all("script") if "lab-research" in x.attrs.get("src", "")]
+        self.assertEqual(len(scripts), 1)
+        self.assertTrue(st.resolves(scripts[0]), scripts[0])
 
 
 class PeopleTest(unittest.TestCase):
@@ -668,6 +724,90 @@ class PublicationFilterScriptTest(unittest.TestCase):
         self.assertEqual(self.node("P.statusText(29, 'all topics', '')"), "Showing 29 publications for all topics.")
         self.assertEqual(self.node("P.statusText(1, 'Data Privacy', 'gdpr')"),
                          "Showing 1 publication for Data Privacy matching \u201cgdpr\u201d.")
+
+
+
+class AwardsPageTest(unittest.TestCase):
+    PEOPLE = ["Peiran Wang", "Ying Li", "Kunlin Cai", "Jinghuai Zhang", "Zihang Xiang",
+              "Faysal Hossain Shezan", "Tamjid Al Rahat", "Fnu Suya", "Jianfeng Chi"]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.page = st.page("awards/")
+
+    def test_header_is_centred(self):
+        self.assertEqual(self.page.find(cls="awards-header").find("h1").text(), "Awards & Service")
+        self.assertIn("text-align:center", st.css_rules(".awards-header"))
+        self.assertIn("margin-bottom:20px", st.css_rules(".awards-header"))
+
+    def test_faculty_awards_list_with_years_on_the_right(self):
+        rows = self.page.find("ul", cls="award-timeline").find_all("li")
+        self.assertEqual(len(rows), 7)
+        self.assertEqual(rows[0].find(cls="award-name").text(), "Okawa Foundation Award")
+        self.assertEqual(rows[0].find(cls="award-year").text(), "2022")
+        self.assertEqual(rows[1].find(cls="award-name").text(), "Best Paper Award, IEEE TPS")
+        self.assertIn("justify-content:space-between", st.css_rules(".award-row"))
+
+    def test_every_student_and_postdoc_award_is_kept(self):
+        cards = self.page.find_all(cls="award-person")
+        self.assertEqual([c.find(cls="award-person-name").text() for c in cards], self.PEOPLE)
+        self.assertEqual(sum(len(c.find_all("li")) for c in cards), 34)
+        ying = cards[1].find_all("li")
+        self.assertEqual(ying[0].find(cls="award-name").text(), "Distinguished Artifact Reviewer, USENIX Security")
+        self.assertEqual(ying[0].find(cls="award-year").text(), "2025")
+
+    def test_kunlin_is_listed_as_an_alumnus(self):
+        card = self.page.find_all(cls="award-person")[2]
+        self.assertEqual(card.find(cls="award-person-role").text(), "PhD Alumni, now at Meta")
+
+    def test_service_lists_are_kept(self):
+        organizing = self.page.find("ul", cls="service-organizing").find_all("li")
+        self.assertEqual(len(organizing), 7)
+        self.assertEqual(organizing[0].find(cls="award-name").text(), "Associate Chair, IEEE S&P (Oakland)")
+        self.assertEqual(organizing[0].find(cls="award-year").text(), "2027")
+        committees = self.page.find("ul", cls="service-committees").find_all("li")
+        self.assertEqual([li.find(cls="award-name").text() for li in committees],
+                         ["IEEE S&P (Oakland)", "USENIX Security", "ACM CCS", "NDSS"])
+
+    def test_people_cards_flow_in_two_columns_without_stretching(self):
+        # A grid stretches every card to its row's tallest one, leaving empty boxes; columns pack them.
+        rules = st.css_rules(".award-people")
+        self.assertIn("column-count:2", rules)
+        self.assertNotIn("display:grid", rules)
+        self.assertIn("break-inside:avoid", st.css_rules(".award-person"))
+        self.assertIn("column-count:1", st.css_rules(".award-people", media="(max-width: 767.98px)"))
+
+    def test_faculty_awards_use_the_same_two_columns_as_service(self):
+        rules = st.css_rules(".award-timeline")
+        self.assertIn("column-count:2", rules)
+        self.assertNotIn("max-width", rules)
+        self.assertIn("break-inside:avoid", st.css_rules(".award-timeline .award-row"))
+        self.assertIn("column-count:1", st.css_rules(".award-timeline", media="(max-width: 767.98px)"))
+
+
+class ResearchFilterScriptTest(PublicationFilterScriptTest):
+    """Small pure helpers of assets/js/lab-research.js and the hash preselect in lab-publications.js."""
+    SCRIPT = os.path.join(st.ROOT, "assets", "js", "lab-research.js")
+
+    def test_topic_filter(self):
+        self.assertTrue(self.node("P.shows('all', 'ai-security')"))
+        self.assertTrue(self.node("P.shows('ai-security', 'ai-security')"))
+        self.assertFalse(self.node("P.shows('data-privacy', 'ai-security')"))
+
+    # The inherited PublicationFilterScriptTest cases target lab-publications.js; skip them here.
+    test_topic_must_match_unless_all = test_every_term_must_appear = test_abstract_is_searched_only_when_asked = None
+    test_query_is_split_into_lower_case_terms = test_status_text = None
+
+
+class PublicationHashTest(PublicationFilterScriptTest):
+    def test_hash_preselects_a_known_topic(self):
+        keys = "['all', 'ai-security', 'data-privacy', 'system-security']"
+        self.assertEqual(self.node("P.topicFromHash('#data-privacy', %s)" % keys), "data-privacy")
+        self.assertEqual(self.node("P.topicFromHash('#nope', %s)" % keys), "all")
+        self.assertEqual(self.node("P.topicFromHash('', %s)" % keys), "all")
+
+    test_topic_must_match_unless_all = test_every_term_must_appear = test_abstract_is_searched_only_when_asked = None
+    test_query_is_split_into_lower_case_terms = test_status_text = None
 
 
 if __name__ == "__main__":

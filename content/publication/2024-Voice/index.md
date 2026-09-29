@@ -1,5 +1,6 @@
 ---
 title: 'Towards Real-time Voice Interaction Data Collection Monitoring and Ambient Light Privacy Notification for Voice-controlled Services'
+short_title: 'Voice Data Privacy Notices' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

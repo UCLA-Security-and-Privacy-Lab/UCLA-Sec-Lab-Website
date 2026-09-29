@@ -1,0 +1,61 @@
+{{/* Research page after Kai-Wei Chang's research page: centred title with a pill link, an area filter, then one
+     card per research area with its status, description, related projects, sponsors and related papers.
+     Related papers are the publications whose `research_area` equals the area's `key`.
+     Content: title, header_link{label,url}, text, areas[{key, title, status, description, projects[], sponsors[{name,kind}]}]. */}}
+{{ $c := .wcBlock.content }}
+{{ $papers := where site.RegularPages "Section" "publication" }}
+<div class="research-page">
+  <header class="research-header">
+    <h1>{{ $c.title }}</h1>
+    {{ with $c.header_link }}
+      <div class="pub-header-links"><a href="{{ partial "functions/lab_url" .url }}">{{ .label }}</a></div>
+    {{ end }}
+  </header>
+  {{ with $c.text }}<p class="research-intro">{{ . | markdownify }}</p>{{ end }}
+
+  <div class="research-filter pub-topic-filter" role="group" aria-label="Filter research areas">
+    <button type="button" class="pub-filter-chip is-active" data-filter="all" aria-pressed="true">All</button>
+    {{ range $c.areas }}
+      <button type="button" class="pub-filter-chip" data-filter="{{ .key }}" aria-pressed="false"><span class="pub-chip-swatch pub-chip-swatch--{{ .key }}" aria-hidden="true"></span>{{ .title }}</button>
+    {{ end }}
+  </div>
+
+  {{ range $c.areas }}
+    {{ $key := .key }}
+    {{ $area_papers := (where $papers "Params.research_area" $key).ByDate.Reverse }}
+    <article class="research-card" id="{{ $key }}" data-topic="{{ $key }}">
+      <header class="research-card-head">
+        <h2>{{ .title }}</h2>
+        <div class="research-card-tags">
+          <span class="research-topic"><span class="pub-chip-swatch pub-chip-swatch--{{ $key }}" aria-hidden="true"></span>{{ .title }}</span>
+          {{ with .status }}<span class="research-status">{{ . }}</span>{{ end }}
+        </div>
+      </header>
+      <p class="research-card-desc">{{ .description | markdownify }}</p>
+      <div class="research-card-body">
+        <div class="research-card-col">
+          <p class="research-label">Related projects</p>
+          <ul class="research-projects">
+            {{ range .projects }}<li>{{ . | markdownify }}</li>{{ end }}
+          </ul>
+          <p class="research-label">Sponsors</p>
+          <div class="chip-row">
+            {{ range .sponsors }}<span class="sponsor-chip sponsor-chip--{{ .kind | default "industry" }}">{{ .name }}</span>{{ end }}
+          </div>
+        </div>
+        <div class="research-card-col research-papers">
+          <p class="research-label">Related papers</p>
+          <div class="chip-row">
+            {{ range $area_papers }}
+              {{ $label := .Params.short_title | default (index (split .Title ":") 0) }}
+              <a class="paper-chip" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ $label }}</a>
+            {{ end }}
+          </div>
+          <a class="research-more" href="{{ partial "functions/lab_url" (printf "publication/#%s" $key) }}">All papers in {{ .title }} &rarr;</a>
+        </div>
+      </div>
+    </article>
+  {{ end }}
+</div>
+{{ $js := resources.Get "js/lab-research.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" defer></script>

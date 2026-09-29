@@ -1,5 +1,6 @@
 ---
 title: 'Alexa, is the skill always safe? Uncover Lenient Skill Vetting Process and Protect User Privacy at Run Time'
+short_title: 'Alexa Skill Vetting' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

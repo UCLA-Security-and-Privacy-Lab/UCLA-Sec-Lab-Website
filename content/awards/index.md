@@ -3,103 +3,134 @@ title: Awards & Service
 date: 2024-01-01
 type: landing
 
+# Rendered by layouts/partials/blocks/awards.html. Add an award by adding a line under the right person;
+# `year` is shown right-aligned and may be left out.
 sections:
-  - block: markdown
+  - block: awards
     content:
       title: Awards & Service
-      subtitle: ''
-      text: |
-        ## Faculty Awards
-
-        - **Okawa Foundation Award**, 2022
-        - **Best Paper Award**, IEEE TPS 2022
-        - **Google Research Scholar Award**, 2021
-        - **Meta (Facebook) Faculty Award**, 2021
-        - **NSF CAREER Award**, 2020
-        - **NSF CRII Award**, 2019
-        - **Amazon AI Faculty Fellowship**, 2019
-
-        ---
-
-        ## Student & Postdoc Awards
-
-        **Peiran Wang** (PhD Student)
-        - CCS Distinguished Paper Award, 2024
-        - National Scholarship, China
-
-        **Ying Li** (PhD Student)
-        - Distinguished Artifact Reviewer, USENIX Security 2025
-        - Student Travel Grant, USENIX Security 2025
-        - Student Travel Grant, NDSS 2024
-        - OpenAI Researcher Access Program, 2024
-        - Student Mentee, ACM CCS 2023
-        - Outstanding Undergraduate Award, Sichuan Province, 2021
-        - Good Future Scholarship, Sichuan University (ranked 1st/126), 2020
-        - Cybersecurity Merit Student Scholarship, 2018
-
-        **Kunlin Cai** (PhD Student)
-        - Best Reviewer Award, AISTATS 2025
-        - Honorable Mention, CHI 2025
-
-        **Jinghuai Zhang** (PhD Student)
-        - UCLA Graduate Student Fellowship, 2024–2025
-        - HKSAR Government Scholarship Fund Academic Award, 2018–2019, 2019–2020
-        - Hong Kong–Asia-Pacific Economic Cooperation Scholarship
-        - Hong Kong Computer Society Student Sponsorship
-        - Department of Computer Science Outstanding Student Scholarship, CityU HK
-        - First-class Honor, City University of Hong Kong
-
-        **Zihang Xiang** (Postdoctoral Researcher)
-        - CSAW'24 Applied Research Competition Finalist
-
-        **Faysal Hossain Shezan** (PhD Alumni, now Assistant Professor at UT Arlington)
-        - Microsoft Research Award, 2025
-        - Roots of Dedication-Service Award, UT Arlington, 2025
-        - NSF Grant, 2025
-        - Sub-Star Award, College of Engineering, UTA, 2024
-        - UT System Rising Stars Award, 2023
-        - CPS Rising Stars
-        - UVA Endowed Graduate Fellowship Award
-        - Link Lab Outstanding Graduate Research Award
-
-        **Tamjid Al Rahat** (PhD Alumni, now Applied Scientist at AWS)
-        - Best Paper Award, IEEE TPS 2022
-        - Qualcomm Innovation Fellowship 2023 Finalist
-        - Google Vulnerability Research Grant, 2022
-        - Google Research Paper Rewards, 2023
-
-        **Fnu Suya** (PhD Alumni, now Assistant Professor at UMD)
-        - Best Paper Award, VISxAI 2022
-        - MC2 Postdoctoral Fellow, Maryland Cybersecurity Center, 2023–2024
-
-        **Jianfeng Chi** (PhD Alumni, now at Meta AI)
-        - ICLR 2025 Oral Presentation
-
-        ---
-
-        ## Organizing Committee
-
-        | Role | Venue | Year |
-        |------|-------|------|
-        | Associate Chair | IEEE S&P (Oakland) | 2027 |
-        | Program Vice Co-Chair | USENIX Security | 2025 |
-        | Poster Chair | ACM CCS | 2022 |
-        | Shadow PC Co-Chair | IEEE S&P (Oakland) | 2021 |
-        | Co-Chair | IEEE Workshop on the Internet of Safe Things | 2019, 2021 |
-        | Poster Chair | USENIX Security | 2018 |
-        | TPC Co-Chair | ACM Workshop on the Internet of Safe Things | 2017 |
-
-        ---
-
-        ## Selected Program Committee Service
-
-        | Venue | Years |
-        |-------|-------|
-        | IEEE S&P (Oakland) | 2024, 2025, 2026 |
-        | USENIX Security | 2025, 2026 |
-        | ACM CCS | 2025 |
-        | NDSS | 2025, 2026 |
-
-    design:
-      columns: '1'
+      faculty_awards:
+      - award: Okawa Foundation Award
+        year: '2022'
+      - award: Best Paper Award, IEEE TPS
+        year: '2022'
+      - award: Google Research Scholar Award
+        year: '2021'
+      - award: Meta (Facebook) Faculty Award
+        year: '2021'
+      - award: NSF CAREER Award
+        year: '2020'
+      - award: NSF CRII Award
+        year: '2019'
+      - award: Amazon AI Faculty Fellowship
+        year: '2019'
+      people:
+      - name: Peiran Wang
+        role: PhD Student
+        awards:
+        - award: CCS Distinguished Paper Award
+          year: '2024'
+        - award: National Scholarship, China
+      - name: Ying Li
+        role: PhD Student
+        awards:
+        - award: Distinguished Artifact Reviewer, USENIX Security
+          year: '2025'
+        - award: Student Travel Grant, USENIX Security
+          year: '2025'
+        - award: Student Travel Grant, NDSS
+          year: '2024'
+        - award: OpenAI Researcher Access Program
+          year: '2024'
+        - award: Student Mentee, ACM CCS
+          year: '2023'
+        - award: Outstanding Undergraduate Award, Sichuan Province
+          year: '2021'
+        - award: Good Future Scholarship, Sichuan University (ranked 1st/126)
+          year: '2020'
+        - award: Cybersecurity Merit Student Scholarship
+          year: '2018'
+      - name: Kunlin Cai
+        role: PhD Alumni, now at Meta
+        awards:
+        - award: Best Reviewer Award, AISTATS
+          year: '2025'
+        - award: Honorable Mention, CHI
+          year: '2025'
+      - name: Jinghuai Zhang
+        role: PhD Student
+        awards:
+        - award: UCLA Graduate Student Fellowship
+          year: 2024–2025
+        - award: HKSAR Government Scholarship Fund Academic Award
+          year: 2018–2019, 2019–2020
+        - award: Hong Kong–Asia-Pacific Economic Cooperation Scholarship
+        - award: Hong Kong Computer Society Student Sponsorship
+        - award: Department of Computer Science Outstanding Student Scholarship, CityU HK
+        - award: First-class Honor, City University of Hong Kong
+      - name: Zihang Xiang
+        role: Postdoctoral Researcher
+        awards:
+        - award: CSAW'24 Applied Research Competition Finalist
+      - name: Faysal Hossain Shezan
+        role: PhD Alumni, now Assistant Professor at UT Arlington
+        awards:
+        - award: Microsoft Research Award
+          year: '2025'
+        - award: Roots of Dedication-Service Award, UT Arlington
+          year: '2025'
+        - award: NSF Grant
+          year: '2025'
+        - award: Sub-Star Award, College of Engineering, UTA
+          year: '2024'
+        - award: UT System Rising Stars Award
+          year: '2023'
+        - award: CPS Rising Stars
+        - award: UVA Endowed Graduate Fellowship Award
+        - award: Link Lab Outstanding Graduate Research Award
+      - name: Tamjid Al Rahat
+        role: PhD Alumni, now Applied Scientist at AWS
+        awards:
+        - award: Best Paper Award, IEEE TPS
+          year: '2022'
+        - award: Qualcomm Innovation Fellowship 2023 Finalist
+        - award: Google Vulnerability Research Grant
+          year: '2022'
+        - award: Google Research Paper Rewards
+          year: '2023'
+      - name: Fnu Suya
+        role: PhD Alumni, now Assistant Professor at UMD
+        awards:
+        - award: Best Paper Award, VISxAI
+          year: '2022'
+        - award: MC2 Postdoctoral Fellow, Maryland Cybersecurity Center
+          year: 2023–2024
+      - name: Jianfeng Chi
+        role: PhD Alumni, now at Meta AI
+        awards:
+        - award: ICLR 2025 Oral Presentation
+      organizing:
+      - role: Associate Chair, IEEE S&P (Oakland)
+        year: '2027'
+      - role: Program Vice Co-Chair, USENIX Security
+        year: '2025'
+      - role: Poster Chair, ACM CCS
+        year: '2022'
+      - role: Shadow PC Co-Chair, IEEE S&P (Oakland)
+        year: '2021'
+      - role: Co-Chair, IEEE Workshop on the Internet of Safe Things
+        year: 2019, 2021
+      - role: Poster Chair, USENIX Security
+        year: '2018'
+      - role: TPC Co-Chair, ACM Workshop on the Internet of Safe Things
+        year: '2017'
+      program_committees:
+      - venue: IEEE S&P (Oakland)
+        years: 2024, 2025, 2026
+      - venue: USENIX Security
+        years: 2025, 2026
+      - venue: ACM CCS
+        years: '2025'
+      - venue: NDSS
+        years: 2025, 2026
 ---

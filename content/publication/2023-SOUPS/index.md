@@ -1,5 +1,6 @@
 ---
 title: 'Towards Usable Security Analysis Tools for Trigger-Action Programming'
+short_title: 'Trigger-Action Security Tools' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

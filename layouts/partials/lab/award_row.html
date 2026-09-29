@@ -1,0 +1,2 @@
+{{/* One "name ... year" row (Awards page). Input: dict "name" "year" (year optional). */}}
+<li class="award-row"><span class="award-name">{{ .name }}</span>{{ with .year }}<span class="award-year">{{ . }}</span>{{ end }}</li>

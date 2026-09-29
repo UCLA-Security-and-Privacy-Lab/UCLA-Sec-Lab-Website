@@ -1,8 +1,0 @@
-{{/* Research page overview: page title, intro, and the kwchang "research at a glance" list.
-     Content: title, text, label (optional), areas[{title, description, link{label, url}}]. */}}
-{{ $c := .wcBlock.content }}
-<div class="lab-page-intro">
-  {{ with $c.title }}<h1>{{ . }}</h1>{{ end }}
-  {{ with $c.text }}<p class="lab-hero-summary">{{ . | markdownify }}</p>{{ end }}
-</div>
-{{ partial "lab/research_list" (dict "label" $c.label "areas" $c.areas) }}

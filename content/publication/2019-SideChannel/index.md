@@ -1,5 +1,6 @@
 ---
 title: 'Side Channel Attacks in GPU-Virtualization-Based Computation-Offload Systems'
+short_title: 'GPU Side Channels' # label for the Research page paper chips
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here

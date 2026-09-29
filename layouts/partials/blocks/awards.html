@@ -1,0 +1,48 @@
+{{/* Awards & Service page, in the style of Kai-Wei Chang's homepage lists: centred title; faculty awards as a
+     name/year list; one card per student or postdoc; service lists. Years sit right-aligned on every row.
+     Content: title, faculty_awards[{award, year}], people[{name, role, awards[{award, year}]}],
+     organizing[{role, year}], program_committees[{venue, years}]. */}}
+{{ $c := .wcBlock.content }}
+<div class="awards-page">
+  <header class="awards-header"><h1>{{ $c.title }}</h1></header>
+
+  <section class="awards-section">
+    <h2>Faculty awards</h2>
+    <ul class="award-timeline award-list-rows">
+      {{ range $c.faculty_awards }}{{ partial "lab/award_row" (dict "name" .award "year" .year) }}{{ end }}
+    </ul>
+  </section>
+
+  <section class="awards-section">
+    <h2>Student &amp; postdoc awards</h2>
+    <div class="award-people">
+      {{ range $c.people }}
+        <article class="award-person">
+          <p class="award-person-name">{{ .name }}</p>
+          <p class="award-person-role">{{ .role }}</p>
+          <ul class="award-list-rows">
+            {{ range .awards }}{{ partial "lab/award_row" (dict "name" .award "year" .year) }}{{ end }}
+          </ul>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <section class="awards-section">
+    <h2>Service</h2>
+    <div class="service-grid">
+      <div>
+        <p class="section-label">Organizing committees</p>
+        <ul class="service-organizing award-list-rows">
+          {{ range $c.organizing }}{{ partial "lab/award_row" (dict "name" .role "year" .year) }}{{ end }}
+        </ul>
+      </div>
+      <div>
+        <p class="section-label">Selected program committees</p>
+        <ul class="service-committees award-list-rows">
+          {{ range $c.program_committees }}{{ partial "lab/award_row" (dict "name" .venue "year" .years) }}{{ end }}
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

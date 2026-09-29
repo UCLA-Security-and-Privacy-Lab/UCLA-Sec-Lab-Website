@@ -11,6 +11,11 @@ var LabPublications = {
     var text = entry.search + (includeAbstract ? ' ' + entry.abstract : '');
     return terms.every(function (term) { return text.indexOf(term) !== -1; });
   },
+  // "#data-privacy" -> "data-privacy" when it is one of the filter keys, otherwise "all".
+  topicFromHash: function (hash, keys) {
+    var key = (hash || '').replace(/^#/, '');
+    return keys.indexOf(key) !== -1 ? key : 'all';
+  },
   statusText: function (shown, scope, query) {
     var text = 'Showing ' + shown + ' publication' + (shown === 1 ? '' : 's') + ' for ' + scope;
     if (query) text += ' matching “' + query + '”';
@@ -61,6 +66,11 @@ if (typeof document !== 'undefined') {
         apply();
       });
     });
+    // Links such as publication/#data-privacy (from the Research page) open with that area selected.
+    var fromHash = LabPublications.topicFromHash(window.location.hash, chips.map(function (c) { return c.dataset.filter; }));
+    if (fromHash !== 'all') {
+      chips.filter(function (c) { return c.dataset.filter === fromHash; })[0].click();
+    }
     search.addEventListener('input', apply);
     withAbstract.addEventListener('change', apply);
 
