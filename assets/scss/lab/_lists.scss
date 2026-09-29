@@ -1,0 +1,79 @@
+// Publications and News lists: kwchang "highlighted papers" rows with thin dividers.
+.page-body .universal-wrapper .view-compact {
+  margin: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid $lab-border;
+}
+.view-compact .media-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.view-compact .article-title {
+  font-size: 16px;
+  line-height: 1.35;
+}
+.view-compact .article-title a {
+  color: $lab-text;
+  font-weight: 700;
+}
+.view-compact .article-title a:hover,
+.view-compact .article-title a:focus {
+  color: $lab-accent;
+}
+.view-compact .stream-meta,
+.view-compact .article-metadata {
+  margin-top: 4px;
+  color: $lab-muted;
+  font-size: 13px;
+}
+.view-compact .btn-links .btn {
+  border-radius: 8px;
+}
+
+// News rows: date label first, one-line summary, no reading time.
+.view-compact .stream-meta {
+  order: -1;
+}
+.view-compact .article-date {
+  color: $lab-date;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.view-compact .middot-divider,
+.view-compact .article-reading-time {
+  display: none;
+}
+.view-compact .summary-link,
+.view-compact .summary-link:hover {
+  color: $lab-body-soft;
+  text-decoration: none;
+}
+.view-compact .summary-link .article-style p {
+  display: -webkit-box;
+  margin: 4px 0 0;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+// Publication rows keep the author line under the title and drop thumbnails
+// (thumbnails stay on the publication pages).
+#container-publications .view-compact .stream-meta {
+  order: 0;
+}
+#container-publications .view-compact .ml-3 {
+  display: none;
+}
+#container-publications .isotope-item {
+  padding-left: 0;
+  padding-right: 0;
+}
+.page-body .form-control {
+  border-color: $lab-border;
+  border-radius: 8px;
+}

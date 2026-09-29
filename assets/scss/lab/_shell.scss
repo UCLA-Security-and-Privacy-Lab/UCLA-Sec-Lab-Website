@@ -45,6 +45,9 @@ button {
   padding-left: 32px;
   padding-right: 32px;
 }
+.page-body .universal-wrapper {
+  width: auto; // Hugo Blox fixes list pages at 1000px, centred
+}
 .page-body .universal-wrapper.pt-3 {
   padding-top: 32px !important;
 }

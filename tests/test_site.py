@@ -402,5 +402,36 @@ class PeopleTest(unittest.TestCase):
                       st.css_rules(".people-compact-grid", media="(max-width: 767.98px)"))
 
 
+class ListPagesTest(unittest.TestCase):
+    def test_publication_rows_hide_thumbnails_and_keep_authors_under_the_title(self):
+        self.assertIn("display:none", st.css_rules("#container-publications .view-compact .ml-3"))
+        self.assertIn("order:0", st.css_rules("#container-publications .view-compact .stream-meta"))
+
+    def test_news_rows_put_the_date_first_without_reading_time(self):
+        self.assertIn("order:-1", st.css_rules(".view-compact .stream-meta"))
+        self.assertIn("display:none", st.css_rules(".view-compact .article-reading-time"))
+
+    def test_publication_list_still_lists_every_paper(self):
+        folder = os.path.join(st.ROOT, "content", "publication")
+        papers = [d for d in os.listdir(folder) if os.path.isdir(os.path.join(folder, d))]
+        self.assertEqual(len(st.page("publication/").find_all(cls="view-compact")), len(papers))
+
+    def test_list_pages_fill_the_card(self):
+        # Hugo Blox fixes .universal-wrapper at width:1000px, centred; inside our 1180px card it must fill the card.
+        widths = [d for d in st.css_rules(".page-body .universal-wrapper").split(";") if d.startswith("width")]
+        self.assertEqual(widths, ["width:auto"])
+
+    def test_publication_rows_line_up_with_the_title(self):
+        # Each publication row is a Bootstrap column inside the isotope grid; drop its gutter.
+        self.assertIn("padding-left:0", st.css_rules("#container-publications .isotope-item"))
+
+    def test_list_page_links_work_under_the_subpath(self):
+        for path in ("publication/", "post/"):
+            for a in st.page(path).find(cls="page-body").find_all("a"):
+                href = a.attrs.get("href", "")
+                if href.startswith("/"):
+                    self.assertTrue(st.resolves(href), (path, href))
+
+
 if __name__ == "__main__":
     unittest.main()
