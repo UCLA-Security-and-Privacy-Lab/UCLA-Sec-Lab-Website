@@ -1,0 +1,12 @@
+{{/* Impact tiles (2 x 2). Input: list of {value, caption, url}. */}}
+<section class="side-card">
+  <p class="section-label">Impact</p>
+  <div class="impact-grid">
+    {{ range . }}
+      <a class="impact-card" href="{{ partial "functions/lab_url" .url }}">
+        <span class="impact-value">{{ .value }}</span>
+        <p>{{ .caption }}</p>
+      </a>
+    {{ end }}
+  </div>
+</section>

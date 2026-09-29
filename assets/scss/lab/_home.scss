@@ -175,6 +175,7 @@ p.lab-hero-summary {
   margin-top: 10px;
 }
 .project-item {
+  margin: 0; // Hugo Blox gives its own portfolio .project-item a 1.5rem bottom margin
   padding: 16px 0 15px;
   border-bottom: 1px solid $lab-border;
 }
@@ -244,5 +245,102 @@ p.lab-hero-summary {
   .lab-side {
     padding-left: 22px;
     padding-right: 22px;
+  }
+}
+
+// Side column: impact tiles, funding list, join callout
+.side-card + .side-card {
+  margin-top: 24px;
+}
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.impact-card {
+  display: block;
+  min-height: 80px;
+  padding: 10px;
+  color: inherit;
+  background: $lab-surface-soft;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.impact-card:hover,
+.impact-card:focus {
+  color: inherit;
+  background: #eef6ff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.impact-value {
+  display: block;
+  margin-bottom: 5px;
+  color: $lab-text;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.impact-card p {
+  margin: 0;
+  color: $lab-tile-text;
+  font-size: 12px;
+  line-height: 1.35;
+}
+.award-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.award-list li {
+  padding: 8px 0;
+  color: $lab-text;
+  border-bottom: 1px solid $lab-border;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.callout-card {
+  padding: 16px;
+  background: $lab-accent-soft;
+  border: 1px solid $lab-callout-border;
+  border-radius: 10px;
+}
+.callout-card .section-label {
+  margin-bottom: 6px;
+  color: $lab-accent;
+}
+.callout-text {
+  margin: 0;
+  color: $lab-pill-text;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.inline-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  color: #fff;
+  background: $lab-accent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.inline-link:hover,
+.inline-link:focus {
+  color: #fff;
+  background: $lab-accent-hover;
+  text-decoration: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .impact-card {
+    transition: none;
+  }
+  .impact-card:hover,
+  .impact-card:focus {
+    transform: none;
   }
 }

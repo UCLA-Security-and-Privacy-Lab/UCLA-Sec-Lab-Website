@@ -1,0 +1,6 @@
+{{/* "Join the lab" callout. Input: {label, text, button{label, url}}. */}}
+<section class="side-card callout-card">
+  <p class="section-label">{{ .label }}</p>
+  <p class="callout-text">{{ .text }}</p>
+  <a class="inline-link" href="{{ partial "functions/lab_url" .button.url }}">{{ .button.label }}</a>
+</section>

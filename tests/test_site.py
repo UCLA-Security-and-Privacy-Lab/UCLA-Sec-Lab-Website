@@ -274,9 +274,58 @@ class HomeMainTest(unittest.TestCase):
         for a in links:
             self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
 
+    def test_research_items_reset_the_theme_portfolio_margin(self):
+        # Hugo Blox styles its own `.project-item` with margin-bottom:1.5rem; ours must win.
+        margins = [d for d in st.css_rules(".project-item").split(";") if d.startswith("margin")]
+        self.assertEqual(margins[-1], "margin:0")
+
     def test_two_column_grid_stacks_on_tablets(self):
         self.assertIn("grid-template-columns:minmax(0,1fr)250px", st.css_rules(".lab-grid"))
         self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-grid", media="(max-width: 991.98px)"))
+
+
+class HomeSideTest(unittest.TestCase):
+    def setUp(self):
+        self.side = st.page("").find(cls="lab-side")
+
+    def test_sections_in_order(self):
+        labels = [s.find("p", cls="section-label").text() for s in self.side.find_all("section", cls="side-card")]
+        self.assertEqual(labels, ["Impact", "Funding & support", "Join the lab"])
+
+    def test_impact_tiles(self):
+        tiles = self.side.find_all("a", cls="impact-card")
+        self.assertEqual([(t.find(cls="impact-value").text(), t.find("p").text()) for t in tiles], [
+            ("2020", "NSF CAREER Award"),
+            ("2021", "Google Research Scholar Award"),
+            ("2022", "Okawa Foundation Award"),
+            ("4", "platforms (Android, Chrome, Firefox, iOS) adopted fixes from our research"),
+        ])
+        for t in tiles:
+            self.assertTrue(st.resolves(t.attrs["href"]), t.attrs["href"])
+
+    def test_funding_list(self):
+        names = [li.text() for li in self.side.find("ul", cls="award-list").find_all("li")]
+        self.assertEqual(names, ["NSF", "Google", "Amazon", "Meta", "Cisco", "Keysight", "Okawa Foundation", "Coefficient Giving"])
+
+    def test_join_callout(self):
+        card = self.side.find(cls="callout-card")
+        self.assertIn("PhD students, postdocs, and research interns", card.text())
+        button = card.find("a", cls="inline-link")
+        self.assertEqual(button.text(), "View opportunities")
+        self.assertTrue(st.resolves(button.attrs["href"]), button.attrs["href"])
+
+
+class HomeLinksTest(unittest.TestCase):
+    def test_every_internal_link_and_image_on_the_homepage_resolves(self):
+        body = st.page("").find("body")
+        broken = []
+        for node in body.find_all():
+            for attr in ("href", "src"):
+                value = node.attrs.get(attr, "")
+                internal = (value.startswith("/") and not value.startswith("//")) or value.startswith(st.BASE_URL)
+                if internal and not st.resolves(value):
+                    broken.append(value)
+        self.assertEqual(broken, [])
 
 
 if __name__ == "__main__":

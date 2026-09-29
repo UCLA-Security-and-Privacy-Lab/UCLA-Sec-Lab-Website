@@ -124,4 +124,32 @@ sections:
         - title: "EIA: Environmental Injection Attack on Generalist Web Agents"
           venue: ICLR 2025
           url: publication/2025-eia-iclr/
+      impact:
+        - value: "2020"
+          caption: NSF CAREER Award
+          url: awards/
+        - value: "2021"
+          caption: Google Research Scholar Award
+          url: awards/
+        - value: "2022"
+          caption: Okawa Foundation Award
+          url: awards/
+        - value: "4"
+          caption: platforms (Android, Chrome, Firefox, iOS) adopted fixes from our research
+          url: awards/
+      funding:
+        - NSF
+        - Google
+        - Amazon
+        - Meta
+        - Cisco
+        - Keysight
+        - Okawa Foundation
+        - Coefficient Giving
+      join:
+        label: Join the lab
+        text: We are looking for PhD students, postdocs, and research interns interested in systems security, AI security, and privacy.
+        button:
+          label: View opportunities
+          url: contact/
 ---
