@@ -69,6 +69,19 @@
   border: 1px solid $lab-border;
   border-radius: 10px;
 }
+.people-compact-photo-link {
+  display: block;
+}
+.people-compact-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 10px;
+  object-fit: cover;
+  border: 1px solid $lab-border;
+  border-radius: 8px;
+}
 .people-compact-name {
   color: $lab-text;
   font-size: 15px;

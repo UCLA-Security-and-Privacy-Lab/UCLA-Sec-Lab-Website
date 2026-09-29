@@ -392,10 +392,28 @@ class PeopleTest(unittest.TestCase):
 
     def test_students_and_interns_use_the_compact_grid(self):
         items = self.grid_items()
-        for name in ("Ying Li", "Kunlin Cai", "Peiran Wang", "Sean Tang"):
+        for name in ("Ying Li", "Kunlin Cai", "Peiran Wang", "Sean Tang", "Bomin Wei", "Nasir Hussain"):
             self.assertIn(name, items)
-        for grid in self.page.find_all("ul", cls="people-compact-grid"):
-            self.assertEqual(grid.find_all("img"), [])
+
+    def test_phd_students_have_photos_in_the_grid(self):
+        items = self.grid_items()
+        for name in ("Kunlin Cai", "Ying Li", "Jinghuai Zhang", "Peiran Wang", "Zhiyuan Zhang",
+                     "Kaiyuan Zhang", "Sean Tang", "Jingmiao Zhang"):
+            img = items[name].find("img")
+            self.assertIsNotNone(img, name)
+            self.assertTrue(st.resolves(img.attrs["src"]), img.attrs["src"])
+
+    def test_research_interns_stay_text_only(self):
+        items = self.grid_items()
+        for name in ("Bomin Wei", "Nasir Hussain", "Esha Shivakumar", "Isaac Khabra", "Kevin Hong", "Tiancheng Zheng"):
+            self.assertIsNone(items[name].find("img"), name)
+
+    def test_jingmiao_zhang_joins_as_a_fall_2026_phd_student(self):
+        phd_grid = self.page.find_all("ul", cls="people-compact-grid")[0]
+        names = [n.text() for n in phd_grid.find_all(cls="people-compact-name")]
+        self.assertIn("Jingmiao Zhang", names)
+        role = self.grid_items()["Jingmiao Zhang"].find(cls="people-compact-role").text()
+        self.assertEqual(role, "PhD Student from 26\u2019Fall")  # markdownify curls the apostrophe, as for everyone else
 
     def test_faculty_and_postdocs_keep_photo_cards(self):
         cards = {c.find("h2").text(): c for c in self.page.find_all(cls="people-person")}

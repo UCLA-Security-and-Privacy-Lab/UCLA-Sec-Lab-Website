@@ -124,4 +124,6 @@ sections:
         - PhD Students
         - Research Interns
         - Undergraduates
+      photo_groups:
+        - PhD Students
 ---
