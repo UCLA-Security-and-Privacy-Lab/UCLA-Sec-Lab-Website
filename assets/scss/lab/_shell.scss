@@ -1,0 +1,97 @@
+// Page shell: light canvas; every page's body is one white card with thin dividers.
+body {
+  background: $lab-canvas;
+  color: $lab-text;
+}
+html,
+body,
+.navbar-light,
+h1, h2, h3, h4, h5, h6,
+.section-subheading,
+.btn,
+input,
+textarea,
+select,
+button {
+  font-family: $lab-font;
+}
+
+.page-body {
+  // = min(1180px, calc(100% - 32px)); libsass cannot compile CSS min() with calc()
+  width: calc(100% - 32px);
+  max-width: 1180px;
+  min-height: 0;
+  margin: 16px auto 24px;
+  overflow: hidden;
+  color: $lab-text;
+  background: $lab-surface;
+  border: 1px solid $lab-border;
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.page-body .home-section,
+.page-body .home-section:nth-of-type(even) {
+  padding: 28px 0;
+  background: transparent;
+}
+.page-body .home-section + .home-section {
+  border-top: 1px solid $lab-border;
+}
+.page-body .home-section > .container,
+.page-body .universal-wrapper {
+  max-width: none;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.page-body .universal-wrapper.pt-3 {
+  padding-top: 32px !important;
+}
+
+.page-body h1 {
+  margin: 0 0 8px;
+  color: $lab-text;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.12;
+}
+.page-body h2 {
+  margin: 24px 0 10px;
+  color: $lab-text;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.page-body h3 {
+  margin: 0 0 5px;
+  color: $lab-text;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+// Page titles sit left-aligned, like kwchang's name heading.
+.page-body .section-heading {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+@media (max-width: $lab-bp-mobile) {
+  .page-body {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 24px;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+  .page-body h1 {
+    font-size: 30px;
+  }
+  .page-body .home-section > .container,
+  .page-body .universal-wrapper {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}

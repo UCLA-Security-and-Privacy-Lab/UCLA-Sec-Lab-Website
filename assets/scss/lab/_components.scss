@@ -1,0 +1,108 @@
+// Shared kwchang components: uppercase section labels, action pills, chips, highlight lists.
+.section-label {
+  margin: 0 0 12px;
+  color: $lab-label;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.action-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  color: $lab-pill-text;
+  background: $lab-surface;
+  border: 1px solid $lab-pill-border;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.2;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: $lab-pill-text;
+    background: $lab-accent-soft;
+    border-color: $lab-pill-hover-border;
+    text-decoration: none;
+  }
+}
+.action-pill.primary {
+  color: #fff;
+  background: $lab-accent;
+  border-color: $lab-accent;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background: $lab-accent-hover;
+    border-color: $lab-accent-hover;
+  }
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+.chip {
+  display: inline-block;
+  padding: 4px 7px;
+  color: $lab-chip-text;
+  background: $lab-accent-soft;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+}
+a.chip:hover,
+a.chip:focus {
+  color: $lab-pill-text;
+  background: $lab-chip-hover;
+  text-decoration: none;
+}
+
+.highlight-list {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid $lab-border;
+  li {
+    margin: 0;
+  }
+  a {
+    display: block;
+    padding: 12px 0;
+    color: $lab-text;
+    border-bottom: 1px solid $lab-border;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      color: $lab-text;
+      text-decoration: none;
+    }
+    &:hover strong,
+    &:focus strong {
+      color: $lab-accent;
+    }
+  }
+  strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  span {
+    display: block;
+    margin-top: 3px;
+    color: $lab-body-soft;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}

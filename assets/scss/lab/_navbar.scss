@@ -1,0 +1,42 @@
+// Navbar (kwchang): #3c58ad bar, uppercase 13px/800 links, gold on hover.
+.navbar {
+  min-height: 90px;
+  background: $lab-navbar !important;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: none !important;
+}
+.navbar .navbar-brand {
+  display: inline-flex !important;
+  align-items: center;
+  color: #fff !important;
+  font-size: 18px;
+  font-weight: 800 !important;
+  &::before {
+    content: '';
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    background: url('../media/icon.png') no-repeat center / contain;
+  }
+}
+.navbar .nav-link,
+.navbar .navbar-toggler {
+  color: #fff !important;
+}
+.navbar .nav-link {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: $lab-nav-hover !important;
+}
+// Current page: white text plus a gold underline. Gold text on the navbar blue
+// is only 3.83:1, below WCAG AA for 13px text.
+.navbar .nav-link.active span {
+  padding-bottom: 4px;
+  border-bottom: 3px solid $lab-nav-hover;
+}

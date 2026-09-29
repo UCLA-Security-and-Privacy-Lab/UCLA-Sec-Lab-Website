@@ -1,0 +1,37 @@
+// People page: card style with rounded rectangle and left alignment
+.people-widget .row {
+  justify-content: flex-start !important;
+}
+.people-person {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px 16px;
+  margin: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// Alumni list style (compact, no avatar)
+.alumni-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  columns: 1;
+  li.alumni-list-item {
+    padding: 6px 0;
+    break-inside: avoid;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    a {
+      font-weight: 600;
+    }
+    .alumni-first-employment {
+      color: #666;
+      font-size: 0.88rem;
+    }
+  }
+}

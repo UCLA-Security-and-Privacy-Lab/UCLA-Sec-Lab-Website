@@ -1,0 +1,30 @@
+// Design tokens from Kai-Wei Chang's homepage (homepage-redesign.css and main.css).
+$lab-canvas: #f7f7f5;
+$lab-surface: #ffffff;
+$lab-surface-soft: #f3f2ed;
+$lab-border: #d8d8d2;
+$lab-text: #1e1e1e;
+$lab-body: #333735;
+$lab-body-soft: #3f4444;
+$lab-muted: #5f625f;
+$lab-label: #74736e;
+$lab-date: #6b6b66;
+$lab-accent: #1f65ab;
+$lab-accent-hover: #174f88;
+$lab-accent-soft: #e7f1ff;
+$lab-link: #0d5ea8;
+$lab-pill-text: #064f99;
+$lab-pill-border: #bfc3c8;
+$lab-pill-hover-border: #8eb8e6;
+$lab-chip-text: #1260a6;
+$lab-chip-hover: #d7e9ff;
+$lab-callout-border: #82b7ed;
+$lab-tile-text: #373a38;
+$lab-navbar: #3c58ad;
+$lab-nav-hover: #F2BE42;
+
+$lab-font: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+
+// kwchang: grids stack at <=991px; the card goes edge-to-edge at <=767px.
+$lab-bp-stack: 991.98px;
+$lab-bp-mobile: 767.98px;
