@@ -63,6 +63,15 @@ class ShellTest(unittest.TestCase):
         self.assertRegex(link, r"letter-spacing:0?\.6px")
         self.assertIn("color:#f2be42!important", st.css_rules(".navbar .nav-link:hover"))
 
+    def test_navbar_is_compact(self):
+        # kwchang's 90px bar looked too tall here: 64px on desktop, 56px on phones, 32px logo.
+        rules = st.css_rules(".navbar")
+        self.assertNotIn("min-height:90px", rules)
+        self.assertIn("height:64px", rules)
+        self.assertIn("height:56px", st.css_rules(".navbar", media="(max-width: 767.98px)"))
+        logo = st.css_rules(".navbar .navbar-brand::before") + st.css_rules(".navbar .navbar-brand:before")
+        self.assertIn("width:32px", logo)
+
     def test_current_page_gets_a_gold_underline_not_gold_text(self):
         self.assertIn("border-bottom:3pxsolid#f2be42", st.css_rules(".navbar .nav-link.active span"))
 

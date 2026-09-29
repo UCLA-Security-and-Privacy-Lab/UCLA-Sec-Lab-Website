@@ -1,6 +1,7 @@
-// Navbar (kwchang): #3c58ad bar, uppercase 13px/800 links, gold on hover.
+// Navbar (kwchang colours): #3c58ad bar, uppercase 13px/800 links, gold on hover.
+// Shorter than kwchang's 90px bar: 64px on desktop, 56px on phones.
 .navbar {
-  min-height: 90px;
+  height: 64px;
   background: $lab-navbar !important;
   border-bottom: 1px solid #eaeaea;
   box-shadow: none !important;
@@ -14,8 +15,8 @@
   &::before {
     content: '';
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     margin-right: 10px;
     background: url('../media/logo-bruinsec.svg') no-repeat center / contain;
   }
@@ -39,4 +40,9 @@
 .navbar .nav-link.active span {
   padding-bottom: 4px;
   border-bottom: 3px solid $lab-nav-hover;
+}
+@media (max-width: $lab-bp-mobile) {
+  .navbar {
+    height: 56px;
+  }
 }
