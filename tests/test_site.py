@@ -203,19 +203,32 @@ class HomeHeroTest(unittest.TestCase):
         for a in pills:
             self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
 
-    def test_pi_card(self):
-        card = self.hero.find(cls="lab-pi-card")
-        img = card.find("img")
+    def test_summary_links_the_pi_homepage(self):
+        link = self.hero.find("p", cls="lab-hero-summary").find("a")
+        self.assertEqual(link.text(), "Prof. Yuan Tian")
+        self.assertEqual(link.attrs["href"], "https://www.ytian.info/")
+
+    def test_lab_illustration_instead_of_the_pi_portrait(self):
+        self.assertIsNone(self.hero.find(cls="lab-pi-card"))
+        imgs = self.hero.find_all("img")
+        self.assertEqual(len(imgs), 1)
+        img = self.hero.find(cls="lab-hero-art").find("img")
+        self.assertIs(img, imgs[0])
+        self.assertTrue(img.attrs["alt"].startswith("Anime illustration"), img.attrs["alt"])
+        self.assertTrue(img.attrs["width"] and img.attrs["height"])
         self.assertTrue(st.resolves(img.attrs["src"]), img.attrs["src"])
-        self.assertEqual(card.find("p", cls="lab-pi-name").text(), "Yuan Tian")
-        links = {a.text(): a.attrs for a in card.find_all("a")}
-        self.assertEqual(links["Email"]["href"], "mailto:yuant@ucla.edu")
-        self.assertEqual(links["Homepage"]["href"], "https://www.ytian.info/")
-        self.assertEqual(links["Scholar"]["href"], "https://scholar.google.com/citations?user=ja0GtqgAAAAJ")
-        self.assertEqual(links["Homepage"].get("target"), "_blank")
+        sources = [part.strip().split(" ") for part in img.attrs["srcset"].split(",")]
+        self.assertEqual([w for _, w in sources], ["640w", "960w", "1536w"])
+        for url, _ in sources:
+            self.assertTrue(url.endswith(".webp") and st.resolves(url), url)
+
+    def test_missing_illustration_fails_the_build(self):
+        code, log = st.build_variant("content/_index.md", "media/lab-hero.jpg", "media/nope.jpg")
+        self.assertNotEqual(code, 0)
+        self.assertIn("media/nope.jpg", log)
 
     def test_hero_grid_stacks_on_tablets(self):
-        self.assertIn("grid-template-columns:minmax(0,1fr)190px", st.css_rules(".lab-hero"))
+        self.assertIn("grid-template-columns:minmax(0,1fr)430px", st.css_rules(".lab-hero"))
         self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-hero", media="(max-width: 991.98px)"))
 
 

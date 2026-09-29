@@ -1,15 +1,15 @@
-{{/* Homepage hero: lab name, role lines, summary and buttons; PI card on the right.
-     Input: dict "hero" (title, roles, summary, buttons[{label, url, primary}]) "pi" (author, name, lines, links[{label, url}]). */}}
+{{/* Homepage hero: lab name, role lines, summary and buttons; the lab illustration on the right.
+     Input: dict "hero" (title, roles, summary, buttons[{label, url, primary}], image{src, alt}); image.src is under assets/. */}}
 {{ $hero := .hero }}
-{{ $pi := .pi }}
-{{ $avatar := "" }}
-{{ with site.GetPage (printf "/authors/%s" $pi.author) }}
-  {{ $avatar = (.Resources.ByType "image").GetMatch "*avatar*" }}
+{{ $art := resources.Get $hero.image.src }}
+{{ if not $art }}
+  {{ errorf "lab/hero: hero image %q not found under assets/" $hero.image.src }}
 {{ end }}
-{{ if not $avatar }}
-  {{ errorf "lab/hero: no avatar image in content/authors/%s/" $pi.author }}
+{{ $sizes := slice }}
+{{ range slice 640 960 1536 }}
+  {{ $sizes = $sizes | append ($art.Resize (printf "%dx webp q82" .)) }}
 {{ end }}
-{{ $portrait := $avatar.Fill "280x322 Center" }}
+{{ $default := index $sizes 1 }}
 <div class="lab-hero">
   <div class="lab-hero-copy">
     <h1>{{ $hero.title }}</h1>
@@ -21,17 +21,10 @@
       {{ end }}
     </div>
   </div>
-  <div class="lab-pi-card">
-    <img class="lab-pi-portrait" src="{{ $portrait.RelPermalink }}" width="140" height="161" alt="{{ $pi.name }}">
-    <div class="lab-pi-body">
-      <p class="lab-pi-name">{{ $pi.name }}</p>
-      {{ range $pi.lines }}<p>{{ . }}</p>{{ end }}
-      <div class="lab-pi-links">
-        {{ range $pi.links }}
-          {{ $href := partial "functions/lab_url" .url }}
-          <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a>
-        {{ end }}
-      </div>
-    </div>
+  <div class="lab-hero-art">
+    <img src="{{ $default.RelPermalink }}"
+         srcset="{{ range $i, $img := $sizes }}{{ if $i }}, {{ end }}{{ $img.RelPermalink }} {{ $img.Width }}w{{ end }}"
+         sizes="(max-width: 991.98px) 100vw, 430px"
+         width="{{ $default.Width }}" height="{{ $default.Height }}" alt="{{ $hero.image.alt }}">
   </div>
 </div>

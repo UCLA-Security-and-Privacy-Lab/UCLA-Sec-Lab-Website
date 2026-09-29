@@ -13,7 +13,7 @@ sections:
         roles:
           - Electrical and Computer Engineering · Computer Science
           - University of California, Los Angeles
-        summary: "BruinSec Lab, led by Prof. Yuan Tian at UCLA, studies the security, privacy, and safety of modern and emerging systems — from AI models and agents to IoT, voice platforms, and extended reality. We combine program analysis, protocol analysis, machine learning, and human factors, and publish at IEEE S&P, USENIX Security, CCS, NDSS, ICLR, and ICML."
+        summary: "BruinSec Lab, led by [Prof. Yuan Tian](https://www.ytian.info/) at UCLA, studies the security, privacy, and safety of modern and emerging systems — from AI models and agents to IoT, voice platforms, and extended reality. We combine program analysis, protocol analysis, machine learning, and human factors, and publish at IEEE S&P, USENIX Security, CCS, NDSS, ICLR, and ICML."
         buttons:
           - label: Research
             url: research/
@@ -26,19 +26,10 @@ sections:
             url: post/
           - label: Join Us
             url: contact/
-      pi:
-        author: Prof-YuanTian
-        name: Yuan Tian
-        lines:
-          - Associate Professor
-          - ECE & CS, UCLA
-        links:
-          - label: Email
-            url: mailto:yuant@ucla.edu
-          - label: Homepage
-            url: https://www.ytian.info/
-          - label: Scholar
-            url: https://scholar.google.com/citations?user=ja0GtqgAAAAJ
+        # Lab illustration on the right of the hero; the path is relative to assets/.
+        image:
+          src: media/lab-hero.jpg
+          alt: "Anime illustration: four bear researchers in blue-and-gold hoodies defend AI agents, private data and smart-home devices from a rooftop lab overlooking the UCLA campus at dusk."
       news:
         count: 5
       research:
