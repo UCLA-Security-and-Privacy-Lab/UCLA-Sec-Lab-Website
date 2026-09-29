@@ -72,15 +72,19 @@
 .people-compact-photo-link {
   display: block;
 }
+// Same size and shape as the faculty/postdoc photos (.people-person .avatar)
 .people-compact-photo {
   display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  margin-bottom: 10px;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 10px;
   object-fit: cover;
   border: 1px solid $lab-border;
-  border-radius: 8px;
+  border-radius: 10px;
+}
+.people-compact-item--photo {
+  align-items: center;
+  text-align: center;
 }
 .people-compact-name {
   color: $lab-text;

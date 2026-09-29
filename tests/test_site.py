@@ -406,6 +406,18 @@ class PeopleTest(unittest.TestCase):
             self.assertIsNotNone(img, name)
             self.assertTrue(st.resolves(img.attrs["src"]), img.attrs["src"])
 
+    def test_phd_photos_match_the_faculty_photo_size(self):
+        self.assertIn("width:150px", st.css_rules(".people-person .avatar"))
+        photo = st.css_rules(".people-compact-photo")
+        self.assertIn("width:150px", photo)
+        self.assertIn("height:150px", photo)
+        self.assertNotIn("width:100%", photo)
+        # Cards with a photo are centred like the faculty cards.
+        for name, li in self.grid_items().items():
+            if li.find("img") is not None:
+                self.assertIn("people-compact-item--photo", li.classes, name)
+        self.assertIn("text-align:center", st.css_rules(".people-compact-item--photo"))
+
     def test_research_interns_stay_text_only(self):
         items = self.grid_items()
         for name in ("Bomin Wei", "Nasir Hussain", "Esha Shivakumar", "Isaac Khabra", "Kevin Hong", "Tiancheng Zheng"):

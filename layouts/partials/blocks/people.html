@@ -95,7 +95,7 @@
           <ul class="people-compact-grid">
             {{ range $query }}
               {{ $link := partial "functions/person_link" . }}
-              <li class="people-compact-item">
+              <li class="people-compact-item{{ if $with_photo }} people-compact-item--photo{{ end }}">
                 {{ if $with_photo }}
                   {{ with (.Resources.ByType "image").GetMatch "*avatar*" }}
                     {{ $photo := .Fill "400x400 Center" }}
