@@ -1,7 +1,7 @@
 {{/* Hugo Blox: People */}}
 {{/* Documentation: https://hugoblox.com/blocks/ */}}
 {{/* License: https://github.com/HugoBlox/hugo-blox-builder/blob/main/LICENSE.md */}}
-{{/* Modified: Added external_link support, alumni list view, undergraduate alumni */}}
+{{/* Modified: external_link support, alumni list view, undergraduate alumni, compact grid for design.compact_groups */}}
 
 {{/* Initialise */}}
 {{ $page := .wcPage }}
@@ -10,6 +10,7 @@
 {{ $show_interests := $block.design.show_interests | default true }}
 {{ $show_organizations := $block.design.show_organizations | default false }}
 {{ $show_role := $block.design.show_role | default true }}
+{{ $compact_groups := $block.design.compact_groups | default slice }}
 
 <div class="row justify-content-center people-widget">
   {{ with $block.content.title }}
@@ -26,8 +27,9 @@
   {{ end }}
 
   {{ range $block.content.user_groups }}
-    {{/* Special handling for Undergraduate Alumni - rendered from custom data */}}
-    {{ if eq . "Undergraduate Alumni" }}
+    {{ $group := . }}
+    {{/* Undergraduate Alumni are listed in the block's own data, not as author pages */}}
+    {{ if eq $group "Undergraduate Alumni" }}
       {{ with $block.content.undergraduate_alumni }}
         <div class="col-md-12">
           <h2 class="mb-4">Undergraduate Alumni</h2>
@@ -50,8 +52,7 @@
         </div>
       {{ end }}
     {{ else }}
-      {{/* Standard handling for all other groups */}}
-      {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
+      {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice $group) }}
 
       {{/* Sort */}}
       {{ $sort_by := $block.content.sort_by | default "Params.last_name" }}
@@ -60,32 +61,21 @@
       {{ $sort_order := cond $sort_ascending "asc" "desc" }}
       {{ $query = sort $query $sort_by $sort_order }}
 
-      {{ $is_alumni_group := eq . "PhD Alumni" }}
-
-      {{if $query | and (gt (len $block.content.user_groups) 1) }}
+      {{ if $query | and (gt (len $block.content.user_groups) 1) }}
         <div class="col-md-12">
-          <h2 class="mb-4">{{ . | markdownify }}</h2>
+          <h2 class="mb-4">{{ $group | markdownify }}</h2>
         </div>
-      {{end}}
+      {{ end }}
 
-      {{ if $is_alumni_group }}
-        {{/* PhD Alumni: render as compact list */}}
+      {{ if eq $group "PhD Alumni" }}
+        {{/* PhD Alumni: compact list */}}
         <div class="col-md-12">
           <ul class="alumni-list">
             {{ range $query }}
-              {{ $link := "" }}
-              {{ $is_external := false }}
-              {{ if .Params.external_link }}
-                {{ $link = .Params.external_link }}
-                {{ $is_external = true }}
-              {{ else }}
-                {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
-                  {{ $link = .RelPermalink }}
-                {{ end }}
-              {{ end }}
+              {{ $link := partial "functions/person_link" . }}
               <li class="alumni-list-item">
-                {{ if $link }}
-                  <a href="{{ $link }}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}</a>
+                {{ if $link.url }}
+                  <a href="{{ $link.url }}"{{ if $link.external }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}</a>
                 {{ else }}
                   <span>{{ .Title }}</span>
                 {{ end }}
@@ -96,21 +86,28 @@
             {{ end }}
           </ul>
         </div>
+      {{ else if in $compact_groups $group }}
+        {{/* PASTA-style compact grid: name and role, no photo */}}
+        <div class="col-md-12">
+          <ul class="people-compact-grid">
+            {{ range $query }}
+              {{ $link := partial "functions/person_link" . }}
+              <li class="people-compact-item">
+                {{ if $link.url }}
+                  <a class="people-compact-name" href="{{ $link.url }}"{{ if $link.external }} target="_blank" rel="noopener"{{ end }}>{{ .Title }}</a>
+                {{ else }}
+                  <span class="people-compact-name">{{ .Title }}</span>
+                {{ end }}
+                {{ with .Params.role }}<span class="people-compact-role">{{ . | markdownify | emojify }}</span>{{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        </div>
       {{ else }}
-        {{/* Regular groups: render as cards */}}
+        {{/* Photo cards */}}
         {{ range $query }}
           {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
-          {{/* Get link to user's profile page or external link. */}}
-          {{ $link := "" }}
-          {{ $is_external := false }}
-          {{ if .Params.external_link }}
-            {{ $link = .Params.external_link }}
-            {{ $is_external = true }}
-          {{ else }}
-            {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
-              {{ $link = .RelPermalink }}
-            {{ end }}
-          {{ end }}
+          {{ $link := partial "functions/person_link" . }}
           <div class="col-12 col-sm-auto people-person">
             {{ $src := "" }}
             {{ if site.Params.features.avatar.gravatar }}
@@ -120,12 +117,11 @@
               {{ $src = $avatar_image.RelPermalink }}
             {{ end }}
             {{ if $src }}
-              {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
-              {{with $link}}<a href="{{.}}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{end}}<img width="270" height="270" loading="lazy" class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="{{ $src }}" alt="Avatar">{{if $link}}</a>{{end}}
+              {{ with $link.url }}<a href="{{ . }}"{{ if $link.external }} target="_blank" rel="noopener"{{ end }}>{{ end }}<img width="270" height="270" loading="lazy" class="avatar" src="{{ $src }}" alt="{{ .Title }}">{{ if $link.url }}</a>{{ end }}
             {{ end }}
 
             <div class="portrait-title">
-              <h2>{{with $link}}<a href="{{.}}"{{ if $is_external }} target="_blank" rel="noopener"{{ end }}>{{end}}{{ .Title }}{{if $link}}</a>{{end}}</h2>
+              <h2>{{ with $link.url }}<a href="{{ . }}"{{ if $link.external }} target="_blank" rel="noopener"{{ end }}>{{ end }}{{ .Title }}{{ if $link.url }}</a>{{ end }}</h2>
               {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
               {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
               {{ if $show_social }}{{ partial "social_links" . }}{{ end }}

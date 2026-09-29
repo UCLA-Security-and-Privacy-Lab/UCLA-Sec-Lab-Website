@@ -1,0 +1,13 @@
+{{- /* Link for a person (author page): their external_link if set, otherwise their profile page.
+       Returns dict "url" (string, may be empty) and "external" (bool). */ -}}
+{{- $url := "" -}}
+{{- $external := false -}}
+{{- if .Params.external_link -}}
+  {{- $url = .Params.external_link -}}
+  {{- $external = true -}}
+{{- else -}}
+  {{- with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) -}}
+    {{- $url = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "url" $url "external" $external) -}}

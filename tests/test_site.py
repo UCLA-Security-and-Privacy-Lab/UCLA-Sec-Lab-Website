@@ -350,5 +350,57 @@ class ResearchPageTest(unittest.TestCase):
         self.assertIsNone(self.page.find(cls="research-cards"))
 
 
+class PeopleTest(unittest.TestCase):
+    def setUp(self):
+        self.page = st.page("people/")
+
+    def grid_items(self):
+        return {li.find(cls="people-compact-name").text(): li for li in self.page.find_all("li", cls="people-compact-item")}
+
+    def test_students_and_interns_use_the_compact_grid(self):
+        items = self.grid_items()
+        for name in ("Ying Li", "Kunlin Cai", "Peiran Wang", "Sean Tang"):
+            self.assertIn(name, items)
+        for grid in self.page.find_all("ul", cls="people-compact-grid"):
+            self.assertEqual(grid.find_all("img"), [])
+
+    def test_faculty_and_postdocs_keep_photo_cards(self):
+        cards = {c.find("h2").text(): c for c in self.page.find_all(cls="people-person")}
+        self.assertEqual(set(cards), {"Yuan Tian", "Zihang Xiang"})
+        for card in cards.values():
+            self.assertIsNotNone(card.find("img"))
+
+    def test_external_homepages_open_in_a_new_tab(self):
+        a = self.grid_items()["Kunlin Cai"].find("a")
+        self.assertEqual(a.attrs["href"], "https://kunlin-cai.com/")
+        self.assertEqual((a.attrs.get("target"), a.attrs.get("rel")), ("_blank", "noopener"))
+
+    def test_profile_links_stay_on_site(self):
+        a = self.grid_items()["Zhiyuan Zhang"].find("a")  # no external_link in his profile
+        self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+        self.assertIsNone(a.attrs.get("target"))
+
+    def test_pi_social_links_are_real(self):
+        card = [c for c in self.page.find_all(cls="people-person") if c.find("h2").text() == "Yuan Tian"][0]
+        hrefs = [a.attrs.get("href", "") for a in card.find_all("a")]
+        self.assertIn("mailto:yuant@ucla.edu", hrefs)
+        self.assertIn("https://scholar.google.com/citations?user=ja0GtqgAAAAJ", hrefs)
+        for placeholder in ("test@example.org", "GeorgeCushen", "gcushen", "sIwtMXoAAAAJ"):
+            self.assertNotIn(placeholder, " ".join(hrefs))
+
+    def test_people_page_lines_up_with_the_page_title(self):
+        # Hugo Blox centres .people-widget and pulls its row out by the column gutter; the photo cards are the
+        # columns themselves, so drop the gutter and left-align everything, as on kwchang's and PASTA's pages.
+        aligns = [d for d in st.css_rules(".people-widget").split(";") if d.startswith("text-align")]
+        self.assertEqual(aligns[-1], "text-align:left")
+        self.assertIn("margin-left:0", st.css_rules(".people-widget.row"))
+        self.assertIn("padding-left:0", st.css_rules(".people-widget > .col-md-12"))
+
+    def test_compact_grid_narrows_on_phones(self):
+        self.assertIn("grid-template-columns:repeat(4,minmax(0,1fr))", st.css_rules(".people-compact-grid"))
+        self.assertIn("grid-template-columns:repeat(2,minmax(0,1fr))",
+                      st.css_rules(".people-compact-grid", media="(max-width: 767.98px)"))
+
+
 if __name__ == "__main__":
     unittest.main()

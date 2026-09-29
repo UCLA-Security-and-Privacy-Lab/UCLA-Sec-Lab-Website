@@ -120,4 +120,8 @@ sections:
       show_interests: false
       show_role: true
       show_social: true
+      compact_groups:
+        - PhD Students
+        - Research Interns
+        - Undergraduates
 ---

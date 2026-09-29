@@ -1,37 +1,124 @@
-// People page: card style with rounded rectangle and left alignment
-.people-widget .row {
+// People page: photo cards (faculty, postdocs), PASTA-style compact grid (students, interns), alumni lists.
+// Hugo Blox centres this widget and pulls its row out by the column gutter. The photo cards are the
+// columns themselves, so drop the gutter and left-align everything to line up with the page title.
+.people-widget {
   justify-content: flex-start !important;
+  text-align: left;
+}
+.people-widget.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.people-widget > .col-md-12,
+.people-widget > .section-heading {
+  padding-left: 0;
+  padding-right: 0;
+}
+.people-widget h2 {
+  width: 100%;
+  margin: 28px 0 12px;
 }
 .people-person {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 20px 16px;
-  margin: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s ease;
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  }
+  width: 200px;
+  margin: 0 12px 12px 0;
+  padding: 16px;
+  text-align: center;
+  background: $lab-surface;
+  border: 1px solid $lab-border;
+  border-radius: 10px;
+}
+.people-person .avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid $lab-border;
+  border-radius: 10px;
+}
+.people-person .portrait-title h2 {
+  width: auto;
+  margin: 10px 0 2px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.people-person .portrait-title h2 a {
+  color: $lab-text;
+  text-decoration: none;
+}
+.people-person .portrait-title h3 {
+  margin: 0;
+  color: $lab-muted;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-// Alumni list style (compact, no avatar)
-.alumni-list {
-  list-style: none;
+.people-compact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 8px;
   padding: 0;
-  margin: 0 0 1.5rem 0;
-  columns: 1;
-  li.alumni-list-item {
-    padding: 6px 0;
-    break-inside: avoid;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    a {
-      font-weight: 600;
-    }
-    .alumni-first-employment {
-      color: #666;
-      font-size: 0.88rem;
-    }
+  list-style: none;
+}
+.people-compact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 14px 16px;
+  background: $lab-surface;
+  border: 1px solid $lab-border;
+  border-radius: 10px;
+}
+.people-compact-name {
+  color: $lab-text;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: $lab-accent;
+  text-underline-offset: 3px;
+}
+a.people-compact-name:hover,
+a.people-compact-name:focus {
+  color: $lab-accent;
+}
+.people-compact-role {
+  color: $lab-muted;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.alumni-list {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid $lab-border;
+}
+.alumni-list li.alumni-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid $lab-border;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.alumni-list li.alumni-list-item a {
+  font-weight: 700;
+}
+.alumni-list .alumni-first-employment {
+  color: $lab-muted;
+  font-size: 13px;
+}
+
+@media (max-width: $lab-bp-mobile) {
+  .people-compact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 479.98px) {
+  .people-compact-grid {
+    grid-template-columns: 1fr;
+  }
+  .people-person {
+    width: 100%;
+    margin-right: 0;
   }
 }
