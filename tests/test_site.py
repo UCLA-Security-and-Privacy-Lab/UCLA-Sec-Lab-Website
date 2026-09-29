@@ -82,5 +82,31 @@ class ShellTest(unittest.TestCase):
         self.assertNotIn("ucla-hero", st.css_compact())
 
 
+class LogoTest(unittest.TestCase):
+    SVG = os.path.join(st.ROOT, "static", "media", "logo-bruinsec.svg")
+
+    def test_logo_is_the_hooded_bear_with_shades(self):
+        with open(self.SVG, encoding="utf-8") as fh:
+            svg = fh.read()
+        self.assertIn('viewBox="150 68 300 300"', svg)
+        self.assertIn("<!-- sunglasses -->", svg)
+        self.assertNotIn("var(", svg)
+
+    def test_icons_are_512px_rgba_pngs(self):
+        for rel in ("assets/media/icon.png", "static/media/icon.png"):
+            self.assertEqual(st.png_info(os.path.join(st.ROOT, rel)), (512, 512, 6), rel)
+
+    def test_navbar_logo_uses_a_relative_url(self):
+        rules = st.css_rules(".navbar .navbar-brand::before") + st.css_rules(".navbar .navbar-brand:before")
+        self.assertRegex(rules, r"url\(['\"]?\.\./media/logo-bruinsec\.svg")
+        self.assertTrue(os.path.isfile(os.path.join(st.public_dir(), "media", "logo-bruinsec.svg")))
+
+    def test_favicon_links_resolve(self):
+        icons = [link.attrs["href"] for link in st.page("").find_all("link") if "icon" in link.attrs.get("rel", "")]
+        self.assertTrue(icons)
+        for href in icons:
+            self.assertTrue(st.resolves(href), href)
+
+
 if __name__ == "__main__":
     unittest.main()

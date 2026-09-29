@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 68 300 300" role="img" aria-labelledby="logo-title">
+<title id="logo-title">BruinSec Lab</title>
+  <!-- ears (poke out through the hood) -->
+  <circle cx="222" cy="120" r="29" fill="#FFC72C" stroke="#003B5C" stroke-width="6"/>
+  <circle cx="222" cy="120" r="14" fill="#FFB81C"/>
+  <circle cx="378" cy="120" r="29" fill="#FFC72C" stroke="#003B5C" stroke-width="6"/>
+  <circle cx="378" cy="120" r="14" fill="#FFB81C"/>
+  <!-- hood -->
+  <path d="M166 346 C154 218 198 98 300 94 C402 98 446 218 434 346 Z" fill="#005587" stroke="#003B5C" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M258 108 Q300 98 342 108" fill="none" stroke="#2774AE" stroke-width="5" stroke-linecap="round"/>
+  <path d="M184 322 C176 240 196 170 236 128" fill="none" stroke="#2774AE" stroke-width="6" stroke-linecap="round"/>
+  <!-- hood opening (shadow) -->
+  <path d="M204 312 C194 208 232 138 300 136 C368 138 406 208 396 312 Q300 332 204 312 Z" fill="#003B5C"/>
+  <!-- head -->
+  <clipPath id="logo-headclip"><ellipse cx="300" cy="226" rx="86" ry="76"/></clipPath>
+  <g clip-path="url(#logo-headclip)">
+    <rect x="200" y="140" width="200" height="180" fill="#FFB81C"/>
+    <ellipse cx="291" cy="217" rx="84" ry="74" fill="#FFC72C"/>
+  </g>
+  <ellipse cx="300" cy="226" rx="86" ry="76" fill="none" stroke="#003B5C" stroke-width="6"/>
+  <!-- cheeks -->
+  <ellipse cx="240" cy="250" rx="12" ry="7" fill="#FFB81C"/>
+  <ellipse cx="360" cy="250" rx="12" ry="7" fill="#FFB81C"/>
+  <!-- muzzle -->
+  <ellipse cx="300" cy="255" rx="41" ry="30" fill="#FFD100" stroke="#003B5C" stroke-width="4"/>
+  <!-- brows over the shades: right one raised -->
+  <path d="M244 190 Q262 184 280 190" fill="none" stroke="#003B5C" stroke-width="6" stroke-linecap="round"/>
+  <path d="M322 186 Q340 172 358 180" fill="none" stroke="#003B5C" stroke-width="6" stroke-linecap="round"/>
+  <!-- sunglasses -->
+  <path d="M232 204 L368 204" stroke="#0b1620" stroke-width="6" stroke-linecap="round"/>
+  <rect x="236" y="200" width="54" height="30" rx="11" fill="#0b1620"/>
+  <rect x="310" y="200" width="54" height="30" rx="11" fill="#0b1620"/>
+  <path d="M288 209 Q300 203 312 209" fill="none" stroke="#0b1620" stroke-width="6" stroke-linecap="round"/>
+  <path d="M247 222 L259 206 M258 224 L265 214" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
+  <path d="M321 222 L333 206 M332 224 L339 214" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
+  <!-- nose + smirk -->
+  <path d="M285 238 Q300 231 315 238 Q312 251 300 253 Q288 251 285 238 Z" fill="#003B5C"/>
+  <ellipse cx="294" cy="239" rx="4.5" ry="2.2" fill="#FFFFFF"/>
+  <path d="M300 253 L300 261" stroke="#003B5C" stroke-width="4" stroke-linecap="round"/>
+  <path d="M283 263 Q293 270 300 261 Q309 271 322 262 Q326 259 329 255" fill="none" stroke="#003B5C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
