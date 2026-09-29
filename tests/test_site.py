@@ -153,5 +153,18 @@ class FooterTest(unittest.TestCase):
         self.assertIn("grid-template-columns:1fr", st.css_rules(".lab-footer-grid", media="(max-width: 767.98px)"))
 
 
+class MarkdownLinkTest(unittest.TestCase):
+    def test_research_page_detail_links_work_under_the_subpath(self):
+        links = [a for a in st.page("research/").find_all("a") if "Details" in a.text()]
+        self.assertGreaterEqual(len(links), 29)
+        for a in links:
+            self.assertTrue(st.resolves(a.attrs["href"]), a.attrs["href"])
+
+    def test_external_markdown_links_still_open_in_a_new_tab(self):
+        a = [a for a in st.page("publication/2019-oauthlint/").find_all("a")
+             if a.attrs.get("href", "").startswith("https://docs.hugoblox.com/")][0]
+        self.assertEqual((a.attrs.get("target"), a.attrs.get("rel")), ("_blank", "noopener"))
+
+
 if __name__ == "__main__":
     unittest.main()
