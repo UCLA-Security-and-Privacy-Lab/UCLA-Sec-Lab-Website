@@ -69,6 +69,14 @@
 #container-publications .view-compact .ml-3 {
   display: none;
 }
+#container-publications .summary-link {
+  display: none; // rows are title, authors, venue; abstracts live on the publication pages
+}
+.view-compact .pub-venue {
+  margin-top: 2px;
+  color: $lab-muted;
+  font-size: 13px;
+}
 #container-publications .isotope-item {
   padding-left: 0;
   padding-right: 0;

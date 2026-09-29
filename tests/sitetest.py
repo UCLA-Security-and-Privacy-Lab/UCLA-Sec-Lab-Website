@@ -56,8 +56,9 @@ def _ignore_at_root(src, names):
     return set()
 
 
-def build_variant(relpath, old, new):
-    """Build a copy of the site with one text replacement in `relpath`; return (exit code, log)."""
+def build_variant(relpath, old, new, pages=None):
+    """Build a copy of the site with one text replacement in `relpath`; return (exit code, log),
+    or (exit code, log, {path: Node}) when `pages` lists site paths to parse from that build."""
     tmp = tempfile.mkdtemp(prefix="bruinsec-variant-")
     try:
         site = os.path.join(tmp, "site")
@@ -69,7 +70,17 @@ def build_variant(relpath, old, new):
             raise AssertionError(f"{old!r} not found in {relpath}")
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(text.replace(old, new, 1))
-        return _run_hugo(site, os.path.join(tmp, "out"))
+        out = os.path.join(tmp, "out")
+        code, log = _run_hugo(site, out)
+        if pages is None:
+            return code, log
+        parsed = {}
+        for path in pages:
+            with open(os.path.join(out, path, "index.html"), encoding="utf-8") as fh:
+                builder = _TreeBuilder()
+                builder.feed(fh.read())
+            parsed[path] = builder.root
+        return code, log, parsed
     finally:
         shutil.rmtree(tmp, True)
 

@@ -230,6 +230,26 @@ class LabUrlTest(unittest.TestCase):
         self.assertNotEqual(code, 0, log)
         self.assertIn('"peeple/" does not match any page', log)
 
+    def test_hrefs_use_the_page_permalink_not_the_typed_path(self):
+        # GitHub Pages is case-sensitive: a url typed with the folder's casing must still link to the real page.
+        code, log, pages = st.build_variant("content/_index.md", "url: publication/2026-oakland/",
+                                            "url: publication/2026-Oakland/", pages=[""])
+        self.assertEqual(code, 0, log)
+        chip = [a for a in pages[""].find_all("a", cls="chip") if a.text() == "GDPR Consent (S&P '26)"][0]
+        self.assertEqual(chip.attrs["href"], st.BASE_PATH + "publication/2026-oakland/")
+
+    def test_content_path_to_an_author_gives_the_author_permalink(self):
+        code, log, pages = st.build_variant("content/_index.md", "url: people/", "url: authors/Prof-YuanTian/", pages=[""])
+        self.assertEqual(code, 0, log)
+        pill = [a for a in pages[""].find(cls="lab-hero").find_all("a", cls="action-pill") if a.text() == "People"][0]
+        self.assertEqual(pill.attrs["href"], st.BASE_PATH + "author/yuan-tian/")
+
+    def test_link_without_url_fails_the_build(self):
+        code, log = st.build_variant("content/_index.md", "          - label: People\n            url: people/\n",
+                                     "          - label: People\n")
+        self.assertNotEqual(code, 0, log)
+        self.assertIn("has no url", log)
+
 
 EXPECTED_CHIPS = {
     "AI Security": ["EIA (ICLR '25)", "BadMerging (CCS '24)", "Chimera (USENIX Sec '25)",
@@ -428,6 +448,14 @@ class ListPagesTest(unittest.TestCase):
     def test_publication_rows_line_up_with_the_title(self):
         # Each publication row is a Bootstrap column inside the isotope grid; drop its gutter.
         self.assertIn("padding-left:0", st.css_rules("#container-publications .isotope-item"))
+
+    def test_publication_rows_show_the_venue(self):
+        rows = st.page("publication/").find_all(cls="view-compact")
+        venues = [row.find(cls="pub-venue") for row in rows]
+        self.assertTrue(all(v is not None and v.text() for v in venues), [r.find("a").text() for r, v in zip(rows, venues) if v is None])
+
+    def test_publication_rows_hide_the_abstract(self):
+        self.assertIn("display:none", st.css_rules("#container-publications .summary-link"))
 
     def test_list_page_links_work_under_the_subpath(self):
         for path in ("publication/", "post/"):
