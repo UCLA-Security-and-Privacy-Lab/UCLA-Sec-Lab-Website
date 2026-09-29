@@ -829,19 +829,22 @@ class AvatarStyleTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.default = member_pictures({p: st.page(p) for p in cls.PAGES})
-        code, log, pages = st.build_variant("config/_default/params.yaml", "avatar_style: photo", "avatar_style: bear",
+        code, log, pages = st.build_variant("config/_default/params.yaml", "avatar_style: human", "avatar_style: bear",
                                             pages=cls.PAGES)
         assert code == 0, log
         cls.bear = member_pictures(pages)
         code, log, pages = st.build_variant("content/authors/PhD-Zhiyuan/_index.md", "\nfirst_name:",
-                                            "\navatar_style: human\nfirst_name:", pages=cls.PAGES)
+                                            "\navatar_style: photo\nfirst_name:", pages=cls.PAGES)
         assert code == 0, log
         cls.override = member_pictures(pages)
 
-    def test_photos_by_default(self):
-        self.assertIn(("people", "Yuan Tian"), self.default)
-        self.assertIn(("people", "Ying Li"), self.default)
-        self.assertEqual(set(self.default.values()), {"avatar"}, self.default)
+    def test_human_avatars_by_default(self):
+        # Everyone with a human-style picture shows it; the rest (e.g. alumni on paper pages) keep their photo.
+        members = [k for k in self.default if k[0] in ("people", "profile")]
+        self.assertEqual(len(members), 10)  # 9 on the People page + Zhiyuan's profile page
+        self.assertEqual({self.default[k] for k in members}, {"stylized-human"}, self.default)
+        self.assertEqual(self.default[("paper", "Ying Li")], "stylized-human")
+        self.assertEqual(self.default[("paper", "Kunlin Cai")], "avatar")
 
     def test_site_wide_style_on_every_page(self):
         for key in [("people", "Yuan Tian"), ("people", "Zihang Xiang"), ("people", "Ying Li"),
@@ -853,10 +856,10 @@ class AvatarStyleTest(unittest.TestCase):
         self.assertEqual(self.bear[("paper", "Jinghuai Zhang")], "avatar")
         self.assertEqual(self.bear[("paper", "Kunlin Cai")], "avatar")        # alumnus, photo only
 
-    def test_a_member_can_choose_their_own_style(self):
-        self.assertEqual(self.override[("people", "Zhiyuan Zhang")], "stylized-human")
-        self.assertEqual(self.override[("profile", "Zhiyuan Zhang")], "stylized-human")
-        self.assertEqual(self.override[("people", "Ying Li")], "avatar")
+    def test_a_member_can_keep_their_photo(self):
+        self.assertEqual(self.override[("people", "Zhiyuan Zhang")], "avatar")
+        self.assertEqual(self.override[("profile", "Zhiyuan Zhang")], "avatar")
+        self.assertEqual(self.override[("people", "Ying Li")], "stylized-human")
 
     def test_stylized_pictures_are_jpgs_next_to_a_photo(self):
         root = os.path.join(st.ROOT, "content", "authors")

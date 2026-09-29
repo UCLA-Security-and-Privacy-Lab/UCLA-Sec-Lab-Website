@@ -134,4 +134,4 @@ publications:
 # content/authors/<folder>/stylized-<style>.jpg for the members who have one and keeps the photo for the rest.
 # A member can set avatar_style in their own _index.md to use a different style or their photo.
 people:
-  avatar_style: photo
+  avatar_style: human
